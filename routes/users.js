@@ -2,27 +2,31 @@ const express = require('express');
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    res.redirect("/users/dashboard");
+    res.send("/dashboard");
 });
 
-router.get("/dashboard", (req, res) => {
-    res.send("Dashboard");
-});
-
-router.get("/signup", (req, res) => {
+router.post("/signup", (req, res) => {
 
 });
 
-router.get("/signin", (req, res) => {
+router.post("/signin", (req, res) => {
 
 });
 
-router.get("/getid/:id", (req, res) => {
-    res.send(`Get user With ID ${req.params.id}`);
-});
+router.get("/get/", (req, res) => {
+    const id = req.query.id;
+    const org = req.query.org;
 
-router.get("/getorg/:org", (req, res) => {
-    res.send(`Get user With ORG ${req.params.org}`);
+    console.log(id);
+    console.log(org);
+
+    if(id) {
+        res.send(`Get user With ID ${id}`);
+    } else if(org){
+        res.send(`Get user With ORG ${org}`);
+    } else{
+        res.redirect("/users");
+    }
 });
 
 module.exports = router;
