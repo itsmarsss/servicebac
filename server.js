@@ -27,5 +27,6 @@ function logger(req, res, next) {
 }
 
 app.use('/users', userRouter);
+app.use('/datas', dataRouter);
 
 app.listen(3000);
