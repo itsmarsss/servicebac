@@ -29,7 +29,7 @@ router.post("/create-users-collection", async (req, res) => {
     const db = mongoClient.db(userDatabase);
     const collections = await db.listCollections().toArray();
     const collectionNames = collections.map((collection) => collection.name);
-    
+
     if (!collectionNames.includes(userCollection)) {
       await db.createCollection(userCollection);
       return res.json({
@@ -96,7 +96,7 @@ router.post("/signup", async (req, res) => {
     const collection = db.collection(userCollection);
 
     const existingUser = await collection.findOne({
-      email: req.body.email,
+      email: email,
     });
     if (existingUser) {
       return res.json({
@@ -105,12 +105,20 @@ router.post("/signup", async (req, res) => {
       });
     }
 
-    const user_data = await executePython("./workers/signup.py", []);
-    const result = await collection.insertOne({ ...user_data, ...req.body });
+    const user_data = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      accountType: accountType,
+    };
+
+    const user_tokid = await executePython("./workers/signup.py", []);
+    const result = await collection.insertOne({ ...user_tokid, ...user_data });
     res.json({
       success: true,
+      ...user_tokid,
       ...user_data,
-      ...req.body,
       ...result,
     });
   } catch (error) {
@@ -151,7 +159,7 @@ router.post("/signin", async (req, res) => {
     if (!user) {
       return res.json({
         success: false,
-        message: "Unauthorized access",
+        message: "Incorrect username/password",
       });
     }
 
@@ -192,7 +200,7 @@ router.post("/update-profile", async (req, res) => {
     const collection = db.collection(userCollection);
 
     const existingUser = await collection.findOne({
-      email: req.body.email,
+      email: email,
     });
 
     const userToken = req.headers["authorization"].split(" ")[1];
@@ -203,15 +211,23 @@ router.post("/update-profile", async (req, res) => {
       });
     }
 
+    const user_data = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      accountType: accountType,
+    };
+
     const result = await collection.updateOne(
       { userToken: userToken },
-      { $set: req.body }
+      { $set: user_data }
     );
     res.json({
       success: true,
       userToken: userToken,
       userId: existingUser.userId,
-      ...req.body,
+      ...user_data,
       ...result,
     });
   } catch (error) {
@@ -233,14 +249,17 @@ router.post("/delete-profile", async (req, res) => {
     const result = await collection.deleteOne({ userToken: userToken });
 
     if (result.deletedCount === 0) {
-      return res.json({ message: "User not found" });
+      return res.json({
+        success: false,
+        message: "User not found",
+      });
     }
 
     res.json({
       success: true,
     });
   } catch (error) {
-    console.error("Error querying token:", error);
+    console.error("Error deleting user:", error);
     res.status(500).send("Internal Server Error");
   }
 });
@@ -333,7 +352,7 @@ async function authorization(req, res, next) {
 
       next();
     } catch (error) {
-      console.error("Error querying token:", error);
+      console.error("Error querying user:", error);
       res.status(500).send("Internal Server Error");
     }
   } else {
