@@ -12,35 +12,16 @@ NOTE: server admin/console user can perform higher permission activities.
 
 const express = require("express");
 const { executePython } = require("../pythonExecutor");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { mongoClient } = require("../mongodb");
 
 require("dotenv").config();
-
-const userDatabase = process.env.USER_DATABASE;
-const userCollection = process.env.USER_COLLECTION;
 
 const router = express.Router();
 
 router.use(authorization);
 
-let mongoClient = null;
-
-const mongoURI = process.env.MONGO_URI;
-console.log(mongoURI);
-
-const initialize = async () => {
-  mongoClient = new MongoClient(mongoURI, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    },
-  });
-  await mongoClient.connect();
-  console.log("Connected to MongoDB");
-};
-
-initialize();
+const userDatabase = process.env.USER_DATABASE;
+const userCollection = process.env.USER_COLLECTION;
 
 // Create users collection
 router.post("/create-users-collection", async (req, res) => {
@@ -48,12 +29,19 @@ router.post("/create-users-collection", async (req, res) => {
     const db = mongoClient.db(userDatabase);
     const collections = await db.listCollections().toArray();
     const collectionNames = collections.map((collection) => collection.name);
+    
     if (!collectionNames.includes(userCollection)) {
       await db.createCollection(userCollection);
-      res.json({ message: "Users collection created successfully" });
-    } else {
-      res.json({ message: "Users collection already exists" });
+      return res.json({
+        success: true,
+        message: "Users collection created successfully",
+      });
     }
+
+    res.json({
+      success: false,
+      message: "Users collection already exists",
+    });
   } catch (error) {
     console.error("Error creating users collection:", error);
     res.status(500).send("Internal Server Error");
@@ -96,7 +84,10 @@ router.post("/signup", async (req, res) => {
   const accountType = req.body.accountType;
 
   if (!(firstName && lastName && email && password && accountType)) {
-    res.status(400).json({ error: "Insufficient data" });
+    res.json({
+      success: false,
+      message: "Insufficient data",
+    });
     return;
   }
 
@@ -142,7 +133,10 @@ router.post("/signin", async (req, res) => {
   const password = req.body.password;
 
   if (!(email && password)) {
-    res.status(400).json({ error: "Insufficient data" });
+    res.json({
+      success: false,
+      message: "Insufficient data",
+    });
     return;
   }
 
@@ -186,7 +180,10 @@ router.post("/update-profile", async (req, res) => {
   const password = req.body.password;
 
   if (!(firstName && lastName && email && password)) {
-    res.status(400).json({ error: "Insufficient data" });
+    res.json({
+      success: false,
+      message: "Insufficient data",
+    });
     return;
   }
 
@@ -253,9 +250,9 @@ router.get("/email/:email", async (req, res) => {
   try {
     const db = mongoClient.db(userDatabase);
     const collection = db.collection(userCollection);
-    
+
     const user = await collection.findOne({ email: req.params.email });
-    
+
     if (!user) {
       return res.json({
         success: false,
@@ -265,7 +262,7 @@ router.get("/email/:email", async (req, res) => {
 
     res.json({
       success: true,
-      email: (user.accountType === "partner" ? user.email : "[REDACTED]"),
+      email: user.accountType === "partner" ? user.email : "[REDACTED]",
       userId: user.userId,
       firstName: user.firstName,
       lastName: user.lastName,
@@ -294,7 +291,7 @@ router.get("/id/:id", async (req, res) => {
 
     res.json({
       success: true,
-      email: (user.accountType === "partner" ? user.email : "[REDACTED]"),
+      email: user.accountType === "partner" ? user.email : "[REDACTED]",
       userId: user.userId,
       firstName: user.firstName,
       lastName: user.lastName,
