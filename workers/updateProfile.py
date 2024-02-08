@@ -9,22 +9,17 @@ def main():
     last_name = sys.argv[2]
     email = sys.argv[3]
     password = sys.argv[4]
-    account_type = sys.argv[5]
 
-    user_id = SnowflakeIDGenerator(0, 0).generate_id()
-    user_token = UserTokenGenerator().generate_user_token()
+    result = {"error": "Unable to update account"}
 
-    result = {"error": "Unable to create account"}
+    updated = True
 
-    created = True
-
-    if created:
+    if updated:
         result = {
             "firstName": first_name,
             "lastName": last_name,
-            "userID": user_id,
-            "userToken": user_token,
-            "accountType": account_type,
+            "email": email,
+            "passowrd": password,
         }
 
     print(json.dumps(result))

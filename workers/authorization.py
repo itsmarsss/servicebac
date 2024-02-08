@@ -1,32 +1,27 @@
 import sys
 import json
 
+
 def main():
     user_token = sys.argv[1]
-    
+
+    result = {"authorized": False}
+
     if user_token == "token":
         first_name = "FN"
         last_name = "LN"
-        user_id = "123"
-        print(json.dumps(
-        {
+        user_id = 123
+        result = {
             "authorized": True,
             "firstName": first_name,
             "lastName": last_name,
-            "userID": user_id
+            "userID": user_id,
         }
-        ))
 
-        sys.stdout.flush()
-        sys.exit(0)
-    
-    print(json.dumps(
-        {
-            "authorized": False
-        }
-        ))
+    print(json.dumps(result))
 
     sys.stdout.flush()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
