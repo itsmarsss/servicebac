@@ -186,8 +186,9 @@ router.post("/update-profile", async (req, res) => {
   const lastName = req.body.lastName;
   const email = req.body.email;
   const password = req.body.password;
+  const accountType = req.body.accountType;
 
-  if (!(firstName && lastName && email && password)) {
+  if (!(firstName && lastName && email && password && accountType)) {
     res.json({
       success: false,
       message: "Insufficient data",
