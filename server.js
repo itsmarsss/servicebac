@@ -1,4 +1,6 @@
 const express = require('express');
+const { executePython } = require('./pythonExecutor');
+
 const app = express();
 
 app.use(express.static('public'));
@@ -14,8 +16,61 @@ app.get('/', (req, res) => {
     res.render("index", { name: "Marsss!" });
 });
 
-app.get("/dashboard", (req, res) => {
-    res.send("Dashboard");
+/*
+Sign up user, must provide:
+- email
+- name
+- password
+
+Response:
+- Device token
+- Redirect to Dashboard
+*/
+app.post("/signup", async (req, res) => {
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    if(!(firstName && lastName && email && password)) {
+        res.status(400).json({ error: "Insufficient data" });
+        return;
+    }
+
+    try {
+        const result = await executePython('./workers/signup.py', [firstName, lastName, email, password]);
+
+        res.json({ result: result });
+    } catch (error) {
+        res.status(500).json({ error: error });
+    }
+});
+
+/*
+Sign in user, must provide:
+- email
+- password
+
+Response:
+- Device token
+- Redirect to Dashboard
+*/
+app.post("/signin", async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    if(!(email && password)) {
+        res.status(400).json({ error: "Insufficient data" });
+        return;
+    }
+
+    try {
+        const result = await executePython('./workers/signin.py', [email, password]);
+
+        res.json({ result: result });
+    } catch (error) {
+        res.status(500).json({ error: error });
+    }
 });
 
 const userRouter = require('./routes/users');
