@@ -1,20 +1,17 @@
 import sys
 import json
+import tools.mongodbCommunicator as MongoDB
 
 
 def main():
     email = sys.argv[1]
     password = sys.argv[2]
 
-    results = { "result": "Forbidden"}
+    login = {"email": email, "password": password}
 
-    authorized = True
+    result = MongoDB.query_token_by_email_password(login)
 
-    if authorized:
-        user_token = "abcdefg"
-        results = {"userToken": user_token}
-
-    print(json.dumps(results))
+    print(json.dumps(result))
 
     sys.stdout.flush()
 

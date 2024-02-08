@@ -49,6 +49,12 @@ def query_user_by_id(user_id):
     return response.json()
 
 
+# Function to query token by email and password
+def query_token_by_email_password(login_data):
+    url = f"{base_url}/user/query-token/"
+    response = requests.post(url, json=login_data)
+    return response.json()
+
 # Function to insert user
 def insert_user(user_data):
     url = f"{base_url}/user/"

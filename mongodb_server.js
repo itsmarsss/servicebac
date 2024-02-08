@@ -90,7 +90,33 @@ class MongoDBServer {
         }
       });
 
-      // Insert user
+      // Query token using email and password
+      this.app.post("/api/user/query-token", async (req, res) => {
+        try {
+          const db = this.mongoClient.db(userDatabase);
+          const collection = db.collection(userCollection);
+
+          const user = await collection.findOne({
+            email: req.body.email,
+            password: req.body.password,
+          });
+          if (!user) {
+            return res.json({
+              success: false,
+              message: "Unauthorized access",
+            });
+          }
+
+          res.json({
+            success: true,
+            userToken: user.userToken,
+          });
+        } catch (error) {
+          console.error("Error querying token:", error);
+          res.status(500).send("Internal Server Error");
+        }
+      });
+
       // Insert user
       this.app.post("/api/user", async (req, res) => {
         try {
@@ -111,7 +137,7 @@ class MongoDBServer {
           res.json({
             success: true,
             ...req.body,
-            ...result
+            ...result,
           });
         } catch (error) {
           console.error("Error inserting user:", error);
