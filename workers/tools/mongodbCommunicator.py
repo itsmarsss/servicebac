@@ -1,3 +1,7 @@
+import warnings
+
+warnings.filterwarnings("ignore")
+
 import requests
 import os
 from dotenv import load_dotenv
@@ -5,7 +9,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 base_url = os.getenv("LOCAL_DB_URI")
-print(base_url)
 
 dummy_user = {
     "id": 1,
@@ -22,7 +25,6 @@ dummy_user = {
 def create_users_collection():
     url = f"{base_url}/create-users-collection"
     response = requests.post(url)
-    print(response.text)
     return response.json()
 
 
@@ -30,7 +32,6 @@ def create_users_collection():
 def query_user_by_email(email):
     url = f"{base_url}/user/email/{email}"
     response = requests.get(url)
-    print(response.text)
     return response.json()
 
 
@@ -38,7 +39,6 @@ def query_user_by_email(email):
 def query_user_by_token(token):
     url = f"{base_url}/user/token/{token}"
     response = requests.get(url)
-    print(response.text)
     return response.json()
 
 
@@ -46,7 +46,6 @@ def query_user_by_token(token):
 def query_user_by_id(user_id):
     url = f"{base_url}/user/id/{user_id}"
     response = requests.get(url)
-    print(response.text)
     return response.json()
 
 
@@ -54,7 +53,6 @@ def query_user_by_id(user_id):
 def insert_user(user_data):
     url = f"{base_url}/user/"
     response = requests.post(url, json=user_data)
-    print(response.text)
     return response.json()
 
 
@@ -62,7 +60,6 @@ def insert_user(user_data):
 def update_user_with_token(token, updated_data):
     url = f"{base_url}/user/token/{token}"
     response = requests.put(url, json=updated_data)
-    print(response.text)
     return response.json()
 
 

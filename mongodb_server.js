@@ -102,12 +102,17 @@ class MongoDBServer {
           });
           if (existingUser) {
             return res.json({
+              success: false,
               message: "User with the same email already exists",
             });
           }
 
           const result = await collection.insertOne(req.body);
-          res.json(result);
+          res.json({
+            success: true,
+            ...req.body,
+            ...result
+          });
         } catch (error) {
           console.error("Error inserting user:", error);
           res.status(500).send("Internal Server Error");
