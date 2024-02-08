@@ -12,6 +12,8 @@ const router = express.Router();
 
 router.use(authorization);
 
+const userDatabase = process.env.USER_DATABASE;
+const userCollection = process.env.USER_COLLECTION;
 const partnerDatabase = process.env.PARTNER_DATABASE;
 const partnerCollection = process.env.PARTNER_COLLECTION;
 
@@ -48,7 +50,7 @@ Service list provides a list of:
 
 of service
 */
-router.post("/service-list/:pageNumber", async (req, res) => {
+router.get("/service-list/:pageNumber", async (req, res) => {
   const count = 10;
   try {
     const pageNumber = parseInt(req.params.pageNumber || "1");
@@ -70,7 +72,7 @@ router.post("/service-list/:pageNumber", async (req, res) => {
       });
     }
 
-    res.json({ success: true, ...entries });
+    res.json({ success: true, services: entries });
   } catch (error) {
     console.error(`Error fetching next ${count} entries:`, error);
     res.status(500).send("Internal Server Error");
@@ -132,7 +134,7 @@ Update service will allow the change of:
 - data...
 */
 router.post("/update-service", async (req, res) => {
-  const serviceId = req.body.data;
+  const serviceId = req.body.serviceId;
   const serviceName = req.body.serviceName;
   const category = req.body.category;
   const data = req.body.data;
@@ -316,8 +318,8 @@ async function authorization(req, res, next) {
     const userToken = authHeader.split(" ")[1];
 
     try {
-      const db = mongoClient.db(partnerDatabase);
-      const collection = db.collection(partnerCollection);
+      const db = mongoClient.db(userDatabase);
+      const collection = db.collection(userCollection);
 
       const user = await collection.findOne({
         userToken: userToken,
