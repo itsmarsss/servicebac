@@ -5,10 +5,11 @@ from tools.usertoken import UserTokenGenerator
 
 
 def main():
-    first_name = sys.argv[1]
-    last_name = sys.argv[2]
-    email = sys.argv[3]
-    password = sys.argv[4]
+    user_token = sys.argv[1]
+    first_name = sys.argv[2]
+    last_name = sys.argv[3]
+    email = sys.argv[4]
+    password = sys.argv[5]
 
     result = {"error": "Unable to update account"}
 

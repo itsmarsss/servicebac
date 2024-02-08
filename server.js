@@ -1,5 +1,6 @@
 const express = require("express");
 const { executePython } = require("./pythonExecutor");
+const MongoDBServer = require("./mongodb_server");
 
 const app = express();
 
@@ -83,7 +84,7 @@ app.post("/signin", async (req, res) => {
 });
 
 const userRouter = require("./routes/user");
-const dataRouter = require("./routes/datas");
+const partnerRouter = require("./routes/partner");
 
 function logger(req, res, next) {
   console.log(req.originalUrl);
@@ -91,6 +92,15 @@ function logger(req, res, next) {
 }
 
 app.use("/user", userRouter);
-app.use("/datas", dataRouter);
+app.use("/partner", partnerRouter);
+
+// Example usage
+const mongoDBServer = new MongoDBServer(3001);
+
+// Graceful shutdown
+process.on("SIGINT", () => {
+  mongoDBServer.close();
+  process.exit(0);
+});
 
 app.listen(3000);
