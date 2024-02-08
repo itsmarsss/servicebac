@@ -15,13 +15,13 @@ router.use(authorization);
 const partnerDatabase = process.env.PARTNER_DATABASE;
 const partnerCollection = process.env.PARTNER_COLLECTION;
 
-// Create users collection
+// Create partners collection
 router.post("/create-partners-collection", async (req, res) => {
   try {
     const db = mongoClient.db(partnerDatabase);
     const collections = await db.listCollections().toArray();
     const collectionNames = collections.map((collection) => collection.name);
-    
+
     if (!collectionNames.includes(partnerCollection)) {
       await db.createCollection(partnerCollection);
       return res.json({
@@ -41,90 +41,54 @@ router.post("/create-partners-collection", async (req, res) => {
 });
 
 /*
-Users dashboard will allow the following:
-- partner searching
-- partner service searching
-- editing user profile
-*/
-router.get("/dashboard", async (req, res) => {
-  try {
-    const result = await executePython("./workers/dashboard.py", [
-      req.headers["authorization"].split(" ")[1],
-    ]);
-
-    res.json({ result: result });
-  } catch (error) {
-    res.status(500).json({ error: error });
-  }
-});
-
-/*
-Sign up user, must provide:
+Service list provides a list of:
 - email
 - name
-- password
+- data...
 
-Response:
-- Device token
-- Redirect to Dashboard
+of service
 */
-router.post("/signup", async (req, res) => {
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const email = req.body.email;
-  const password = req.body.password;
-  const accountType = req.body.accountType;
-
-  if (!(firstName && lastName && email && password && accountType)) {
-    res.json({
-      success: false,
-      message: "Insufficient data",
-    });
-    return;
-  }
-
+router.post("/service-list/:pageNumber", async (req, res) => {
+  const count = 10;
   try {
+    const pageNumber = parseInt(req.params.pageNumber || "1");
+    const skipCount = (pageNumber - 1) * count;
+
     const db = mongoClient.db(partnerDatabase);
     const collection = db.collection(partnerCollection);
 
-    const existingUser = await collection.findOne({
-      email: req.body.email,
-    });
-    if (existingUser) {
+    const entries = await collection
+      .find()
+      .skip(skipCount)
+      .limit(count)
+      .toArray();
+
+    if (entries.length === 0) {
       return res.json({
         success: false,
-        message: "User with the same email already exists",
+        message: "No entries found",
       });
     }
 
-    const user_data = await executePython("./workers/signup.py", []);
-    const result = await collection.insertOne({ ...user_data, ...req.body });
-    res.json({
-      success: true,
-      ...user_data,
-      ...req.body,
-      ...result,
-    });
+    res.json({ success: true, ...entries });
   } catch (error) {
-    console.error("Error inserting user:", error);
+    console.error(`Error fetching next ${count} entries:`, error);
     res.status(500).send("Internal Server Error");
   }
 });
 
 /*
-Sign in user, must provide:
-- email
-- password
-
-Response:
-- Device token
-- Redirect to Dashboard
+Service, creates service, requires:
+- name
+- category
+- data...
 */
-router.post("/signin", async (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
+router.post("/service", async (req, res) => {
+  const serviceName = req.body.serviceName;
+  const category = req.body.category;
+  const data = req.body.data;
 
-  if (!(email && password)) {
+  if (!(serviceName && category)) {
     res.json({
       success: false,
       message: "Insufficient data",
@@ -136,42 +100,102 @@ router.post("/signin", async (req, res) => {
     const db = mongoClient.db(partnerDatabase);
     const collection = db.collection(partnerCollection);
 
-    const user = await collection.findOne({
-      email: req.body.email,
-      password: req.body.password,
+    const userToken = req.headers["authorization"].split(" ")[1];
+    const service_data = {
+      ownerToken: userToken,
+      serviceName: serviceName,
+      category: category,
+      data: data,
+    };
+
+    const service_tokid = await executePython("./workers/signup.py", []);
+    const result = await collection.insertOne({
+      ...service_tokid,
+      ...service_data,
     });
-    if (!user) {
+    res.json({
+      success: true,
+      ...service_tokid,
+      ...service_data,
+      ...result,
+    });
+  } catch (error) {
+    console.error("Error inserting service:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+/*
+Update service will allow the change of:
+- name
+- category
+- data...
+*/
+router.post("/update-service", async (req, res) => {
+  const serviceId = req.body.data;
+  const serviceName = req.body.serviceName;
+  const category = req.body.category;
+  const data = req.body.data;
+
+  if (!(serviceId && serviceName && category)) {
+    res.json({
+      success: false,
+      message: "Insufficient data",
+    });
+    return;
+  }
+
+  try {
+    const db = mongoClient.db(partnerDatabase);
+    const collection = db.collection(partnerCollection);
+
+    const userToken = req.headers["authorization"].split(" ")[1];
+
+    const existingService = await collection.findOne({
+      ownerToken: userToken,
+      serviceId: serviceId,
+    });
+
+    if (!existingService) {
       return res.json({
         success: false,
         message: "Unauthorized access",
       });
     }
 
+    const service_data = {
+      serviceId: serviceId,
+      ownerToken: userToken,
+      serviceName: serviceName,
+      category: category,
+      data: data,
+    };
+
+    const result = await collection.updateOne(
+      {
+        serviceId: serviceId,
+        ownerToken: userToken,
+      },
+      { $set: service_data }
+    );
     res.json({
       success: true,
-      userToken: user.userToken,
-      userId: user.userId,
+      ...service_data,
+      ...result,
     });
   } catch (error) {
-    console.error("Error querying token:", error);
+    console.error("Error updating service with tokid:", error);
     res.status(500).send("Internal Server Error");
   }
 });
 
 /*
-Update user profile will allow the change of:
-- email
-- password
-- first name
-- last name
+Delete service will delete service
 */
-router.post("/update-profile", async (req, res) => {
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const email = req.body.email;
-  const password = req.body.password;
+router.post("/delete-service", async (req, res) => {
+  const serviceId = req.body.serviceId;
 
-  if (!(firstName && lastName && email && password)) {
+  if (!serviceId) {
     res.json({
       success: false,
       message: "Insufficient data",
@@ -183,114 +207,95 @@ router.post("/update-profile", async (req, res) => {
     const db = mongoClient.db(partnerDatabase);
     const collection = db.collection(partnerCollection);
 
-    const existingUser = await collection.findOne({
-      email: req.body.email,
-    });
-
     const userToken = req.headers["authorization"].split(" ")[1];
-    if (existingUser && existingUser.userToken !== userToken) {
-      return res.json({
-        success: false,
-        message: "User with the same email already exists",
-      });
-    }
-
-    const result = await collection.updateOne(
-      { userToken: userToken },
-      { $set: req.body }
-    );
-    res.json({
-      success: true,
-      userToken: userToken,
-      userId: existingUser.userId,
-      ...req.body,
-      ...result,
+    const result = await collection.deleteOne({
+      serviceId: serviceId,
+      ownerToken: userToken,
     });
-  } catch (error) {
-    console.error("Error updating user with token:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-/*
-Delete user profile will delete profile
-*/
-router.post("/delete-profile", async (req, res) => {
-  const userToken = req.headers["authorization"].split(" ")[1];
-
-  try {
-    const db = mongoClient.db(partnerDatabase);
-    const collection = db.collection(partnerCollection);
-
-    const result = await collection.deleteOne({ userToken: userToken });
 
     if (result.deletedCount === 0) {
-      return res.json({ message: "User not found" });
-    }
-
-    res.json({
-      success: true,
-    });
-  } catch (error) {
-    console.error("Error querying token:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-// Query user by email
-router.get("/email/:email", async (req, res) => {
-  try {
-    const db = mongoClient.db(partnerDatabase);
-    const collection = db.collection(partnerCollection);
-
-    const user = await collection.findOne({ email: req.params.email });
-
-    if (!user) {
       return res.json({
         success: false,
-        message: "Accounts not found",
+        message: "Service not found",
       });
     }
 
     res.json({
       success: true,
-      email: user.accountType === "partner" ? user.email : "[REDACTED]",
-      userId: user.userId,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      accountType: user.accountType,
     });
   } catch (error) {
-    console.error("Error querying user by email:", error);
+    console.error("Error deleting service:", error);
     res.status(500).send("Internal Server Error");
   }
 });
 
-// Query user by id
+// Query service by id
 router.get("/id/:id", async (req, res) => {
   try {
     const db = mongoClient.db(partnerDatabase);
     const collection = db.collection(partnerCollection);
 
-    const user = await collection.findOne({ userId: parseInt(req.params.id) });
+    const service = await collection.findOne({
+      serviceId: parseInt(req.params.id),
+    });
 
-    if (!user) {
+    if (!service) {
       return res.json({
         success: false,
-        message: "Accounts not found",
+        message: "Services not found",
       });
     }
 
     res.json({
       success: true,
-      email: user.accountType === "partner" ? user.email : "[REDACTED]",
-      userId: user.userId,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      accountType: user.accountType,
+      serviceId: service.serviceId,
+      serviceName: service.serviceName,
+      category: service.category,
+      data: service.data,
     });
   } catch (error) {
-    console.error("Error querying user by id:", error);
+    console.error("Error querying service by id:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Search service by parameters: name/category/data...
+router.get("/search", async (req, res) => {
+  const category = req.query.category;
+  const data = req.query.data;
+
+  if (!(serviceId && serviceName && category)) {
+    res.json({
+      success: false,
+      message: "Insufficient data",
+    });
+    return;
+  }
+
+  try {
+    const db = mongoClient.db(partnerDatabase);
+    const collection = db.collection(partnerCollection);
+
+    const service = await collection.findOne({
+      serviceId: parseInt(req.params.id),
+    });
+
+    if (!service) {
+      return res.json({
+        success: false,
+        message: "Services not found",
+      });
+    }
+
+    res.json({
+      success: true,
+      serviceId: service.serviceId,
+      serviceName: service.serviceName,
+      category: service.category,
+      data: service.data,
+    });
+  } catch (error) {
+    console.error("Error seraching for service:", error);
     res.status(500).send("Internal Server Error");
   }
 });
