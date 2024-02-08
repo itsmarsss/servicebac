@@ -113,7 +113,7 @@ router.post("/signup", async (req, res) => {
       accountType: accountType,
     };
 
-    const user_tokid = await executePython("./workers/signup.py", []);
+    const user_tokid = await executePython("./workers/createUser.py", []);
     const result = await collection.insertOne({ ...user_tokid, ...user_data });
     res.json({
       success: true,

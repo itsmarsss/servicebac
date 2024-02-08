@@ -108,7 +108,7 @@ router.post("/service", async (req, res) => {
       data: data,
     };
 
-    const service_tokid = await executePython("./workers/signup.py", []);
+    const service_tokid = await executePython("./workers/createService.py", []);
     const result = await collection.insertOne({
       ...service_tokid,
       ...service_data,
@@ -262,42 +262,43 @@ router.get("/id/:id", async (req, res) => {
 // Search service by parameters: name/category/data...
 router.get("/search", async (req, res) => {
   const category = req.query.category;
-  const data = req.query.data;
+  const terms = req.query.terms;
 
-  if (!(serviceId && serviceName && category)) {
+  if (!(category || terms)) {
     res.json({
       success: false,
       message: "Insufficient data",
     });
     return;
   }
+// TODO: Semantic Search
 
-  try {
-    const db = mongoClient.db(partnerDatabase);
-    const collection = db.collection(partnerCollection);
+//   try {
+//     const db = mongoClient.db(partnerDatabase);
+//     const collection = db.collection(partnerCollection);
 
-    const service = await collection.findOne({
-      serviceId: parseInt(req.params.id),
-    });
+//     const service = await collection.findOne({
+//       serviceId: parseInt(req.params.id),
+//     });
 
-    if (!service) {
-      return res.json({
-        success: false,
-        message: "Services not found",
-      });
-    }
+//     if (!service) {
+//       return res.json({
+//         success: false,
+//         message: "Services not found",
+//       });
+//     }
 
-    res.json({
-      success: true,
-      serviceId: service.serviceId,
-      serviceName: service.serviceName,
-      category: service.category,
-      data: service.data,
-    });
-  } catch (error) {
-    console.error("Error seraching for service:", error);
-    res.status(500).send("Internal Server Error");
-  }
+//     res.json({
+//       success: true,
+//       serviceId: service.serviceId,
+//       serviceName: service.serviceName,
+//       category: service.category,
+//       data: service.data,
+//     });
+//   } catch (error) {
+//     console.error("Error seraching for service:", error);
+//     res.status(500).send("Internal Server Error");
+//   }
 });
 
 async function authorization(req, res, next) {
