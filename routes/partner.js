@@ -271,34 +271,34 @@ router.get("/search", async (req, res) => {
     });
     return;
   }
-// TODO: Semantic Search
+  // TODO: Semantic Search
 
-//   try {
-//     const db = mongoClient.db(partnerDatabase);
-//     const collection = db.collection(partnerCollection);
+  //   try {
+  //     const db = mongoClient.db(partnerDatabase);
+  //     const collection = db.collection(partnerCollection);
 
-//     const service = await collection.findOne({
-//       serviceId: parseInt(req.params.id),
-//     });
+  //     const service = await collection.findOne({
+  //       serviceId: parseInt(req.params.id),
+  //     });
 
-//     if (!service) {
-//       return res.json({
-//         success: false,
-//         message: "Services not found",
-//       });
-//     }
+  //     if (!service) {
+  //       return res.json({
+  //         success: false,
+  //         message: "Services not found",
+  //       });
+  //     }
 
-//     res.json({
-//       success: true,
-//       serviceId: service.serviceId,
-//       serviceName: service.serviceName,
-//       category: service.category,
-//       data: service.data,
-//     });
-//   } catch (error) {
-//     console.error("Error seraching for service:", error);
-//     res.status(500).send("Internal Server Error");
-//   }
+  //     res.json({
+  //       success: true,
+  //       serviceId: service.serviceId,
+  //       serviceName: service.serviceName,
+  //       category: service.category,
+  //       data: service.data,
+  //     });
+  //   } catch (error) {
+  //     console.error("Error seraching for service:", error);
+  //     res.status(500).send("Internal Server Error");
+  //   }
 });
 
 async function authorization(req, res, next) {
