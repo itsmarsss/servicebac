@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+:root {
+    --post: #49cc90;
+    --put: #fca130;
+    --get: #61affe;
+    --delete: #f93e3e;
+
+    --post-back: #e8f6f0;
+    --put-back: #fbf1e6;
+    --get-back: #ebf3fb;
+    --delete-back: #fae7e7;
+
+    --strong: #007bff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #495057;
+}
+
+header {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+nav {
+    background-color: #e9ecef;
+    padding: 10px;
+}
+
+a {
+    color: var(--strong);
+}
+
+main {
+    padding: 20px;
+}
+
+.endpoint {
+    margin-bottom: 40px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #0000001a;
+}
+
+section {
+    height: 45px;
+    transition: 200ms;
+}
+
+section request,
+section infos {
+    visibility: hidden;
+    opacity: 0;
+    transition: 200ms;
+}
+
+section.full {
+    height: auto;
+}
+
+section.full request,
+section.full infos {
+    visibility: visible;
+    opacity: 1;
+}
+
+.revealer {
+    font-size: 19px;
+    user-select: none;
+    float: right;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+section.full .revealer {
+    transform: rotate(90deg);
+}
+
+method {
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    color: #3d4254;
+    border: 2px solid;
+    font-weight: bold;
+}
+
+method>.method_name {
+    display: inline;
+    margin-right: 15px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+method>.method_url {
+    display: inline;
+    margin-right: 15px;
+}
+
+method>.method_desc {
+    display: inline-flex;
+    width: max-content;
+    color: #999da5;
+    font-weight: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+method>.method_desc>pre {
+    margin: 0;
+}
+
+method>.method_desc>pre>code {
+    padding: 2px 5px;
+    margin: 0 5px;
+}
+
+.post {
+    border-color: var(--post);
+    background: var(--post-back);
+}
+
+.put {
+    border-color: var(--put);
+    background: var(--put-back);
+}
+
+.get {
+    border-color: var(--get);
+    background: var(--get-back);
+}
+
+.delete {
+    border-color: var(--delete);
+    background: var(--delete-back);
+}
+
+.post>.method_name {
+    background: var(--post);
+}
+
+.put>.method_name {
+    background: var(--put);
+}
+
+.get>.method_name {
+    background: var(--get);
+}
+
+.delete>.method_name {
+    background: var(--delete);
+}
+
+request pre {
+    background: #f8f9fa;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    overflow-x: auto;
+    color: #6c757d;
+}
+
+strong {
+    color: var(--strong);
+}
+
+infos>div {
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.note {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.warning {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404;
+}
+
+.error {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}

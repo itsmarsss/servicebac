@@ -1,207 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>API Documentation</title>
 
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f8f9fa;
-        color: #495057;
-      }
-      header {
-        background-color: #343a40;
-        color: #fff;
-        padding: 20px;
-        text-align: center;
-      }
-      nav {
-        background-color: #e9ecef;
-        padding: 10px;
-      }
-      nav ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-      }
-      nav ul li {
-        display: inline;
-        margin-right: 20px;
-      }
-      main {
-        padding: 20px;
-      }
-      .endpoint {
-        margin-bottom: 40px;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px #0000001a;
-      }
-      .endpoint h2 {
-        color: #007bff;
-      }
-      .endpoint p {
-        margin-bottom: 20px;
-      }
-      pre {
-        background-color: #f8f9fa;
-        padding: 10px;
-        border-radius: 5px;
-        overflow-x: auto;
-        color: #6c757d;
-      }
-      ul {
-        list-style-type: none;
-        padding-left: 0;
-        margin-bottom: 20px;
-      }
-      ul li {
-        margin-bottom: 5px;
-      }
-      a,
-      ul li strong {
-        color: #007bff;
-      }
-      .note {
-        background-color: #d4edda;
-        border-color: #c3e6cb;
-        color: #155724;
-        padding: 10px;
-        border-radius: 5px;
-        margin-bottom: 20px;
-      }
-      .warning {
-        background-color: #fff3cd;
-        border-color: #ffeeba;
-        color: #856404;
-        padding: 10px;
-        border-radius: 5px;
-        margin-bottom: 20px;
-      }
-      .error {
-        background-color: #f8d7da;
-        border-color: #f5c6cb;
-        color: #721c24;
-        padding: 10px;
-        border-radius: 5px;
-        margin-bottom: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>API Documentation</h1>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Documentation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-    <nav>
-      Root
-      <ul>
-        <li><a href="#root_none">/</a></li>
-      </ul>
-      User
-      <ul>
-        <li>
-          <a href="#user_create-users-collection"
-            >/user/create-users-collection</a
-          >
-        </li>
-        <li><a href="#user_signup">/user/signup</a></li>
-        <li><a href="#user_signin">/user/signin</a></li>
-        <li><a href="#user_update-profile">/user/update-profile</a></li>
-        <li><a href="#user_delete-profile">/user/delete-profile</a></li>
-        <li><a href="#user_email_email">/user/email/{email}</a></li>
-        <li><a href="#user_id_id">/user/id/{id}</a></li>
-      </ul>
-    </nav>
+<body>
+  <header>
+    <h1>API Documentation</h1>
+  </header>
 
-    <main>
-      <h1>Root</h1>
-      <section id="root_none" class="endpoint">
-        <h2>/</h2>
-        <p>Greet user.</p>
+  <nav>
+    <h3>Root</h3>
+    <ul>
+      <li><a href="#root_none">/</a></li>
+    </ul>
+
+    <h3>User</h3>
+    <ul>
+      <li><a href="#user_create-users-collection">/api/user/create-users-collection</a></li>
+      <li><a href="#user_signup">/api/user/signup</a></li>
+      <li><a href="#user_signin">/api/user/signin</a></li>
+      <li><a href="#user_update-profile">/api/user/update-profile</a></li>
+      <li><a href="#user_delete-profile">/api/user/delete-profile</a></li>
+      <li><a href="#user_email_email">/api/user/email/{email}</a></li>
+      <li><a href="#user_id_id">/api/user/id/{id}</a></li>
+    </ul>
+
+
+    <h3>Partner</h3>
+    <ul>
+      <li><a href="#partner_create-partners-collection">/api/partner/create-users-collection</a></li>
+      <li><a href="#partner_create-service">/api/partner/create-service</a></li>
+      <li><a href="#partner_update-service">/api/partner/update-service</a></li>
+      <li><a href="#partner_delete-service">/api/partner/delete-service</a></li>
+      <li><a href="#partner_service-list_pageNumber">/api/partner/service-list/{pageNumber}</a></li>
+      <li><a href="#partner_id_id">/api/partner/id/{id}</a></li>
+      <li><a href="#partner_search">/api/partner/search</a></li>
+    </ul>
+
+  </nav>
+
+  <main>
+    <h1>Root</h1>
+    <section id="root_none" class="endpoint">
+      <method class="get">
+        <span class="method_name">GET</span>
+        <span class="method_url">/</span>
+        <span class="method_desc">Greet user</span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+      </method>
+      <request>
         <h3>Request</h3>
-        <ul>
-          <li><strong>HTTP Method:</strong> GET</li>
-          <li><strong>Head:</strong></li>
-        </ul>
+        <strong>Headers:</strong>
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Body:</strong></li>
-        </ul>
+
+        <strong>Body:</strong>
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Query:</strong></li>
-        </ul>
+
+        <strong>Query:</strong>
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Parameter:</strong></li>
-        </ul>
+
+        <strong>Parameter:</strong>
         <pre><code>None</code></pre>
+
         <h3>Response</h3>
         <pre><code>index.ejs</code></pre>
-        <div class="note"><strong>Note:</strong> This is a note.</div>
-        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
-        <div class="error"><strong>Error:</strong> This is an error.</div>
-      </section>
+      </request>
 
-      <h1>User</h1>
-      <section id="user_create-users-collection" class="endpoint">
-        <h2>/user/create-users-collection</h2>
-        <p>
-          Create database <code>userDatabase</code> with collection
-          <code>user</code> in MongoDB if it doesn't already exist.
-        </p>
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+
+    </section>
+
+    <h1>User</h1>
+    <section id="user_create-users-collection" class="endpoint">
+      <method class="post">
+        <span class="method_name">POST</span>
+        <span class="method_url">/api/user/create-users-collection</span>
+        <span class="method_desc">Create database
+          <pre><code class="text">userDatabase</code></pre> with collection
+          <pre><code class="text">user</code></pre> in MongoDB if it doesn't already exist
+        </span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+      </method>
+      <request>
+
         <h3>Request</h3>
-        <ul>
-          <li><strong>HTTP Method:</strong> POST</li>
-          <li><strong>Head:</strong></li>
-        </ul>
+        <strong>Headers:</strong>
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
-        <ul>
-          <li><strong>Body:</strong></li>
-        </ul>
+
+        <strong>Body:</strong>
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Query:</strong></li>
-        </ul>
+
+        <strong>Query:</strong>
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Parameter:</strong></li>
-        </ul>
+
+        <strong>Parameter:</strong>
         <pre><code>None</code></pre>
+
         <h3>Response</h3>
         <pre><code>{
     success: true,
     message: "Users collection created successfully"
 }</code></pre>
-        <div class="note"><strong>Note:</strong> This is a note.</div>
-        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
-        <div class="error"><strong>Error:</strong> This is an error.</div>
-      </section>
 
-      <section id="user_signup" class="endpoint">
-        <h2>/user/signup</h2>
-        <p>
-          Signs a user up. Inserts their data into <code>userDatabase</code>.
-        </p>
+      </request>
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
+
+    <section id="user_signup" class="endpoint">
+      <method class="post">
+        <span class="method_name">POST</span>
+        <span class="method_url">/api/user/signup</span>
+        <span class="method_desc">Signs a user up. Inserts their data into
+          <pre><code class="text">userDatabase</code></pre>
+        </span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+      </method>
+
+      <request>
         <h3>Request</h3>
-        <ul>
-          <li><strong>HTTP Method:</strong> POST</li>
-          <li><strong>Head:</strong></li>
-        </ul>
+
+        <strong>Headers:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Body:</strong></li>
-        </ul>
+
+        <strong>Body:</strong>
+
         <pre><code>{
     firstName: "John",
     lastName: "Doe",
@@ -209,13 +154,13 @@
     passowrd: "johndoe123",
     accountType: "company"
 }</code></pre>
-        <ul>
-          <li><strong>Query:</strong></li>
-        </ul>
+
+        <strong>Query:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Parameter:</strong></li>
-        </ul>
+
+        <strong>Parameter:</strong>
+
         <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
@@ -228,34 +173,48 @@
     password: "johndoe123",
     accountType: "company"
 }</code></pre>
-        <div class="note"><strong>Note:</strong> This is a note.</div>
-        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
-        <div class="error"><strong>Error:</strong> This is an error.</div>
-      </section>
+      </request>
 
-      <section id="user_signin" class="endpoint">
-        <h2>/user/signin</h2>
-        <p>Sign user in with <code>email</code> and <code>password</code>.</p>
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
+
+    <section id="user_signin" class="endpoint">
+      <method class="post">
+        <span class="method_name">POST</span>
+        <span class="method_url">/api/user/signin</span>
+        <span class="method_desc">Sign user in with
+          <pre><code class="text">email</code></pre> and
+          <pre><code class="text">password</code></pre>
+        </span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+      </method>
+      <request>
+
         <h3>Request</h3>
-        <ul>
-          <li><strong>HTTP Method:</strong> POST</li>
-          <li><strong>Head:</strong></li>
-        </ul>
+
+        <strong>Headers:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Body:</strong></li>
-        </ul>
+
+        <strong>Body:</strong>
+
         <pre><code>{
     email: "john.doe@gmail.com",
     password: "johndoe123"
 }</code></pre>
-        <ul>
-          <li><strong>Query:</strong></li>
-        </ul>
+
+        <strong>Query:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Parameter:</strong></li>
-        </ul>
+
+        <strong>Parameter:</strong>
+
         <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
@@ -263,30 +222,42 @@
     userToken: "token",
     userId: 0123456789
 }</code></pre>
-        <div class="note"><strong>Note:</strong> This is a note.</div>
-        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
-        <div class="error"><strong>Error:</strong> This is an error.</div>
-      </section>
+      </request>
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
 
-      <section id="user_update-profile" class="endpoint">
-        <h2>/user/update-profile</h2>
-        <p>
-          Update user profile including: <code>firstName</code>,
-          <code>lastName</code>, <code>email</code>, <code>password</code>, and
-          <code>accountType</code>
-        </p>
+    <section id="user_update-profile" class="endpoint">
+      <method class="post">
+        <span class="method_name">POST</span>
+        <span class="method_url">/api/user/update-profile</span>
+        <span class="method_desc">Update user profile including:
+          <pre><code class="text">firstName</code></pre>,
+          <pre><code class="text">lastName</code></pre>,
+          <pre><code class="text">email</code></pre>,
+          <pre><code class="text">password</code></pre>, and
+          <pre><code class="text">accountType</code></pre>
+        </span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+      </method>
+
+      <request>
         <h3>Request</h3>
-        <ul>
-          <li><strong>HTTP Method:</strong> POST</li>
-          <li><strong>Head:</strong></li>
-        </ul>
+
+        <strong>Headers:</strong>
+
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
-        <ul>
-          <li><strong>Body:</strong></li>
-        </ul>
+
+        <strong>Body:</strong>
+
         <pre><code>{
     firstName: "John",
     lastName: "Doe",
@@ -294,13 +265,13 @@
     password: "johndoe123",
     accountType: "company"
 }</code></pre>
-        <ul>
-          <li><strong>Query:</strong></li>
-        </ul>
+
+        <strong>Query:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Parameter:</strong></li>
-        </ul>
+
+        <strong>Parameter:</strong>
+
         <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
@@ -313,67 +284,93 @@
     password: "johndoe123",
     accountType: "company"
 }</code></pre>
-        <div class="note"><strong>Note:</strong> This is a note.</div>
-        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
-        <div class="error"><strong>Error:</strong> This is an error.</div>
-      </section>
+      </request>
 
-      <section id="user_delete-profile" class="endpoint">
-        <h2>/user/delete-profile</h2>
-        <p>Drops user from <code>userDatabase</code>.</p>
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
+
+    <section id="user_delete-profile" class="endpoint">
+      <method class="post">
+        <span class="method_name">POST</span>
+        <span class="method_url">/api/user/delete-profile</span>
+        <span class="method_desc">Drops user from
+          <pre><code class="text">userDatabase</code></pre>
+        </span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+      </method>
+      <request>
+
         <h3>Request</h3>
-        <ul>
-          <li><strong>HTTP Method:</strong> POST</li>
-          <li><strong>Head:</strong></li>
-        </ul>
+
+        <strong>HTTP Method:</strong> POST
+        <strong>Headers:</strong>
+
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
-        <ul>
-          <li><strong>Body:</strong></li>
-        </ul>
+
+        <strong>Body:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Query:</strong></li>
-        </ul>
+
+        <strong>Query:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Parameter:</strong></li>
-        </ul>
+
+        <strong>Parameter:</strong>
+
         <pre><code>{
     success: true
 }</code></pre>
         <h3>Response</h3>
         <pre><code>Example response JSON</code></pre>
-        <div class="note"><strong>Note:</strong> This is a note.</div>
-        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
-        <div class="error"><strong>Error:</strong> This is an error.</div>
-      </section>
+      </request>
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
 
-      <section id="user_email_email" class="endpoint">
-        <h2>/user/email/{email}</h2>
-        <p>Query for user using <code>email</code>.</p>
+    <section id="user_email_email" class="endpoint">
+      <method class="get">
+        <span class="method_name">GET</span>
+        <span class="method_url">/api/user/email/{email}</span>
+        <span class="method_desc">Query for user using
+          <pre><code class="text">email</code></pre>
+        </span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+      </method>
+      <request>
+
         <h3>Request</h3>
-        <ul>
-          <li><strong>HTTP Method:</strong> GET</li>
-          <li><strong>Head:</strong></li>
-        </ul>
+
+        <strong>Headers:</strong>
+
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
-        <ul>
-          <li><strong>Body:</strong></li>
-        </ul>
+
+        <strong>Body:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Query:</strong></li>
-        </ul>
+
+        <strong>Query:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Parameter:</strong></li>
-        </ul>
+
+        <strong>Parameter:</strong>
+
         <pre><code>/user/email/john.doe@gmail.com</code></pre>
         <h3>Response</h3>
         <pre><code>{
@@ -384,34 +381,45 @@
     lastName: "Doe",
     accountType: "company"
 }</code></pre>
-        <div class="note"><strong>Note:</strong> This is a note.</div>
-        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
-        <div class="error"><strong>Error:</strong> This is an error.</div>
-      </section>
+      </request>
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
 
-      <section id="user_id_id" class="endpoint">
-        <h2>/user/id/{id}</h2>
-        <p>Query for user using <code>userId</code>.</p>
+    <section id="user_id_id" class="endpoint">
+      <method class="get">
+        <span class="method_name">GET</span>
+        <span class="method_url">/api/user/id/{id}</span>
+        <span class="method_desc">Query for user using
+          <pre><code class="text">userId</code></pre>
+        </span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+      </method>
+      <request>
         <h3>Request</h3>
-        <ul>
-          <li><strong>HTTP Method:</strong> GET</li>
-          <li><strong>Head:</strong></li>
-        </ul>
+
+        <strong>Headers:</strong>
+
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
-        <ul>
-          <li><strong>Body:</strong></li>
-        </ul>
+
+        <strong>Body:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Query:</strong></li>
-        </ul>
+
+        <strong>Query:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Parameter:</strong></li>
-        </ul>
+
+        <strong>Parameter:</strong>
+
         <pre><code>/user/id/0123456789</code></pre>
         <h3>Response</h3>
         <pre><code>{
@@ -422,76 +430,98 @@
     lastName: "Doe",
     accountType: "company"
 }</code></pre>
-        <div class="note"><strong>Note:</strong> This is a note.</div>
-        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
-        <div class="error"><strong>Error:</strong> This is an error.</div>
-      </section>
+      </request>
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
 
-      <h1>Partner</h1>
-      <section id="partner_create-partners-collection" class="endpoint">
-        <h2>/partner/create-partners-collection</h2>
-        <p>
-          Create database <code>partnerDatabase</code> with collection
-          <code>partner</code> in MongoDB if it doesn't already exist.
-        </p>
+    <h1>Partner</h1>
+    <section id="partner_create-partners-collection" class="endpoint">
+      <method class="post">
+        <span class="method_name">POST</span>
+        <span class="method_url">/api/partner/create-partners-collection</span>
+        <span class="method_desc">Create database
+          <pre><code class="text">partnerDatabase</code></pre> with collection
+          <pre><code class="text">partner</code></pre> in MongoDB if it doesn't already exist
+        </span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+      </method>
+      <request>
+
         <h3>Request</h3>
-        <ul>
-          <li><strong>HTTP Method:</strong> POST</li>
-          <li><strong>Head:</strong></li>
-        </ul>
+
+        <strong>Headers:</strong>
+
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
-        <ul>
-          <li><strong>Body:</strong></li>
-        </ul>
+
+        <strong>Body:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Query:</strong></li>
-        </ul>
+
+        <strong>Query:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Parameter:</strong></li>
-        </ul>
+
+        <strong>Parameter:</strong>
+
         <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
     success: true,
     message: "Partner collection created successfully"
 }</code></pre>
-        <div class="note"><strong>Note:</strong> This is a note.</div>
-        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
-        <div class="error"><strong>Error:</strong> This is an error.</div>
-      </section>
+      </request>
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
 
-      <section id="partner_create-service" class="endpoint">
-        <h2>/partner/create-service</h2>
-        <p>Insert service into <code>partnerDatabase</code>.</p>
+    <section id="partner_create-service" class="endpoint">
+      <method class="post">
+        <span class="method_name">POST</span>
+        <span class="method_url">/api/partner/create-service</span>
+        <span class="method_desc">Insert service into
+          <pre><code class="text">partnerDatabase</code></pre>
+        </span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+      </method>
+      <request>
+
         <h3>Request</h3>
-        <ul>
-          <li><strong>HTTP Method:</strong> POST</li>
-          <li><strong>Head:</strong></li>
-        </ul>
+
+        <strong>Headers:</strong>
+
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
-        <ul>
-          <li><strong>Body:</strong></li>
-        </ul>
+
+        <strong>Body:</strong>
+
         <pre><code>{
-    serviceName: "Codng Camp",
+    serviceName: "Coding Camp",
     category: "CODING",
     data: ...
 }</code></pre>
-        <ul>
-          <li><strong>Query:</strong></li>
-        </ul>
+
+        <strong>Query:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Parameter:</strong></li>
-        </ul>
+
+        <strong>Parameter:</strong>
+
         <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
@@ -501,153 +531,150 @@
     category: "CODING",
     data: ...
 }</code></pre>
-        <div class="note"><strong>Note:</strong> This is a note.</div>
-        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
-        <div class="error"><strong>Error:</strong> This is an error.</div>
-      </section>
+      </request>
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
 
-      <section id="partner_update-service" class="endpoint">
-        <h2>/partner/update-profile</h2>
-        <p>Insert service into <code>partnerDatabase</code>.</p>
+    <section id="partner_update-service" class="endpoint">
+      <method class="post">
+        <span class="method_name">POST</span>
+        <span class="method_url">/api/partner/update-service</span>
+        <span class="method_desc">Update service including:
+          <pre><code class="text">serviceName</code></pre>,
+          <pre><code class="text">category</code></pre>, and
+          <pre><code class="text">data</code></pre>
+        </span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+      </method>
+      <request>
+
         <h3>Request</h3>
-        <ul>
-          <li><strong>HTTP Method:</strong> POST</li>
-          <li><strong>Head:</strong></li>
-        </ul>
+
+        <strong>Headers:</strong>
+
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
-        <ul>
-          <li><strong>Body:</strong></li>
-        </ul>
+
+        <strong>Body:</strong>
+
         <pre><code>{
     serviceId: 0123456789,
-    serviceName: "Codng Camp",
+    serviceName: "Coding Camp",
     category: "CODING",
     data: ...
 }</code></pre>
-        <ul>
-          <li><strong>Query:</strong></li>
-        </ul>
+
+        <strong>Query:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Parameter:</strong></li>
-        </ul>
+
+        <strong>Parameter:</strong>
+
         <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
     success: true,
     serviceId: 0123456789,
     ownerToken: "token",
-    serviceName: "Codng Camp",
+    serviceName: "Coding Camp",
     category: "CODING",
     data: ...
 }</code></pre>
-        <div class="note"><strong>Note:</strong> This is a note.</div>
-        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
-        <div class="error"><strong>Error:</strong> This is an error.</div>
-      </section>
+      </request>
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
 
-      <section id="partner_delete-service" class="endpoint">
-        <h2>/partner/delete-service</h2>
-        <p>Insert service into <code>partnerDatabase</code>.</p>
+    <section id="partner_delete-service" class="endpoint">
+      <method class="post">
+        <span class="method_name">POST</span>
+        <span class="method_url">/api/partner/delete-service</span>
+        <span class="method_desc">Drop service from
+          <pre><code class="text">partnerDatabase</code></pre>
+        </span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+      </method>
+      <request>
+
         <h3>Request</h3>
-        <ul>
-          <li><strong>HTTP Method:</strong> POST</li>
-          <li><strong>Head:</strong></li>
-        </ul>
+
+        <strong>Headers:</strong>
+
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
-        <ul>
-          <li><strong>Body:</strong></li>
-        </ul>
+
+        <strong>Body:</strong>
+
         <pre><code>{
     serviceId: 0123456789
 }</code></pre>
-        <ul>
-          <li><strong>Query:</strong></li>
-        </ul>
+
+        <strong>Query:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Parameter:</strong></li>
-        </ul>
+
+        <strong>Parameter:</strong>
+
         <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
     success: true
 }</code></pre>
-        <div class="note"><strong>Note:</strong> This is a note.</div>
-        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
-        <div class="error"><strong>Error:</strong> This is an error.</div>
-      </section>
+      </request>
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
 
-      <section id="partner_id_id" class="endpoint">
-        <h2>/partner/id/{id}</h2>
-        <p>Insert service into <code>partnerDatabase</code>.</p>
+    <section id="partner_service-list_pageNumber" class="endpoint">
+      <method class="get">
+        <span class="method_name">GET</span>
+        <span class="method_url">/api/partner/service-list/{pageNumber}</span>
+        <span class="method_desc">Provides 10 services on page
+          <pre><code class="text">pageNumber</code></pre>
+        </span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+      </method>
+      <request>
+
         <h3>Request</h3>
-        <ul>
-          <li><strong>HTTP Method:</strong> POST</li>
-          <li><strong>Head:</strong></li>
-        </ul>
+
+        <strong>Headers:</strong>
+
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
-        <ul>
-          <li><strong>Body:</strong></li>
-        </ul>
-        <pre><code>{
-    serviceName: "Codng Camp",
-    category: "CODING",
-    data: ...
-}</code></pre>
-        <ul>
-          <li><strong>Query:</strong></li>
-        </ul>
-        <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Parameter:</strong></li>
-        </ul>
-        <pre><code>None</code></pre>
-        <h3>Response</h3>
-        <pre><code>{
-    success: true,
-    serviceId: 0123456789,
-    serviceName: "Codng Camp",
-    category: "CODING",
-    data: ...
-}</code></pre>
-        <div class="note"><strong>Note:</strong> This is a note.</div>
-        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
-        <div class="error"><strong>Error:</strong> This is an error.</div>
-      </section>
 
-      <section id="partner_service-list_pageNumber" class="endpoint">
-        <h2>/partner/service-list/{pageNumber}</h2>
-        <p>Provides 10 services on page <code>pageNumber</code>.</p>
-        <h3>Request</h3>
-        <ul>
-          <li><strong>HTTP Method:</strong> GET</li>
-          <li><strong>Head:</strong></li>
-        </ul>
-        <pre><code>{
-    Authorization: "Bearer {token}"
-}
-</code></pre>
-        <ul>
-          <li><strong>Body:</strong></li>
-        </ul>
+        <strong>Body:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Query:</strong></li>
-        </ul>
+
+        <strong>Query:</strong>
+
         <pre><code>None</code></pre>
-        <ul>
-          <li><strong>Parameter:</strong></li>
-        </ul>
+
+        <strong>Parameter:</strong>
+
         <pre><code>/partner/service-list/1</code></pre>
         <h3>Response</h3>
         <pre><code>{
@@ -656,7 +683,7 @@
                     {
         serviceId: 0123456789,
         ownerToken: "token",
-        serviceName: "Code Camp",
+        serviceName: "Coding Camp",
         category: "CODING",
         data: ...
     }, {
@@ -667,19 +694,131 @@
         data: ...
     }]
 }</code></pre>
-        <div class="note"><strong>Note:</strong> This is a note.</div>
-        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
-        <div class="error"><strong>Error:</strong> This is an error.</div>
-      </section>
-    </main>
-  </body>
+      </request>
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
 
-  <link
-    rel="stylesheet"
-    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css"
-  />
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-  <script>
-    hljs.highlightAll();
-  </script>
+    <section id="partner_id_id" class="endpoint">
+      <method class="get">
+        <span class="method_name">GET</span>
+        <span class="method_url">/api/partner/id/{id}</span>
+        <span class="method_desc">Query for service with
+          <pre><code class="text">serviceId</code></pre>
+        </span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+      </method>
+      <request>
+
+        <h3>Request</h3>
+
+        <strong>Headers:</strong>
+
+        <pre><code>{
+    Authorization: "Bearer {token}"
+}
+</code></pre>
+
+        <strong>Body:</strong>
+
+        <pre><code>None</code></pre>
+
+        <strong>Query:</strong>
+
+        <pre><code>None</code></pre>
+
+        <strong>Parameter:</strong>
+
+        <pre><code>None</code></pre>
+        <h3>Response</h3>
+        <pre><code>{
+    success: true,
+    serviceId: 0123456789,
+    serviceName: "Coding Camp",
+    category: "CODING",
+    data: ...
+}</code></pre>
+      </request>
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
+
+    <section id="partner_search" class="endpoint">
+      <method class="get">
+        <span class="method_name">GET</span>
+        <span class="method_url">/api/partner/search</span>
+        <span class="method_desc">Query for service with
+          <pre><code class="text">category</code></pre> or
+          <pre><code class="text">terms</code></pre>
+        </span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+      </method>
+      <request>
+
+        <h3>Request</h3>
+
+        <strong>Headers:</strong>
+
+        <pre><code>{
+    Authorization: "Bearer {token}"
+}
+</code></pre>
+
+        <strong>Body:</strong>
+
+        <pre><code>None</code></pre>
+
+        <strong>Query:</strong>
+
+        <pre><code>/partner/search?category=CODING&terms=Programming</code></pre>
+
+        <strong>Parameter:</strong>
+
+        <pre><code>None</code></pre>
+        <h3>Response</h3>
+        <pre><code>{
+    success: true,
+    services: [
+                    {
+        serviceId: 0123456789,
+        ownerToken: "token",
+        serviceName: "Coding Camp",
+        category: "CODING",
+        data: ...
+    }, {
+        serviceId: 1123456789,
+        ownerToken: "token",
+        serviceName: "Art Camp",
+        category: "ART",
+        data: ...
+    }]
+}</code></pre>
+      </request>
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
+  </main>
+</body>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+
+<script src="app.js"></script>
+
 </html>
