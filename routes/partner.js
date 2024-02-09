@@ -4,8 +4,8 @@ All partner related API requests reside on this file.
 
 const express = require("express");
 const { executePython } = require("../pythonExecutor");
-const { mongoClient } = require("../mongodb");
-const { cohereClient } = require("../cohereai");
+const { mongoClient } = require("../api/mongodb");
+const { cohereClient } = require("../api/cohereai");
 
 require("dotenv").config();
 

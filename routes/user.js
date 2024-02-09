@@ -12,7 +12,7 @@ NOTE: server admin/console user can perform higher permission activities.
 
 const express = require("express");
 const { executePython } = require("../pythonExecutor");
-const { mongoClient } = require("../mongodb");
+const { mongoClient } = require("../api/mongodb");
 
 require("dotenv").config();
 
