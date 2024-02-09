@@ -163,7 +163,7 @@
           <li><strong>Head:</strong></li>
         </ul>
         <pre><code>{
-    Authorization: "Bearer token"
+    Authorization: "Bearer {token}"
 }
 </code></pre>
         <ul>
@@ -417,10 +417,255 @@
         <pre><code>{
     success: true,
     email: "john.doe@gmail.com",
-    userId: 012345678790,
+    userId: 01234567879,
     firstName: "John",
     lastName: "Doe",
     accountType: "company"
+}</code></pre>
+        <div class="note"><strong>Note:</strong> This is a note.</div>
+        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
+        <div class="error"><strong>Error:</strong> This is an error.</div>
+      </section>
+
+      <h1>Partner</h1>
+      <section id="partner_create-partners-collection" class="endpoint">
+        <h2>/partner/create-partners-collection</h2>
+        <p>
+          Create database <code>partnerDatabase</code> with collection
+          <code>partner</code> in MongoDB if it doesn't already exist.
+        </p>
+        <h3>Request</h3>
+        <ul>
+          <li><strong>HTTP Method:</strong> POST</li>
+          <li><strong>Head:</strong></li>
+        </ul>
+        <pre><code>{
+    Authorization: "Bearer {token}"
+}
+</code></pre>
+        <ul>
+          <li><strong>Body:</strong></li>
+        </ul>
+        <pre><code>None</code></pre>
+        <ul>
+          <li><strong>Query:</strong></li>
+        </ul>
+        <pre><code>None</code></pre>
+        <ul>
+          <li><strong>Parameter:</strong></li>
+        </ul>
+        <pre><code>None</code></pre>
+        <h3>Response</h3>
+        <pre><code>{
+    success: true,
+    message: "Partner collection created successfully"
+}</code></pre>
+        <div class="note"><strong>Note:</strong> This is a note.</div>
+        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
+        <div class="error"><strong>Error:</strong> This is an error.</div>
+      </section>
+
+      <section id="partner_create-service" class="endpoint">
+        <h2>/partner/create-service</h2>
+        <p>Insert service into <code>partnerDatabase</code>.</p>
+        <h3>Request</h3>
+        <ul>
+          <li><strong>HTTP Method:</strong> POST</li>
+          <li><strong>Head:</strong></li>
+        </ul>
+        <pre><code>{
+    Authorization: "Bearer {token}"
+}
+</code></pre>
+        <ul>
+          <li><strong>Body:</strong></li>
+        </ul>
+        <pre><code>{
+    serviceName: "Codng Camp",
+    category: "CODING",
+    data: ...
+}</code></pre>
+        <ul>
+          <li><strong>Query:</strong></li>
+        </ul>
+        <pre><code>None</code></pre>
+        <ul>
+          <li><strong>Parameter:</strong></li>
+        </ul>
+        <pre><code>None</code></pre>
+        <h3>Response</h3>
+        <pre><code>{
+    success: true,
+    serviceId: 0123456789,
+    serviceName: "Codng Camp",
+    category: "CODING",
+    data: ...
+}</code></pre>
+        <div class="note"><strong>Note:</strong> This is a note.</div>
+        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
+        <div class="error"><strong>Error:</strong> This is an error.</div>
+      </section>
+
+      <section id="partner_update-service" class="endpoint">
+        <h2>/partner/update-profile</h2>
+        <p>Insert service into <code>partnerDatabase</code>.</p>
+        <h3>Request</h3>
+        <ul>
+          <li><strong>HTTP Method:</strong> POST</li>
+          <li><strong>Head:</strong></li>
+        </ul>
+        <pre><code>{
+    Authorization: "Bearer {token}"
+}
+</code></pre>
+        <ul>
+          <li><strong>Body:</strong></li>
+        </ul>
+        <pre><code>{
+    serviceId: 0123456789,
+    serviceName: "Codng Camp",
+    category: "CODING",
+    data: ...
+}</code></pre>
+        <ul>
+          <li><strong>Query:</strong></li>
+        </ul>
+        <pre><code>None</code></pre>
+        <ul>
+          <li><strong>Parameter:</strong></li>
+        </ul>
+        <pre><code>None</code></pre>
+        <h3>Response</h3>
+        <pre><code>{
+    success: true,
+    serviceId: 0123456789,
+    ownerToken: "token",
+    serviceName: "Codng Camp",
+    category: "CODING",
+    data: ...
+}</code></pre>
+        <div class="note"><strong>Note:</strong> This is a note.</div>
+        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
+        <div class="error"><strong>Error:</strong> This is an error.</div>
+      </section>
+
+      <section id="partner_delete-service" class="endpoint">
+        <h2>/partner/delete-service</h2>
+        <p>Insert service into <code>partnerDatabase</code>.</p>
+        <h3>Request</h3>
+        <ul>
+          <li><strong>HTTP Method:</strong> POST</li>
+          <li><strong>Head:</strong></li>
+        </ul>
+        <pre><code>{
+    Authorization: "Bearer {token}"
+}
+</code></pre>
+        <ul>
+          <li><strong>Body:</strong></li>
+        </ul>
+        <pre><code>{
+    serviceId: 0123456789
+}</code></pre>
+        <ul>
+          <li><strong>Query:</strong></li>
+        </ul>
+        <pre><code>None</code></pre>
+        <ul>
+          <li><strong>Parameter:</strong></li>
+        </ul>
+        <pre><code>None</code></pre>
+        <h3>Response</h3>
+        <pre><code>{
+    success: true
+}</code></pre>
+        <div class="note"><strong>Note:</strong> This is a note.</div>
+        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
+        <div class="error"><strong>Error:</strong> This is an error.</div>
+      </section>
+
+      <section id="partner_id_id" class="endpoint">
+        <h2>/partner/id/{id}</h2>
+        <p>Insert service into <code>partnerDatabase</code>.</p>
+        <h3>Request</h3>
+        <ul>
+          <li><strong>HTTP Method:</strong> POST</li>
+          <li><strong>Head:</strong></li>
+        </ul>
+        <pre><code>{
+    Authorization: "Bearer {token}"
+}
+</code></pre>
+        <ul>
+          <li><strong>Body:</strong></li>
+        </ul>
+        <pre><code>{
+    serviceName: "Codng Camp",
+    category: "CODING",
+    data: ...
+}</code></pre>
+        <ul>
+          <li><strong>Query:</strong></li>
+        </ul>
+        <pre><code>None</code></pre>
+        <ul>
+          <li><strong>Parameter:</strong></li>
+        </ul>
+        <pre><code>None</code></pre>
+        <h3>Response</h3>
+        <pre><code>{
+    success: true,
+    serviceId: 0123456789,
+    serviceName: "Codng Camp",
+    category: "CODING",
+    data: ...
+}</code></pre>
+        <div class="note"><strong>Note:</strong> This is a note.</div>
+        <div class="warning"><strong>Warning:</strong> This is a warning.</div>
+        <div class="error"><strong>Error:</strong> This is an error.</div>
+      </section>
+
+      <section id="partner_service-list_pageNumber" class="endpoint">
+        <h2>/partner/service-list/{pageNumber}</h2>
+        <p>Provides 10 services on page <code>pageNumber</code>.</p>
+        <h3>Request</h3>
+        <ul>
+          <li><strong>HTTP Method:</strong> GET</li>
+          <li><strong>Head:</strong></li>
+        </ul>
+        <pre><code>{
+    Authorization: "Bearer {token}"
+}
+</code></pre>
+        <ul>
+          <li><strong>Body:</strong></li>
+        </ul>
+        <pre><code>None</code></pre>
+        <ul>
+          <li><strong>Query:</strong></li>
+        </ul>
+        <pre><code>None</code></pre>
+        <ul>
+          <li><strong>Parameter:</strong></li>
+        </ul>
+        <pre><code>/partner/service-list/1</code></pre>
+        <h3>Response</h3>
+        <pre><code>{
+    success: true,
+    services: [
+                    {
+        serviceId: 0123456789,
+        ownerToken: "token",
+        serviceName: "Code Camp",
+        category: "CODING",
+        data: ...
+    }, {
+        serviceId: 1123456789,
+        ownerToken: "token",
+        serviceName: "Art Camp",
+        category: "ART",
+        data: ...
+    }]
 }</code></pre>
         <div class="note"><strong>Note:</strong> This is a note.</div>
         <div class="warning"><strong>Warning:</strong> This is a warning.</div>

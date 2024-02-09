@@ -43,49 +43,12 @@ router.post("/create-partners-collection", async (req, res) => {
 });
 
 /*
-Service list provides a list of:
-- email
-- name
-- data...
-
-of service
-*/
-router.get("/service-list/:pageNumber", async (req, res) => {
-  const count = 10;
-  try {
-    const pageNumber = parseInt(req.params.pageNumber || "1");
-    const skipCount = (pageNumber - 1) * count;
-
-    const db = mongoClient.db(partnerDatabase);
-    const collection = db.collection(partnerCollection);
-
-    const entries = await collection
-      .find()
-      .skip(skipCount)
-      .limit(count)
-      .toArray();
-
-    if (entries.length === 0) {
-      return res.json({
-        success: false,
-        message: "No entries found",
-      });
-    }
-
-    res.json({ success: true, services: entries });
-  } catch (error) {
-    console.error(`Error fetching next ${count} entries:`, error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-/*
 Service, creates service, requires:
 - name
 - category
 - data...
 */
-router.post("/service", async (req, res) => {
+router.post("/create-service", async (req, res) => {
   const serviceName = req.body.serviceName;
   const category = req.body.category;
   const data = req.body.data;
@@ -227,6 +190,43 @@ router.post("/delete-service", async (req, res) => {
     });
   } catch (error) {
     console.error("Error deleting service:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+/*
+Service list provides a list of:
+- email
+- name
+- data...
+
+of service
+*/
+router.get("/service-list/:pageNumber", async (req, res) => {
+  const count = 10;
+  try {
+    const pageNumber = parseInt(req.params.pageNumber || "1");
+    const skipCount = (pageNumber - 1) * count;
+
+    const db = mongoClient.db(partnerDatabase);
+    const collection = db.collection(partnerCollection);
+
+    const entries = await collection
+      .find()
+      .skip(skipCount)
+      .limit(count)
+      .toArray();
+
+    if (entries.length === 0) {
+      return res.json({
+        success: false,
+        message: "No entries found",
+      });
+    }
+
+    res.json({ success: true, services: entries });
+  } catch (error) {
+    console.error(`Error fetching next ${count} entries:`, error);
     res.status(500).send("Internal Server Error");
   }
 });
