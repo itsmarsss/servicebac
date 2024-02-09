@@ -50,10 +50,10 @@
       <method class="get">
         <span class="method_name">GET</span>
         <span class="method_url">/</span>
-        <span class="method_desc">Greet user</span>
         <span class="material-symbols-outlined revealer">
           chevron_right
         </span>
+        <span class="method_desc">Greet user</span>
       </method>
       <request>
         <h3>Request</h3>
@@ -86,12 +86,12 @@
       <method class="post">
         <span class="method_name">POST</span>
         <span class="method_url">/api/user/create-users-collection</span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
         <span class="method_desc">Create database
           <pre><code class="text">userDatabase</code></pre> with collection
           <pre><code class="text">user</code></pre> in MongoDB if it doesn't already exist
-        </span>
-        <span class="material-symbols-outlined revealer">
-          chevron_right
         </span>
       </method>
       <request>
@@ -130,11 +130,11 @@
       <method class="post">
         <span class="method_name">POST</span>
         <span class="method_url">/api/user/signup</span>
-        <span class="method_desc">Signs a user up. Inserts their data into
-          <pre><code class="text">userDatabase</code></pre>
-        </span>
         <span class="material-symbols-outlined revealer">
           chevron_right
+        </span>
+        <span class="method_desc">Signs a user up. Inserts their data into
+          <pre><code class="text">userDatabase</code></pre>
         </span>
       </method>
 
@@ -186,12 +186,12 @@
       <method class="post">
         <span class="method_name">POST</span>
         <span class="method_url">/api/user/signin</span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
         <span class="method_desc">Sign user in with
           <pre><code class="text">email</code></pre> and
           <pre><code class="text">password</code></pre>
-        </span>
-        <span class="material-symbols-outlined revealer">
-          chevron_right
         </span>
       </method>
       <request>
@@ -234,15 +234,15 @@
       <method class="post">
         <span class="method_name">POST</span>
         <span class="method_url">/api/user/update-profile</span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
         <span class="method_desc">Update user profile including:
           <pre><code class="text">firstName</code></pre>,
           <pre><code class="text">lastName</code></pre>,
           <pre><code class="text">email</code></pre>,
           <pre><code class="text">password</code></pre>, and
           <pre><code class="text">accountType</code></pre>
-        </span>
-        <span class="material-symbols-outlined revealer">
-          chevron_right
         </span>
       </method>
 
@@ -297,11 +297,11 @@
       <method class="post">
         <span class="method_name">POST</span>
         <span class="method_url">/api/user/delete-profile</span>
-        <span class="method_desc">Drops user from
-          <pre><code class="text">userDatabase</code></pre>
-        </span>
         <span class="material-symbols-outlined revealer">
           chevron_right
+        </span>
+        <span class="method_desc">Drops user from
+          <pre><code class="text">userDatabase</code></pre>
         </span>
       </method>
       <request>
@@ -343,11 +343,11 @@
       <method class="get">
         <span class="method_name">GET</span>
         <span class="method_url">/api/user/email/{email}</span>
-        <span class="method_desc">Query for user using
-          <pre><code class="text">email</code></pre>
-        </span>
         <span class="material-symbols-outlined revealer">
           chevron_right
+        </span>
+        <span class="method_desc">Query for user using
+          <pre><code class="text">email</code></pre>
         </span>
       </method>
       <request>
@@ -393,11 +393,11 @@
       <method class="get">
         <span class="method_name">GET</span>
         <span class="method_url">/api/user/id/{id}</span>
-        <span class="method_desc">Query for user using
-          <pre><code class="text">userId</code></pre>
-        </span>
         <span class="material-symbols-outlined revealer">
           chevron_right
+        </span>
+        <span class="method_desc">Query for user using
+          <pre><code class="text">userId</code></pre>
         </span>
       </method>
       <request>
@@ -443,12 +443,12 @@
       <method class="post">
         <span class="method_name">POST</span>
         <span class="method_url">/api/partner/create-partners-collection</span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
         <span class="method_desc">Create database
           <pre><code class="text">partnerDatabase</code></pre> with collection
           <pre><code class="text">partner</code></pre> in MongoDB if it doesn't already exist
-        </span>
-        <span class="material-symbols-outlined revealer">
-          chevron_right
         </span>
       </method>
       <request>
@@ -490,11 +490,11 @@
       <method class="post">
         <span class="method_name">POST</span>
         <span class="method_url">/api/partner/create-service</span>
-        <span class="method_desc">Insert service into
-          <pre><code class="text">partnerDatabase</code></pre>
-        </span>
         <span class="material-symbols-outlined revealer">
           chevron_right
+        </span>
+        <span class="method_desc">Insert service into
+          <pre><code class="text">partnerDatabase</code></pre>
         </span>
       </method>
       <request>
@@ -543,13 +543,13 @@
       <method class="post">
         <span class="method_name">POST</span>
         <span class="method_url">/api/partner/update-service</span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
         <span class="method_desc">Update service including:
           <pre><code class="text">serviceName</code></pre>,
           <pre><code class="text">category</code></pre>, and
           <pre><code class="text">data</code></pre>
-        </span>
-        <span class="material-symbols-outlined revealer">
-          chevron_right
         </span>
       </method>
       <request>
@@ -600,11 +600,11 @@
       <method class="post">
         <span class="method_name">POST</span>
         <span class="method_url">/api/partner/delete-service</span>
-        <span class="method_desc">Drop service from
-          <pre><code class="text">partnerDatabase</code></pre>
-        </span>
         <span class="material-symbols-outlined revealer">
           chevron_right
+        </span>
+        <span class="method_desc">Drop service from
+          <pre><code class="text">partnerDatabase</code></pre>
         </span>
       </method>
       <request>
@@ -647,11 +647,11 @@
       <method class="get">
         <span class="method_name">GET</span>
         <span class="method_url">/api/partner/service-list/{pageNumber}</span>
-        <span class="method_desc">Provides 10 services on page
-          <pre><code class="text">pageNumber</code></pre>
-        </span>
         <span class="material-symbols-outlined revealer">
           chevron_right
+        </span>
+        <span class="method_desc">Provides 10 services on page
+          <pre><code class="text">pageNumber</code></pre>
         </span>
       </method>
       <request>
@@ -706,11 +706,11 @@
       <method class="get">
         <span class="method_name">GET</span>
         <span class="method_url">/api/partner/id/{id}</span>
-        <span class="method_desc">Query for service with
-          <pre><code class="text">serviceId</code></pre>
-        </span>
         <span class="material-symbols-outlined revealer">
           chevron_right
+        </span>
+        <span class="method_desc">Query for service with
+          <pre><code class="text">serviceId</code></pre>
         </span>
       </method>
       <request>
@@ -755,12 +755,12 @@
       <method class="get">
         <span class="method_name">GET</span>
         <span class="method_url">/api/partner/search</span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
         <span class="method_desc">Query for service with
           <pre><code class="text">category</code></pre> or
           <pre><code class="text">terms</code></pre>
-        </span>
-        <span class="material-symbols-outlined revealer">
-          chevron_right
         </span>
       </method>
       <request>
