@@ -335,7 +335,7 @@ router.get("/search", async (req, res) => {
 
     const sanitizedResults = resultsSimilarity.map(({ ownerToken, embeddings, ...rest }) => rest);
 
-    res.json({ success: true, services: sanitizedResults });
+    res.json({ success: true, terms: terms, services: sanitizedResults });
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, message: "Internal server error" });
