@@ -5,8 +5,13 @@ All partner related API requests reside on this file.
 const express = require("express");
 const { executePython } = require("../pythonExecutor");
 const { mongoClient } = require("../mongodb");
+const { CohereClient } = require("cohere-ai");
 
 require("dotenv").config();
+
+const cohere = new CohereClient({
+  token: process.env.COHERE_KEY,
+});
 
 const router = express.Router();
 
@@ -78,6 +83,22 @@ router.post("/create-service", async (req, res) => {
       ...service_tokid,
       ...service_data,
     });
+
+    const dataValues = Object.values(data).join(" ");
+
+    const embed = await cohere.embed({
+      texts: [serviceName, category, dataValues],
+      model: "embed-english-v3.0",
+      inputType: "classification",
+    });
+
+    const serviceEmbeddings = embed.embeddings[0];
+
+    await collection.updateOne(
+      { _id: result.insertedId },
+      { $set: { embeddings: serviceEmbeddings } }
+    );
+
     res.json({
       success: true,
       ...service_tokid,
@@ -143,6 +164,22 @@ router.put("/update-service", async (req, res) => {
       },
       { $set: service_data }
     );
+
+    const dataValues = Object.values(data).join(" ");
+
+    const embed = await cohere.embed({
+      texts: [serviceName, category, dataValues],
+      model: "embed-english-v3.0",
+      inputType: "classification",
+    });
+
+    const serviceEmbeddings = embed.embeddings[0];
+
+    await collection.updateOne(
+      { serviceId: serviceId },
+      { $set: { embeddings: serviceEmbeddings } }
+    );
+
     res.json({
       success: true,
       ...service_data,
@@ -225,7 +262,7 @@ router.get("/service-list/:pageNumber", async (req, res) => {
     }
 
     const sanitizedEntries = entries.map(entry => {
-      const { ownerToken, ...rest } = entry;
+      const { ownerToken, embeddings, ...rest } = entry;
       return rest;
     });
 
@@ -255,7 +292,7 @@ router.get("/id/:id", async (req, res) => {
 
     console.log(service)
 
-    const { ownerToken, ...sanitizedService } = service;
+    const { ownerToken, embeddings, ...sanitizedService } = service;
 
     res.json({ success: true, service: sanitizedService });
   } catch (error) {
@@ -276,35 +313,57 @@ router.get("/search", async (req, res) => {
     });
     return;
   }
-  // TODO: Semantic Search
 
-  //   try {
-  //     const db = mongoClient.db(partnerDatabase);
-  //     const collection = db.collection(partnerCollection);
+  try {
+    const embed = await cohere.embed({
+      texts: [terms],
+      model: "embed-english-v3.0",
+      inputType: "classification",
+    });
 
-  //     const service = await collection.findOne({
-  //       serviceId: parseInt(req.params.id),
-  //     });
+    const queryEmbeddings = embed.embeddings[0];
 
-  //     if (!service) {
-  //       return res.json({
-  //         success: false,
-  //         message: "Services not found",
-  //       });
-  //     }
+    const db = mongoClient.db(partnerDatabase);
+    const collection = db.collection(partnerCollection);
 
-  //     res.json({
-  //       success: true,
-  //       serviceId: service.serviceId,
-  //       serviceName: service.serviceName,
-  //       category: service.category,
-  //       data: service.data,
-  //     });
-  //   } catch (error) {
-  //     console.error("Error seraching for service:", error);
-  //     res.status(500).send("Internal Server Error");
-  //   }
+    const searchResult = await collection.find().toArray();
+    const resultsSimilarity = searchResult.map(doc => {
+      const documentEmbeddings = doc.embeddings;
+      const similarity = calculateCosineSimilarity(queryEmbeddings, documentEmbeddings);
+      return { ...doc, similarity };
+    });
+
+    resultsSimilarity.sort((a, b) => b.similarity - a.similarity);
+
+    const sanitizedResults = resultsSimilarity.map(({ ownerToken, embeddings, ...rest }) => rest);
+
+    res.json({ success: true, services: sanitizedResults });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
 });
+
+function calculateCosineSimilarity(vector1, vector2) {
+  if (!vector1 || !vector2 || vector1.length !== vector2.length) {
+    return 0;
+  }
+
+  let dotProduct = 0;
+  for (let i = 0; i < vector1.length; i++) {
+    dotProduct += vector1[i] * vector2[i];
+  }
+
+  const magnitude1 = Math.sqrt(vector1.reduce((acc, val) => acc + Math.pow(val, 2), 0));
+  const magnitude2 = Math.sqrt(vector2.reduce((acc, val) => acc + Math.pow(val, 2), 0));
+
+  if (magnitude1 === 0 || magnitude2 === 0) {
+    return 0;
+  }
+
+  return dotProduct / (magnitude1 * magnitude2);
+}
+
 
 async function authorization(req, res, next) {
   console.log(req.originalUrl);
