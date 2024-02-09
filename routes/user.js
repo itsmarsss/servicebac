@@ -314,7 +314,6 @@ router.get("/id/:id", async (req, res) => {
 });
 
 async function authorization(req, res, next) {
-  console.log(req.originalUrl);
   if (
     req.originalUrl === "/api/user/signup" ||
     req.originalUrl === "/api/user/signin"

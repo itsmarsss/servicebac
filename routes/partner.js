@@ -364,7 +364,6 @@ function calculateCosineSimilarity(vector1, vector2) {
 
 
 async function authorization(req, res, next) {
-  console.log(req.originalUrl);
   if (
     req.originalUrl === "/api/user/signup" ||
     req.originalUrl === "/api/user/signin"
