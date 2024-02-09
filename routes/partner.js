@@ -5,13 +5,9 @@ All partner related API requests reside on this file.
 const express = require("express");
 const { executePython } = require("../pythonExecutor");
 const { mongoClient } = require("../mongodb");
-const { CohereClient } = require("cohere-ai");
+const { cohereClient } = require("../cohereai");
 
 require("dotenv").config();
-
-const cohere = new CohereClient({
-  token: process.env.COHERE_KEY,
-});
 
 const router = express.Router();
 
@@ -21,6 +17,8 @@ const userDatabase = process.env.USER_DATABASE;
 const userCollection = process.env.USER_COLLECTION;
 const partnerDatabase = process.env.PARTNER_DATABASE;
 const partnerCollection = process.env.PARTNER_COLLECTION;
+
+const cohereModel = process.env.COHERE_MODEL;
 
 // Create partners collection
 router.post("/create-partners-collection", async (req, res) => {
@@ -86,9 +84,9 @@ router.post("/create-service", async (req, res) => {
 
     const dataValues = Object.values(data).join(" ");
 
-    const embed = await cohere.embed({
+    const embed = await cohereClient.embed({
       texts: [serviceName, category, dataValues],
-      model: "embed-english-v3.0",
+      model: cohereModel,
       inputType: "classification",
     });
 
@@ -167,9 +165,9 @@ router.put("/update-service", async (req, res) => {
 
     const dataValues = Object.values(data).join(" ");
 
-    const embed = await cohere.embed({
+    const embed = await cohereClient.embed({
       texts: [serviceName, category, dataValues],
-      model: "embed-english-v3.0",
+      model: cohereModel,
       inputType: "classification",
     });
 
@@ -315,9 +313,9 @@ router.get("/search", async (req, res) => {
   }
 
   try {
-    const embed = await cohere.embed({
+    const embed = await cohereClient.embed({
       texts: [terms],
-      model: "embed-english-v3.0",
+      model: cohereModel,
       inputType: "classification",
     });
 
