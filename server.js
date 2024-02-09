@@ -1,5 +1,4 @@
 const express = require("express");
-const { executePython } = require("./pythonExecutor");
 
 const app = express();
 
@@ -11,16 +10,16 @@ app.use(logger);
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  console.log("Root");
-  res.render("index", { name: "Marsss!" });
+    console.log("Root");
+    res.render("index", { name: "Marsss!" });
 });
 
 const userRouter = require("./routes/user");
 const partnerRouter = require("./routes/partner");
 
 function logger(req, res, next) {
-  console.log(req.originalUrl);
-  next();
+    console.log(req.originalUrl);
+    next();
 }
 
 app.use("/api/user", userRouter);

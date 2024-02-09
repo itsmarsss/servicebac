@@ -37,6 +37,8 @@ header {
 nav {
     background-color: #e9ecef;
     padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 a {
@@ -73,7 +75,6 @@ section.full infos {
     font-size: 19px;
     user-select: none;
     float: right;
-    cursor: pointer;
     transition: 200ms;
 }
 
@@ -88,6 +89,7 @@ method {
     color: #3d4254;
     outline: 2px solid;
     font-weight: bold;
+    cursor: pointer;
 }
 
 method>.method_name {

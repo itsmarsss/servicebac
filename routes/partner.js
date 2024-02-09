@@ -224,7 +224,12 @@ router.get("/service-list/:pageNumber", async (req, res) => {
       });
     }
 
-    res.json({ success: true, services: entries });
+    const sanitizedEntries = entries.map(entry => {
+      const { ownerToken, ...rest } = entry;
+      return rest;
+    });
+
+    res.json({ success: true, services: sanitizedEntries });
   } catch (error) {
     console.error(`Error fetching next ${count} entries:`, error);
     res.status(500).send("Internal Server Error");
@@ -248,13 +253,11 @@ router.get("/id/:id", async (req, res) => {
       });
     }
 
-    res.json({
-      success: true,
-      serviceId: service.serviceId,
-      serviceName: service.serviceName,
-      category: service.category,
-      data: service.data,
-    });
+    console.log(service)
+
+    const { ownerToken, ...sanitizedService } = service;
+
+    res.json({ success: true, service: sanitizedService });
   } catch (error) {
     console.error("Error querying service by id:", error);
     res.status(500).send("Internal Server Error");

@@ -280,14 +280,9 @@ router.get("/email/:email", async (req, res) => {
       });
     }
 
-    res.json({
-      success: true,
-      email: user.accountType === "partner" ? user.email : "[REDACTED]",
-      userId: user.userId,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      accountType: user.accountType,
-    });
+    const { password, userToken, ...sanitizedUser } = user;
+
+    res.json(sanitizedUser);
   } catch (error) {
     console.error("Error querying user by email:", error);
     res.status(500).send("Internal Server Error");
@@ -309,14 +304,9 @@ router.get("/id/:id", async (req, res) => {
       });
     }
 
-    res.json({
-      success: true,
-      email: user.accountType === "partner" ? user.email : "[REDACTED]",
-      userId: user.userId,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      accountType: user.accountType,
-    });
+    const { password, userToken, ...sanitizedUser } = user;
+
+    res.json(sanitizedUser);
   } catch (error) {
     console.error("Error querying user by id:", error);
     res.status(500).send("Internal Server Error");
