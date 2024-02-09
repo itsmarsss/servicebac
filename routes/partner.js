@@ -96,7 +96,7 @@ Update service will allow the change of:
 - category
 - data...
 */
-router.post("/update-service", async (req, res) => {
+router.put("/update-service", async (req, res) => {
   const serviceId = req.body.serviceId;
   const serviceName = req.body.serviceName;
   const category = req.body.category;
@@ -157,7 +157,7 @@ router.post("/update-service", async (req, res) => {
 /*
 Delete service will delete service
 */
-router.post("/delete-service", async (req, res) => {
+router.delete("/delete-service", async (req, res) => {
   const serviceId = req.body.serviceId;
 
   if (!serviceId) {

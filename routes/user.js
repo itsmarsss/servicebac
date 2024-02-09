@@ -181,7 +181,7 @@ Update user profile will allow the change of:
 - first name
 - last name
 */
-router.post("/update-profile", async (req, res) => {
+router.put("/update-profile", async (req, res) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const email = req.body.email;
@@ -240,7 +240,7 @@ router.post("/update-profile", async (req, res) => {
 /*
 Delete user profile will delete profile
 */
-router.post("/delete-profile", async (req, res) => {
+router.delete("/delete-profile", async (req, res) => {
   const userToken = req.headers["authorization"].split(" ")[1];
 
   try {

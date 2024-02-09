@@ -55,8 +55,10 @@
         </span>
         <span class="method_desc">Greet user</span>
       </method>
+
       <request>
         <h3>Request</h3>
+
         <strong>Headers:</strong>
         <pre><code>None</code></pre>
 
@@ -64,10 +66,10 @@
         <pre><code>None</code></pre>
 
         <strong>Query:</strong>
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <strong>Parameter:</strong>
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <h3>Response</h3>
         <pre><code>index.ejs</code></pre>
@@ -78,7 +80,6 @@
         <div class="warning"><b>Warning:</b> This is a warning.</div>
         <div class="error"><b>Error:</b> This is an error.</div>
       </infos>
-
     </section>
 
     <h1>User</h1>
@@ -94,9 +95,10 @@
           <pre><code class="text">user</code></pre> in MongoDB if it doesn't already exist
         </span>
       </method>
-      <request>
 
+      <request>
         <h3>Request</h3>
+
         <strong>Headers:</strong>
         <pre><code>{
     Authorization: "Bearer {token}"
@@ -107,18 +109,18 @@
         <pre><code>None</code></pre>
 
         <strong>Query:</strong>
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <strong>Parameter:</strong>
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <h3>Response</h3>
         <pre><code>{
     success: true,
     message: "Users collection created successfully"
 }</code></pre>
-
       </request>
+
       <infos>
         <div class="note"><b>Note:</b> This is a note.</div>
         <div class="warning"><b>Warning:</b> This is a warning.</div>
@@ -142,26 +144,23 @@
         <h3>Request</h3>
 
         <strong>Headers:</strong>
-
         <pre><code>None</code></pre>
 
         <strong>Body:</strong>
-
         <pre><code>{
     firstName: "John",
     lastName: "Doe",
     email: "john.doe@gmail.com",
-    passowrd: "johndoe123",
+    password: "johndoe123",
     accountType: "company"
 }</code></pre>
 
         <strong>Query:</strong>
-
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <strong>Parameter:</strong>
+        <pre><code class="text">None</code></pre>
 
-        <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
     success: true,
@@ -194,28 +193,25 @@
           <pre><code class="text">password</code></pre>
         </span>
       </method>
-      <request>
 
+      <request>
         <h3>Request</h3>
 
         <strong>Headers:</strong>
-
         <pre><code>None</code></pre>
 
         <strong>Body:</strong>
-
         <pre><code>{
     email: "john.doe@gmail.com",
     password: "johndoe123"
 }</code></pre>
 
         <strong>Query:</strong>
-
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <strong>Parameter:</strong>
+        <pre><code class="text">None</code></pre>
 
-        <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
     success: true,
@@ -223,6 +219,7 @@
     userId: 0123456789
 }</code></pre>
       </request>
+
       <infos>
         <div class="note"><b>Note:</b> This is a note.</div>
         <div class="warning"><b>Warning:</b> This is a warning.</div>
@@ -231,8 +228,8 @@
     </section>
 
     <section id="user_update-profile" class="endpoint">
-      <method class="post">
-        <span class="method_name">POST</span>
+      <method class="put">
+        <span class="method_name">PUT</span>
         <span class="method_url">/api/user/update-profile</span>
         <span class="material-symbols-outlined revealer">
           chevron_right
@@ -250,14 +247,12 @@
         <h3>Request</h3>
 
         <strong>Headers:</strong>
-
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
 
         <strong>Body:</strong>
-
         <pre><code>{
     firstName: "John",
     lastName: "Doe",
@@ -267,12 +262,11 @@
 }</code></pre>
 
         <strong>Query:</strong>
-
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <strong>Parameter:</strong>
+        <pre><code class="text">None</code></pre>
 
-        <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
     success: true,
@@ -294,8 +288,8 @@
     </section>
 
     <section id="user_delete-profile" class="endpoint">
-      <method class="post">
-        <span class="method_name">POST</span>
+      <method class="delete">
+        <span class="method_name">DELETE</span>
         <span class="method_url">/api/user/delete-profile</span>
         <span class="material-symbols-outlined revealer">
           chevron_right
@@ -304,34 +298,31 @@
           <pre><code class="text">userDatabase</code></pre>
         </span>
       </method>
-      <request>
 
+      <request>
         <h3>Request</h3>
 
-        <strong>HTTP Method:</strong> POST
         <strong>Headers:</strong>
-
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
 
         <strong>Body:</strong>
-
         <pre><code>None</code></pre>
 
         <strong>Query:</strong>
-
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <strong>Parameter:</strong>
+        <pre><code class="text">None</code></pre>
 
-        <pre><code>{
-    success: true
-}</code></pre>
         <h3>Response</h3>
-        <pre><code>Example response JSON</code></pre>
+        <pre><code>{
+  success: true
+}</code></pre>
       </request>
+
       <infos>
         <div class="note"><b>Note:</b> This is a note.</div>
         <div class="warning"><b>Warning:</b> This is a warning.</div>
@@ -350,28 +341,24 @@
           <pre><code class="text">email</code></pre>
         </span>
       </method>
-      <request>
 
+      <request>
         <h3>Request</h3>
 
         <strong>Headers:</strong>
-
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
 
         <strong>Body:</strong>
-
         <pre><code>None</code></pre>
 
         <strong>Query:</strong>
-
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <strong>Parameter:</strong>
-
-        <pre><code>/user/email/john.doe@gmail.com</code></pre>
+        <pre><code class="text">/api/user/email/john.doe@gmail.com</code></pre>
         <h3>Response</h3>
         <pre><code>{
     success: true,
@@ -382,6 +369,7 @@
     accountType: "company"
 }</code></pre>
       </request>
+
       <infos>
         <div class="note"><b>Note:</b> This is a note.</div>
         <div class="warning"><b>Warning:</b> This is a warning.</div>
@@ -400,27 +388,25 @@
           <pre><code class="text">userId</code></pre>
         </span>
       </method>
+
       <request>
         <h3>Request</h3>
 
         <strong>Headers:</strong>
-
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
 
         <strong>Body:</strong>
-
         <pre><code>None</code></pre>
 
         <strong>Query:</strong>
-
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <strong>Parameter:</strong>
+        <pre><code class="text">/api/user/id/0123456789</code></pre>
 
-        <pre><code>/user/id/0123456789</code></pre>
         <h3>Response</h3>
         <pre><code>{
     success: true,
@@ -431,6 +417,7 @@
     accountType: "company"
 }</code></pre>
       </request>
+
       <infos>
         <div class="note"><b>Note:</b> This is a note.</div>
         <div class="warning"><b>Warning:</b> This is a warning.</div>
@@ -451,34 +438,32 @@
           <pre><code class="text">partner</code></pre> in MongoDB if it doesn't already exist
         </span>
       </method>
-      <request>
 
+      <request>
         <h3>Request</h3>
 
         <strong>Headers:</strong>
-
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
 
         <strong>Body:</strong>
-
         <pre><code>None</code></pre>
 
         <strong>Query:</strong>
-
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <strong>Parameter:</strong>
+        <pre><code class="text">None</code></pre>
 
-        <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
     success: true,
     message: "Partner collection created successfully"
 }</code></pre>
       </request>
+
       <infos>
         <div class="note"><b>Note:</b> This is a note.</div>
         <div class="warning"><b>Warning:</b> This is a warning.</div>
@@ -497,19 +482,17 @@
           <pre><code class="text">partnerDatabase</code></pre>
         </span>
       </method>
-      <request>
 
+      <request>
         <h3>Request</h3>
 
         <strong>Headers:</strong>
-
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
 
         <strong>Body:</strong>
-
         <pre><code>{
     serviceName: "Coding Camp",
     category: "CODING",
@@ -517,21 +500,22 @@
 }</code></pre>
 
         <strong>Query:</strong>
-
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <strong>Parameter:</strong>
+        <pre><code class="text">None</code></pre>
 
-        <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
     success: true,
     serviceId: 0123456789,
+    ownerToken: "token",
     serviceName: "Codng Camp",
     category: "CODING",
     data: ...
 }</code></pre>
       </request>
+
       <infos>
         <div class="note"><b>Note:</b> This is a note.</div>
         <div class="warning"><b>Warning:</b> This is a warning.</div>
@@ -540,8 +524,8 @@
     </section>
 
     <section id="partner_update-service" class="endpoint">
-      <method class="post">
-        <span class="method_name">POST</span>
+      <method class="put">
+        <span class="method_name">PUT</span>
         <span class="method_url">/api/partner/update-service</span>
         <span class="material-symbols-outlined revealer">
           chevron_right
@@ -552,19 +536,17 @@
           <pre><code class="text">data</code></pre>
         </span>
       </method>
-      <request>
 
+      <request>
         <h3>Request</h3>
 
         <strong>Headers:</strong>
-
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
 
         <strong>Body:</strong>
-
         <pre><code>{
     serviceId: 0123456789,
     serviceName: "Coding Camp",
@@ -573,12 +555,11 @@
 }</code></pre>
 
         <strong>Query:</strong>
-
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <strong>Parameter:</strong>
+        <pre><code class="text">None</code></pre>
 
-        <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
     success: true,
@@ -589,6 +570,7 @@
     data: ...
 }</code></pre>
       </request>
+
       <infos>
         <div class="note"><b>Note:</b> This is a note.</div>
         <div class="warning"><b>Warning:</b> This is a warning.</div>
@@ -597,8 +579,8 @@
     </section>
 
     <section id="partner_delete-service" class="endpoint">
-      <method class="post">
-        <span class="method_name">POST</span>
+      <method class="delete">
+        <span class="method_name">DELETE</span>
         <span class="method_url">/api/partner/delete-service</span>
         <span class="material-symbols-outlined revealer">
           chevron_right
@@ -607,35 +589,33 @@
           <pre><code class="text">partnerDatabase</code></pre>
         </span>
       </method>
-      <request>
 
+      <request>
         <h3>Request</h3>
 
         <strong>Headers:</strong>
-
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
 
         <strong>Body:</strong>
-
         <pre><code>{
     serviceId: 0123456789
 }</code></pre>
 
         <strong>Query:</strong>
-
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <strong>Parameter:</strong>
+        <pre><code class="text">None</code></pre>
 
-        <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
     success: true
 }</code></pre>
       </request>
+
       <infos>
         <div class="note"><b>Note:</b> This is a note.</div>
         <div class="warning"><b>Warning:</b> This is a warning.</div>
@@ -654,47 +634,47 @@
           <pre><code class="text">pageNumber</code></pre>
         </span>
       </method>
-      <request>
 
+      <request>
         <h3>Request</h3>
 
         <strong>Headers:</strong>
-
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
 
         <strong>Body:</strong>
-
         <pre><code>None</code></pre>
 
         <strong>Query:</strong>
-
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <strong>Parameter:</strong>
+        <pre><code class="text">/api/partner/service-list/1</code></pre>
 
-        <pre><code>/partner/service-list/1</code></pre>
         <h3>Response</h3>
         <pre><code>{
     success: true,
     services: [
-                    {
+    {
         serviceId: 0123456789,
         ownerToken: "token",
         serviceName: "Coding Camp",
         category: "CODING",
         data: ...
-    }, {
+    },
+    {
         serviceId: 1123456789,
         ownerToken: "token",
         serviceName: "Art Camp",
         category: "ART",
         data: ...
-    }]
+    }
+  ]
 }</code></pre>
       </request>
+
       <infos>
         <div class="note"><b>Note:</b> This is a note.</div>
         <div class="warning"><b>Warning:</b> This is a warning.</div>
@@ -713,28 +693,25 @@
           <pre><code class="text">serviceId</code></pre>
         </span>
       </method>
-      <request>
 
+      <request>
         <h3>Request</h3>
 
         <strong>Headers:</strong>
-
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
 
         <strong>Body:</strong>
-
         <pre><code>None</code></pre>
 
         <strong>Query:</strong>
-
-        <pre><code>None</code></pre>
+        <pre><code class="text">None</code></pre>
 
         <strong>Parameter:</strong>
+        <pre><code class="text">None</code></pre>
 
-        <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
     success: true,
@@ -744,6 +721,7 @@
     data: ...
 }</code></pre>
       </request>
+
       <infos>
         <div class="note"><b>Note:</b> This is a note.</div>
         <div class="warning"><b>Warning:</b> This is a warning.</div>
@@ -763,47 +741,47 @@
           <pre><code class="text">terms</code></pre>
         </span>
       </method>
-      <request>
 
+      <request>
         <h3>Request</h3>
 
         <strong>Headers:</strong>
-
         <pre><code>{
     Authorization: "Bearer {token}"
 }
 </code></pre>
 
         <strong>Body:</strong>
-
         <pre><code>None</code></pre>
 
         <strong>Query:</strong>
-
-        <pre><code>/partner/search?category=CODING&terms=Programming</code></pre>
+        <pre><code class="text">/api/partner/search?category=CODING&terms=Programming</code></pre>
 
         <strong>Parameter:</strong>
+        <pre><code class="text">None</code></pre>
 
-        <pre><code>None</code></pre>
         <h3>Response</h3>
         <pre><code>{
     success: true,
     services: [
-                    {
+    {
         serviceId: 0123456789,
         ownerToken: "token",
         serviceName: "Coding Camp",
         category: "CODING",
         data: ...
-    }, {
+    },
+    {
         serviceId: 1123456789,
         ownerToken: "token",
         serviceName: "Art Camp",
         category: "ART",
         data: ...
-    }]
+    }
+  ]
 }</code></pre>
       </request>
+
       <infos>
         <div class="note"><b>Note:</b> This is a note.</div>
         <div class="warning"><b>Warning:</b> This is a warning.</div>
