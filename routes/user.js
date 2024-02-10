@@ -56,13 +56,30 @@ Users dashboard will allow the following:
 */
 router.get("/dashboard", async (req, res) => {
   try {
-    const result = await executePython("./workers/dashboard.py", [
-      req.headers["authorization"].split(" ")[1],
-    ]);
+    const db = mongoClient.db(userDatabase);
+    const collection = db.collection(userCollection);
 
-    res.json({ result: result });
+    const token = req.headers["authorization"].split(" ")[1];
+
+    const user = await collection.findOne({
+      userToken: token,
+    });
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "Token not found",
+      });
+    }
+
+    const { password, userToken, ...sanitizedUser } = user;
+
+    res.json({
+      success: true,
+      ...sanitizedUser
+    });
   } catch (error) {
-    res.status(500).json({ error: error });
+    console.error("Error querying token:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
@@ -282,7 +299,10 @@ router.get("/email/:email", async (req, res) => {
 
     const { password, userToken, ...sanitizedUser } = user;
 
-    res.json(sanitizedUser);
+    res.json({
+      success: true,
+      ...sanitizedUser
+    });
   } catch (error) {
     console.error("Error querying user by email:", error);
     res.status(500).send("Internal Server Error");
@@ -306,7 +326,10 @@ router.get("/id/:id", async (req, res) => {
 
     const { password, userToken, ...sanitizedUser } = user;
 
-    res.json(sanitizedUser);
+    res.json({
+      success: true,
+      ...sanitizedUser
+    });
   } catch (error) {
     console.error("Error querying user by id:", error);
     res.status(500).send("Internal Server Error");
