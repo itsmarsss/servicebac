@@ -132,6 +132,54 @@
       </infos>
     </section>
 
+    <section id="user_dashboard" class="endpoint">
+      <method class="get">
+        <span class="method_name">GET</span>
+        <span class="method_url">/api/user/dashboard</span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+        <span class="method_desc">Query for user data with
+          <pre><code class="text">userToken</code></pre> for the dashboard
+        </span>
+      </method>
+
+      <request>
+        <h3>Request</h3>
+
+        <strong>Headers:</strong>
+        <pre><code>{
+    Authorization: "Bearer {token}"
+}
+</code></pre>
+
+        <strong>Body:</strong>
+        <pre><code>None</code></pre>
+
+        <strong>Query:</strong>
+        <pre><code class="text">None</code></pre>
+
+        <strong>Parameter:</strong>
+        <pre><code class="text">None</code></pre>
+
+        <h3>Response</h3>
+        <pre><code>{
+    success: true,
+    userId: 0123456789,
+    firstName: "Johnny",
+    lastName: "Doe",
+    email: "john.doe@gmail.com",
+    accountType: "company"
+}</code></pre>
+      </request>
+
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
+
     <section id="user_signup" class="endpoint">
       <method class="post">
         <span class="method_name">POST</span>
