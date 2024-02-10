@@ -25,6 +25,7 @@
       <h3>User</h3>
       <ul>
         <li><a href="#user_create-users-collection">/api/user/create-users-collection</a></li>
+        <li><a href="#user_dashboard">/api/user/dashboard</a></li>
         <li><a href="#user_signup">/api/user/signup</a></li>
         <li><a href="#user_signin">/api/user/signin</a></li>
         <li><a href="#user_update-profile">/api/user/update-profile</a></li>
@@ -38,6 +39,7 @@
       <h3>Partner</h3>
       <ul>
         <li><a href="#partner_create-partners-collection">/api/partner/create-users-collection</a></li>
+        <li><a href="#partner_owned-services">/api/partner/owned-services</a></li>
         <li><a href="#partner_create-service">/api/partner/create-service</a></li>
         <li><a href="#partner_update-service">/api/partner/update-service</a></li>
         <li><a href="#partner_delete-service">/api/partner/delete-service</a></li>
@@ -513,6 +515,63 @@
         <pre><code>{
     success: true,
     message: "Partner collection created successfully"
+}</code></pre>
+      </request>
+
+      <infos>
+        <div class="note"><b>Note:</b> This is a note.</div>
+        <div class="warning"><b>Warning:</b> This is a warning.</div>
+        <div class="error"><b>Error:</b> This is an error.</div>
+      </infos>
+    </section>
+
+    <section id="partner_owned-services" class="endpoint">
+      <method class="get">
+        <span class="method_name">GET</span>
+        <span class="method_url">/api/partner/owned-services</span>
+        <span class="material-symbols-outlined revealer">
+          chevron_right
+        </span>
+        <span class="method_desc">Query for all services owned by
+          <pre><code class="text">userToken</code></pre>
+        </span>
+      </method>
+
+      <request>
+        <h3>Request</h3>
+
+        <strong>Headers:</strong>
+        <pre><code>{
+    Authorization: "Bearer {token}"
+}
+</code></pre>
+
+        <strong>Body:</strong>
+        <pre><code>None</code></pre>
+
+        <strong>Query:</strong>
+        <pre><code class="text">None</code></pre>
+
+        <strong>Parameter:</strong>
+        <pre><code class="text">None</code></pre>
+
+        <h3>Response</h3>
+        <pre><code>{
+    success: true,
+    services: [
+    {
+        serviceId: 0123456789,
+        serviceName: "Coding Camp",
+        category: "CODING",
+        data: ...
+    },
+    {
+        serviceId: 1123456789,
+        serviceName: "Art Camp",
+        category: "ART",
+        data: ...
+    }
+  ]
 }</code></pre>
       </request>
 
