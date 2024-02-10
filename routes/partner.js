@@ -45,6 +45,33 @@ router.post("/create-partners-collection", async (req, res) => {
   }
 });
 
+// Query services owned by token
+router.get("/owned-services", async (req, res) => {
+  try {
+    const db = mongoClient.db(partnerDatabase);
+    const collection = db.collection(partnerCollection);
+
+    const token = req.headers["authorization"].split(" ")[1];
+
+    const services = await collection.find({
+      ownerToken: token
+    }).toArray();
+
+    const sanitizedServices = services.map(service => {
+      const { ownerToken, embeddings, ...sanitizedService } = service;
+      return sanitizedService;
+    });
+
+    res.json({
+      success: true,
+      services: sanitizedServices
+    });
+  } catch (error) {
+    console.error("Error querying services by ownerToken:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 /*
 Service, creates service, requires:
 - name
@@ -264,7 +291,10 @@ router.get("/service-list/:pageNumber", async (req, res) => {
       return rest;
     });
 
-    res.json({ success: true, services: sanitizedEntries });
+    res.json({
+      success: true,
+      services: sanitizedEntries
+    });
   } catch (error) {
     console.error(`Error fetching next ${count} entries:`, error);
     res.status(500).send("Internal Server Error");
@@ -288,11 +318,12 @@ router.get("/id/:id", async (req, res) => {
       });
     }
 
-    console.log(service)
-
     const { ownerToken, embeddings, ...sanitizedService } = service;
 
-    res.json({ success: true, service: sanitizedService });
+    res.json({
+      success: true,
+      service: sanitizedService
+    });
   } catch (error) {
     console.error("Error querying service by id:", error);
     res.status(500).send("Internal Server Error");
@@ -335,10 +366,17 @@ router.get("/search", async (req, res) => {
 
     const sanitizedResults = resultsSimilarity.map(({ ownerToken, embeddings, ...rest }) => rest);
 
-    res.json({ success: true, terms: terms, services: sanitizedResults });
+    res.json({
+      success: true,
+      terms: terms,
+      services: sanitizedResults
+    });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    res.status(500).json({
+      success: false,
+      message: "Internal server error"
+    });
   }
 });
 
