@@ -21,7 +21,7 @@ function Dashboard() {
 
   useEffect(() => {
     try {
-      fetch("http://localhost:3000/api/user/dashboard", {
+      fetch("/api/user/dashboard", {
         method: "GET",
         headers: {
           authorization: `Bearer ${getToken()}`,

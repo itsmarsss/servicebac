@@ -38,7 +38,7 @@ function SignUp() {
         return;
       }
 
-      await fetch("http://localhost:3000/api/user/signup", {
+      await fetch("/api/user/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

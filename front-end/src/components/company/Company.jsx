@@ -27,7 +27,7 @@ function Company() {
   const getOwnedServices = () => {
     try {
       setLoading(true);
-      fetch("http://localhost:3000/api/partner/owned-services", {
+      fetch("/api/partner/owned-services", {
         method: "GET",
         headers: {
           authorization: `Bearer ${getToken()}`,

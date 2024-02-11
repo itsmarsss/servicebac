@@ -40,7 +40,7 @@ function ServiceLister({
     setUpdating(true);
     try {
       setLoading(true);
-      fetch(`http://localhost:3000/api/partner/id/${serviceId}`, {
+      fetch(`/api/partner/id/${serviceId}`, {
         method: "GET",
         headers: {
           authorization: `Bearer ${getToken()}`,
@@ -94,7 +94,7 @@ function ServiceLister({
         serviceData = JSON.parse(data);
       } catch (err) {}
 
-      fetch("http://localhost:3000/api/partner/update-service", {
+      fetch("/api/partner/update-service", {
         method: "PUT",
         headers: {
           authorization: `Bearer ${getToken()}`,
@@ -132,7 +132,7 @@ function ServiceLister({
         serviceData = JSON.parse(data);
       } catch (err) {}
 
-      fetch("http://localhost:3000/api/partner/create-service", {
+      fetch("/api/partner/create-service", {
         method: "POST",
         headers: {
           authorization: `Bearer ${getToken()}`,
@@ -163,7 +163,7 @@ function ServiceLister({
   const deleteService = (serviceId) => {
     try {
       setLoading(true);
-      fetch("http://localhost:3000/api/partner/delete-service", {
+      fetch("/api/partner/delete-service", {
         method: "DELETE",
         headers: {
           authorization: `Bearer ${getToken()}`,

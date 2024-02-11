@@ -43,7 +43,7 @@ function Profile() {
         return;
       }
 
-      await fetch("http://localhost:3000/api/user/update-profile", {
+      await fetch("/api/user/update-profile", {
         method: "PUT",
         headers: {
           authorization: `Bearer ${getToken()}`,
@@ -72,7 +72,7 @@ function Profile() {
 
   useEffect(() => {
     try {
-      fetch("http://localhost:3000/api/user/dashboard", {
+      fetch("/api/user/dashboard", {
         method: "GET",
         headers: {
           authorization: `Bearer ${getToken()}`,

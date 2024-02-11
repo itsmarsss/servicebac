@@ -30,7 +30,7 @@ function Department() {
   const getServices = (pageNumber) => {
     try {
       setLoading(true);
-      fetch(`http://localhost:3000/api/partner/service-list/${pageNumber}`, {
+      fetch(`/api/partner/service-list/${pageNumber}`, {
         method: "GET",
         headers: {
           authorization: `Bearer ${getToken()}`,
@@ -70,7 +70,7 @@ function Department() {
   const semanticSearch = () => {
     try {
       setLoading(true);
-      fetch(`http://localhost:3000/api/partner/search?terms=${search}`, {
+      fetch(`/api/partner/search?terms=${search}`, {
         method: "GET",
         headers: {
           authorization: `Bearer ${getToken()}`,

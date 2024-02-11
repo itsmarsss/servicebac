@@ -27,7 +27,7 @@ function SignIn() {
         return;
       }
 
-      await fetch("http://localhost:3000/api/user/signin", {
+      await fetch("/api/user/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
