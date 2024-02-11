@@ -19,3 +19,17 @@
         font-size: 30px;
     }
 }
+
+@media screen and (max-width: 400px) {
+    .title {
+        margin: 0;
+        padding: 50px;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .company,
+    .department {
+        padding: 0;
+    }
+}
