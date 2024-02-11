@@ -1,20 +1,15 @@
 import "./Department.css";
 import React from "react";
-import ServiceCard from "../../components/serviceCard/ServiceCard.jsx";
 import Loader from "../../components/loader/Loader.jsx";
+import ServiceLister from "../../components/serviceLister/ServiceLister.jsx";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
 function Department() {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState(false);
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [serviceResults, setServiceResults] = useState([]);
-
-  const [serviceId, setServiceId] = useState(0);
-  const [serviceName, setServiceName] = useState("");
-  const [category, setCategory] = useState("");
-  const [data, setData] = useState("");
 
   const getToken = () => {
     return Cookies.get("token") || "";
@@ -23,7 +18,7 @@ function Department() {
   const getServices = () => {
     try {
       setLoading(true);
-      fetch(`http://localhost:3000/api/partner/service-list/${page}`, {
+      fetch(`http://localhost:3000/api/partner/service-list/${currentPage}`, {
         method: "GET",
         headers: {
           authorization: `Bearer ${getToken()}`,
@@ -43,147 +38,37 @@ function Department() {
     }
   };
 
-  const showModal = (serviceId) => {
-    setUpdating(true);
-    try {
-      setLoading(true);
-      fetch(`http://localhost:3000/api/partner/id/${serviceId}`, {
-        method: "GET",
-        headers: {
-          authorization: `Bearer ${getToken()}`,
-        },
-      })
-        .then((data) => data.json())
-        .then((response) => {
-          if (response.success) {
-            const service = response.service;
-            setServiceId(service.serviceId);
-            setServiceName(service.serviceName);
-            setCategory(service.category);
-
-            let data = service.data;
-
-            if (typeof data !== "string") {
-              try {
-                data = JSON.stringify(service.data, null, "\t");
-              } catch (err) {}
-            }
-
-            setData(data);
-            setEditing(true);
-          } else {
-            alert(response.message);
-          }
-          setLoading(false);
-          setEditing(true);
-        });
-    } catch (error) {
-      console.error("Error getting service:", error);
-    }
-  };
-
-  const addService = () => {
-    setServiceName("");
-    setCategory("");
-    setData("");
-    setUpdating(false);
-    setEditing(true);
-  };
-
-  const updateService = () => {
-    setEditing(false);
-    try {
-      setLoading(true);
-      let serviceData = data;
-      try {
-        serviceData = JSON.parse(data);
-      } catch (err) {}
-
-      fetch("http://localhost:3000/api/partner/update-service", {
-        method: "PUT",
-        headers: {
-          authorization: `Bearer ${getToken()}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          serviceId: serviceId,
-          serviceName: serviceName,
-          category: category,
-          data:
-            typeof serviceData === "object" ? { ...serviceData } : serviceData,
-        }),
-      })
-        .then((data) => data.json())
-        .then((response) => {
-          if (!response.success) {
-            alert(response.message);
-          }
-          setLoading(false);
-        });
-    } catch (error) {
-      console.error("Error updating service:", error);
-    }
-  };
-
-  const createService = () => {
-    setEditing(false);
-    try {
-      setLoading(true);
-      let serviceData = data;
-      try {
-        serviceData = JSON.parse(data);
-      } catch (err) {}
-
-      fetch("http://localhost:3000/api/partner/create-service", {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${getToken()}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          serviceName: serviceName,
-          category: category,
-          data:
-            typeof serviceData === "object" ? { ...serviceData } : serviceData,
-        }),
-      })
-        .then((data) => data.json())
-        .then((response) => {
-          if (!response.success) {
-            alert(response.message);
-          }
-          setLoading(false);
-        });
-    } catch (error) {
-      console.error("Error creating service:", error);
-    }
+  const setPageNumber = (num) => {
+    setCurrentPage(Math.max(1, num));
   };
 
   useEffect(() => {
-    getServices();
-  }, []);
+    getServices(currentPage);
+  }, [currentPage]);
 
   return (
     <>
       <div className="department">
-        <div className="title">Services:</div>
         {loading && <Loader />}
-        <div className="services">
-          {serviceResults.length > 0 && (
-            <>
-              {serviceResults.map((service) => (
-                <ServiceCard
-                  key={service.serviceId}
-                  service={service}
-                  noEdit={true}
-                  showModal={showModal}
-                />
-              ))}
-            </>
-          )}
+        <ServiceLister
+          doneAction={getServices}
+          setLoading={setLoading}
+          serviceList={serviceResults}
+          noEdit={true}
+        />
+      </div>
+      <div className="page_seekers">
+        <button onClick={() => setPageNumber(currentPage - 1)}>Prev</button>
+        <div className="page_input">
+          <span className="page_text">Page:</span>
+          <input
+            type="number"
+            placeholder="Page Number"
+            value={currentPage}
+            onChange={(e) => setPageNumber(e.target.value)}
+          />
         </div>
-        <button>Prev</button>
-        <button>Next</button>
+        <button onClick={() => setPageNumber(currentPage + 1)}>Next</button>
       </div>
     </>
   );

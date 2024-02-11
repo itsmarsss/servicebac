@@ -21,6 +21,10 @@
     cursor: pointer;
 }
 
+.stealth {
+    visibility: hidden;
+}
+
 .service_details {
     height: 100%;
     display: flex;
