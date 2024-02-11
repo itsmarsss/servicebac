@@ -6,9 +6,8 @@ import Cookies from "js-cookie";
 function Nav() {
   const [pages, setPages] = useState([
     { title: "Home", link: "/", id: 1 },
-    { title: "Submit", link: "/submit", id: 2 },
-    { title: "Login", link: "/signin", id: 3 },
-    { title: "Register", link: "/signup", id: 4 },
+    { title: "Login", link: "/signin", id: 2 },
+    { title: "Register", link: "/signup", id: 3 },
   ]);
 
   const getToken = () => {
@@ -17,7 +16,7 @@ function Nav() {
       setPages([
         { title: "Dashboard", link: "/dashboard", id: 1 },
         { title: "Profile", link: "/profile", id: 2 },
-        { title: "logout", link: "/Logout", id: 3 },
+        { title: "Logout", link: "/logout", id: 3 },
       ]);
     }
     return token;
