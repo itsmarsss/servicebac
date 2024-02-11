@@ -12,9 +12,16 @@ function Logout() {
   }, []);
 
   return (
-    <div className="loggedOut_text">
-      {loggedOut ? "Logged out..." : "Logging out..."}
-    </div>
+    <>
+      <div className="loggedOut_text">
+        {loggedOut ? "Logged out..." : "Logging out..."}
+      </div>
+      <div className="loggedOut_signin_cont">
+        <a className="loggedOut_signin" href="/signin">
+          <button>Go To Sign In</button>
+        </a>
+      </div>
+    </>
   );
 }
 
