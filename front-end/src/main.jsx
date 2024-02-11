@@ -4,7 +4,7 @@ import SignIn from "./pages/signin/SignIn.jsx";
 import SignUp from "./pages/signup/SignUp.jsx";
 import Dashboard from "./pages/dashboard/Dashboard.jsx";
 import Submit from "./pages/submit/Submit.jsx";
-import Nav from "./components/Nav.jsx";
+import Nav from "./components/nav/Nav.jsx";
 import "./index.css";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
