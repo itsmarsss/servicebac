@@ -1,0 +1,60 @@
+.edit_modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #00000066;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: calc(100% - 2*50px);
+    height: calc(100% - 2*50px);
+    background: #fff;
+    border-radius: 25px;
+    padding: 50px;
+}
+
+.edit_id {
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    font-size: 12px;
+    color: #374151;
+}
+
+.edit_property {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.edit_property>label {
+    font-weight: bold;
+}
+
+.property_note {
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.edit_data_cont {
+    height: 100%;
+}
+
+.edit_data {
+    resize: none;
+    height: 100%;
+}
+
+.edit_actions {
+    display: flex;
+    gap: 20px;
+}
