@@ -1,0 +1,40 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    font-weight: bold;
+}
+
+.pages {
+    display: flex;
+    gap: 15px;
+}
+
+.page {
+    padding: 3px 5px;
+    position: relative;
+    transition: 200ms;
+}
+
+.page:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: 200ms;
+}
+
+.page:hover {
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.page:hover:before {
+    transform: scaleX(1);
+}

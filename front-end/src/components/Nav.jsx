@@ -1,3 +1,4 @@
+import "./Nav.css";
 import React from "react";
 import { useState } from "react";
 
@@ -10,15 +11,11 @@ function Nav() {
   ]);
   return (
     <>
-      <nav className="flex m-8 justify-between">
-        <div className="font-bold">ManageBACK</div>
-        <div className="flex space-x-12 font-bold">
+      <nav className="nav">
+        <div className="logo">ManageBACK</div>
+        <div className="pages">
           {pages.map((page) => (
-            <a
-              href={page.link}
-              className="hover:underline hover:text-gray-500"
-              key={page.id}
-            >
+            <a className="page" href={page.link} key={page.id}>
               {page.title}
             </a>
           ))}
