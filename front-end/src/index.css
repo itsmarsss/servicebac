@@ -9,7 +9,8 @@ body {
     background-position: -20px -20px;
 }
 
-.button {
+button {
+    cursor: pointer;
     background: #fff;
     color: #4299e1;
     padding: 10px 20px;
@@ -20,10 +21,42 @@ body {
     transition: 200ms;
 }
 
-.button:hover {
+button:hover {
     background: #4299e1;
     color: #fff;
     border-color: transparent;
     text-shadow: 1px 0px 0px #fff;
     box-shadow: none;
+}
+
+.fill_button {
+    cursor: pointer;
+    background: #60a5fa;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    transition: 200ms;
+}
+
+.fill_button:hover {
+    background: #3b82f6;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    background-color: #f9fafb;
+    border: 1px solid #d1d5db;
+    color: #1f2937;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    transition: 200ms;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: 2px solid #2563eb;
 }

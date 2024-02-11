@@ -1,0 +1,72 @@
+.sign_in_container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.left,
+.right {
+    width: 50%;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 50px;
+}
+
+.left_title {
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.media {
+    width: 100%;
+}
+
+.right {
+    padding: 100px;
+}
+
+.sign_in_form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sign_in_title {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+@media screen and (max-width: 800px) {
+    .sign_in_container {
+        flex-direction: column;
+    }
+
+    .left,
+    .right {
+        padding: 50px;
+        width: 100%;
+    }
+
+    .media {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .left {
+        padding: 0 50px;
+    }
+
+    .right {
+        padding: 50px;
+    }
+
+    .left_title {
+        font-size: 30px;
+    }
+}

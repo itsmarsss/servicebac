@@ -14,8 +14,8 @@ function Home() {
             Providing Schools with Seamless Data Storage and Search <br /> We
             build ready made databases and applications
           </div>
-          <a href="/signin" className="button">
-            Access your Dashboard
+          <a href="/signin">
+            <button>Access your Dashboard</button>
           </a>
         </div>
 
