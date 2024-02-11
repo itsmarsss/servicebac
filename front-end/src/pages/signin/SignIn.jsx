@@ -10,8 +10,8 @@ function SignIn() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
+  const handleLogin = async (e) => {
+    eveent.preventDefault();
 
     try {
       await fetch("http://localhost:3000/api/user/signin", {

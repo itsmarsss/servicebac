@@ -1,15 +1,20 @@
 import "./Dashboard.css";
 import React from "react";
 import Company from "../../components/company/Company.jsx";
-import Department from "../../components/department/Department.jsx";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 function Dashboard() {
   const [accountType, setAccountType] = useState("");
+  const navigate = useNavigate();
 
   const getToken = () => {
-    return Cookies.get("token") || "";
+    const token = Cookies.get("token");
+    if (!token) {
+      navigate("/signin");
+    }
+    return token;
   };
 
   useEffect(() => {

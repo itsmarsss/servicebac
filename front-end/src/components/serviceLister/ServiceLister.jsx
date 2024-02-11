@@ -3,6 +3,7 @@ import React from "react";
 import ServiceCard from "../serviceCard/ServiceCard.jsx";
 import EditModal from "../editModal/EditModal.jsx";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 function ServiceLister({
@@ -24,9 +25,14 @@ function ServiceLister({
   const [data, setData] = useState("");
 
   const [empty, setEmpty] = useState([]);
+  const navigate = useNavigate();
 
   const getToken = () => {
-    return Cookies.get("token") || "";
+    const token = Cookies.get("token");
+    if (!token) {
+      navigate("/signin");
+    }
+    return token;
   };
 
   const showModal = (serviceId) => {

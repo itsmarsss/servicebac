@@ -13,8 +13,8 @@ function SignUp() {
   const [accountType, setAccountType] = useState("company");
   const navigate = useNavigate();
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
     try {
       await fetch("http://localhost:3000/api/user/signup", {

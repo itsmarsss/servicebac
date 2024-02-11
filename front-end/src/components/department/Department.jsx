@@ -4,6 +4,7 @@ import Loader from "../../components/loader/Loader.jsx";
 import ServiceLister from "../../components/serviceLister/ServiceLister.jsx";
 import ServiceViewer from "../../components/serviceViewer/ServiceViewer.jsx";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 function Department() {
@@ -15,9 +16,14 @@ function Department() {
 
   const [service, setService] = useState();
   const [serviceView, setServiceView] = useState(false);
+  const navigate = useNavigate();
 
   const getToken = () => {
-    return Cookies.get("token") || "";
+    const token = Cookies.get("token");
+    if (!token) {
+      navigate("/signin");
+    }
+    return token;
   };
 
   const getServices = (pageNumber) => {
