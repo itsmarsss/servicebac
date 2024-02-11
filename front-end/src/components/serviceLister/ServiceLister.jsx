@@ -5,6 +5,7 @@ import EditModal from "../editModal/EditModal.jsx";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import * as toast from "../../components/toastAlert/toastAlert";
 
 function ServiceLister({
   doneAction,
@@ -63,8 +64,10 @@ function ServiceLister({
 
             setData(data);
             setEditing(true);
+
+            toast.showSuccessAlert("Fetched service data");
           } else {
-            alert(response.message);
+            toast.showErrorAlert(response.message);
           }
           setLoading(false);
           setEditing(true);
@@ -107,8 +110,10 @@ function ServiceLister({
       })
         .then((data) => data.json())
         .then((response) => {
-          if (!response.success) {
-            alert(response.message);
+          if (response.success) {
+            toast.showSuccessAlert("Updated service");
+          } else {
+            toast.showErrorAlert(response.message);
           }
           setLoading(false);
           doneAction();
@@ -142,8 +147,10 @@ function ServiceLister({
       })
         .then((data) => data.json())
         .then((response) => {
-          if (!response.success) {
-            alert(response.message);
+          if (response.success) {
+            toast.showSuccessAlert("Created service");
+          } else {
+            toast.showErrorAlert(response.message);
           }
           setLoading(false);
           doneAction();
@@ -168,8 +175,10 @@ function ServiceLister({
       })
         .then((data) => data.json())
         .then((response) => {
-          if (!response.success) {
-            alert(response.message);
+          if (response.success) {
+            toast.showSuccessAlert("Deleted service");
+          } else {
+            toast.showErrorAlert(response.message);
           }
           setLoading(false);
           doneAction();

@@ -6,6 +6,7 @@ import ServiceViewer from "../../components/serviceViewer/ServiceViewer.jsx";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import * as toast from "../../components/toastAlert/toastAlert";
 
 function Department() {
   const [loading, setLoading] = useState(false);
@@ -40,8 +41,9 @@ function Department() {
           if (response.success) {
             setServiceResults(response.services);
             setCurrentPage(pageNumber);
+            toast.showSuccessAlert(`Fetched page ${pageNumber}`);
           } else {
-            alert(response.message);
+            toast.showErrorAlert(response.message);
           }
           setLoading(false);
         });
@@ -78,8 +80,9 @@ function Department() {
         .then((response) => {
           if (response.success) {
             setServiceResults(response.services);
+            toast.showSuccessAlert("Fetched services");
           } else {
-            alert(response.message);
+            toast.showErrorAlert(response.message);
           }
           setLoading(false);
         });

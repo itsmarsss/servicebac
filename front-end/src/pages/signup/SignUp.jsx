@@ -4,6 +4,7 @@ import Frame from "../../assets/Frame.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import * as toast from "../../components/toastAlert/toastAlert";
 
 function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -13,8 +14,16 @@ function SignUp() {
   const [accountType, setAccountType] = useState("company");
   const navigate = useNavigate();
 
+  const isEmail = (email) =>
+    /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
+
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    if (!isEmail(email)) {
+      toast.showErrorAlert("Incorrect email pattern");
+      return;
+    }
 
     try {
       await fetch("http://localhost:3000/api/user/signup", {
@@ -38,11 +47,11 @@ function SignUp() {
                 expires: 7,
                 secure: true,
               });
-              console.log("Register successful!");
+              toast.showSuccessAlert("Registered successfully");
               navigate("/dashboard");
             }
           } else {
-            alert(response.message);
+            toast.showErrorAlert(response.message);
           }
         });
     } catch (error) {
@@ -62,7 +71,7 @@ function SignUp() {
         </div>
 
         <div className="right">
-          <form className="sign_up_form" onSubmit={handleLogin}>
+          <form className="sign_up_form">
             <label className="sign_up_title">Sign Up</label>
             <input
               type="text"
@@ -93,7 +102,12 @@ function SignUp() {
               <option value="department">Department</option>
             </select>
 
-            <input className="fill_button" type="submit" value="Register" />
+            <input
+              className="fill_button"
+              type="button"
+              value="Register"
+              onClick={handleLogin}
+            />
           </form>
         </div>
       </div>

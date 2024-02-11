@@ -6,6 +6,7 @@ import ServiceViewer from "../../components/serviceViewer/ServiceViewer.jsx";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import * as toast from "../../components/toastAlert/toastAlert";
 
 function Company() {
   const [loading, setLoading] = useState(false);
@@ -36,8 +37,9 @@ function Company() {
         .then((response) => {
           if (response.success) {
             setOwnedServices(response.services);
+            toast.showSuccessAlert("Fetched all owned services");
           } else {
-            alert(response.message);
+            toast.showErrorAlert(response.message);
           }
           setLoading(false);
         });

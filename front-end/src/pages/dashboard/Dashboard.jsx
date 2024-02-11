@@ -4,6 +4,8 @@ import Company from "../../components/company/Company.jsx";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import * as toast from "../../components/toastAlert/toastAlert";
+import Department from "../../components/department/Department.jsx";
 
 function Dashboard() {
   const [accountType, setAccountType] = useState("");
@@ -29,8 +31,9 @@ function Dashboard() {
         .then((response) => {
           if (response.success) {
             setAccountType(response.accountType);
+            toast.showSuccessAlert("Fetched dashboard");
           } else {
-            alert(response.message);
+            toast.showErrorAlert(response.message);
           }
         });
     } catch (error) {
@@ -42,9 +45,9 @@ function Dashboard() {
     <>
       <div className="dashboard">
         <div className="title">
-          {accountType === "company" ? "Services:" : "Dashboard:"}
+          {accountType === "company" ? "Dashboard:" : "Services:"}
         </div>
-        {accountType === "company" ? <Company /> : <Company />}
+        {accountType === "company" ? <Company /> : <Department />}
       </div>
     </>
   );
