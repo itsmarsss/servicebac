@@ -7,9 +7,10 @@ import Cookies from "js-cookie";
 function Company() {
   const [loading, setLoading] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [updating, setUpdating] = useState(false);
   const [ownedServices, setOwnedServices] = useState([]);
 
-  const [serviceId, setServiceId] = useState();
+  const [serviceId, setServiceId] = useState(0);
   const [serviceName, setServiceName] = useState("");
   const [category, setCategory] = useState("");
   const [data, setData] = useState("");
@@ -42,6 +43,7 @@ function Company() {
   };
 
   const showModal = (serviceId) => {
+    setUpdating(true);
     try {
       setLoading(true);
       fetch(`http://localhost:3000/api/partner/id/${serviceId}`, {
@@ -54,7 +56,6 @@ function Company() {
         .then((response) => {
           if (response.success) {
             const service = response.service;
-            console.log("Fetched service:", service);
             setServiceId(service.serviceId);
             setServiceName(service.serviceName);
             setCategory(service.category);
@@ -80,7 +81,15 @@ function Company() {
     }
   };
 
-  const saveService = () => {
+  const addService = () => {
+    setServiceName("");
+    setCategory("");
+    setData("");
+    setUpdating(false);
+    setEditing(true);
+  };
+
+  const updateService = () => {
     setEditing(false);
     try {
       setLoading(true);
@@ -111,7 +120,41 @@ function Company() {
           setLoading(false);
         });
     } catch (error) {
-      console.error("Error getting service:", error);
+      console.error("Error updating service:", error);
+    }
+  };
+
+  const createService = () => {
+    setEditing(false);
+    try {
+      setLoading(true);
+      let serviceData = data;
+      try {
+        serviceData = JSON.parse(data);
+      } catch (err) {}
+
+      fetch("http://localhost:3000/api/partner/create-service", {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${getToken()}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          serviceName: serviceName,
+          category: category,
+          data:
+            typeof serviceData === "object" ? { ...serviceData } : serviceData,
+        }),
+      })
+        .then((data) => data.json())
+        .then((response) => {
+          if (!response.success) {
+            alert(response.message);
+          }
+          setLoading(false);
+        });
+    } catch (error) {
+      console.error("Error creating service:", error);
     }
   };
 
@@ -145,13 +188,17 @@ function Company() {
                   </div>
                 </div>
               ))}
-              <button className="add_service">Add New Service</button>
+              <button className="add_service" onClick={() => addService()}>
+                Add New Service
+              </button>
             </>
           )}
         </div>
         {editing && (
           <EditModal
-            saveService={saveService}
+            updating={updating}
+            updateService={updateService}
+            createService={createService}
             setEditing={setEditing}
             setServiceName={setServiceName}
             setCategory={setCategory}

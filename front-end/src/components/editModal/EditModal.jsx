@@ -2,7 +2,9 @@ import "./EditModal.css";
 import React from "react";
 
 function EditModal({
-  saveService,
+  updating,
+  updateService,
+  createService,
   setEditing,
   setServiceName,
   setCategory,
@@ -15,7 +17,10 @@ function EditModal({
   return (
     <div className="edit_modal">
       <div className="edit">
-        <div className="edit_id">Editing: {serviceId}</div>
+        <div className="edit_id">
+          {updating ? "Editing:" : "Creating new service"}{" "}
+          {updating && serviceId}
+        </div>
         <div className="edit_property">
           <label>
             Service Name:{" "}
@@ -58,8 +63,11 @@ function EditModal({
           />
         </div>
         <div className="edit_actions">
-          <button className="fill_button" onClick={() => saveService()}>
-            Save
+          <button
+            className="fill_button"
+            onClick={() => (updating ? updateService() : createService())}
+          >
+            {updating ? "Save" : "Submit"}
           </button>
           <button onClick={() => setEditing(false)}>Cancel</button>
         </div>
