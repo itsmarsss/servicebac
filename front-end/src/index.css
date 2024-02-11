@@ -44,6 +44,7 @@ button:hover {
 
 input[type="text"],
 input[type="email"],
+input[type="number"],
 input[type="password"],
 textarea,
 select {
@@ -63,6 +64,7 @@ textarea {
 
 input[type="text"]:focus,
 input[type="email"]:focus,
+input[type="number"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus {

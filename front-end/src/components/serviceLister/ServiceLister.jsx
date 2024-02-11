@@ -5,7 +5,9 @@ import EditModal from "../editModal/EditModal.jsx";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
-function ServiceLister({ doneAction, setLoading, serviceList }) {
+function ServiceLister({ doneAction, setLoading, serviceList, noEdit }) {
+  const [width, setWidth] = useState(window.innerWidth);
+
   const [editing, setEditing] = useState(false);
   const [updating, setUpdating] = useState(false);
 
@@ -13,6 +15,8 @@ function ServiceLister({ doneAction, setLoading, serviceList }) {
   const [serviceName, setServiceName] = useState("");
   const [category, setCategory] = useState("");
   const [data, setData] = useState("");
+
+  const [empty, setEmpty] = useState([]);
 
   const getToken = () => {
     return Cookies.get("token") || "";
@@ -162,22 +166,46 @@ function ServiceLister({ doneAction, setLoading, serviceList }) {
     }
   };
 
+  useEffect(() => {
+    const empties = Math.floor(serviceList.length % ((width - 100) / 300));
+    let allEmpties = [];
+    for (let i = 0; i < empties; i++) {
+      allEmpties.push(i);
+    }
+
+    setEmpty(allEmpties);
+
+    const handleResize = () => setWidth(window.innerWidth);
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [serviceList, width]);
+
   return (
     <>
-      <div className="owned_services">
+      <div className="services">
         {serviceList.length > 0 && (
           <>
             {serviceList.map((service) => (
               <ServiceCard
                 key={service.serviceId}
                 service={service}
+                noEdit={noEdit}
                 showModal={showModal}
                 deleteService={deleteService}
               />
             ))}
-            <button className="add_service" onClick={() => addService()}>
-              Add New Service
-            </button>
+            {empty.map((index) => (
+              <ServiceCard key={index} empty={true} />
+            ))}
+            {!noEdit && (
+              <button className="add_service" onClick={() => addService()}>
+                Add New Service
+              </button>
+            )}
           </>
         )}
       </div>

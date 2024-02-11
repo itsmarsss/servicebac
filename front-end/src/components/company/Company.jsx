@@ -43,12 +43,12 @@ function Company() {
   return (
     <>
       <div className="company">
-        <div className="title">Dashboard:</div>
         {loading && <Loader />}
         <ServiceLister
           doneAction={getOwnedServices}
           setLoading={setLoading}
           serviceList={ownedServices}
+          noEdit={false}
         />
       </div>
     </>
