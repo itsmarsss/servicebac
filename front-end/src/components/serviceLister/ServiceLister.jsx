@@ -167,7 +167,15 @@ function ServiceLister({ doneAction, setLoading, serviceList, noEdit }) {
   };
 
   useEffect(() => {
-    const empties = Math.floor(serviceList.length % ((width - 100) / 300));
+    let empties = 0;
+    for (let i = 0; i < serviceList.length; i++) {
+      const reqWidth = i * 300 + (i - 1) * 20;
+      if (reqWidth > width - 100) {
+        const rem = serviceList.length % (i - 1);
+        empties = rem == 0 ? 0 : i - 1 - rem;
+        break;
+      }
+    }
     let allEmpties = [];
     for (let i = 0; i < empties; i++) {
       allEmpties.push(i);
