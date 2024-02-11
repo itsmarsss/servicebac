@@ -29,7 +29,14 @@ function ServiceCard({ empty, service, noEdit, showModal, deleteService }) {
             </div>
           )}
           {noEdit && (
-            <code className="service_data">{JSON.stringify(service.data)}</code>
+            <>
+              <code className="service_data">
+                {JSON.stringify(service.data)}
+              </code>
+              <span className="service_similarity">
+                Similarity: {service.similarity}
+              </span>
+            </>
           )}
         </>
       )}

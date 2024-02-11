@@ -7,7 +7,8 @@ import Cookies from "js-cookie";
 
 function Department() {
   const [loading, setLoading] = useState(false);
-  const [search, setSearch] = useState(false);
+  const [search, setSearch] = useState("");
+  const [semantic, setSemantic] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [serviceResults, setServiceResults] = useState([]);
 
@@ -43,12 +44,74 @@ function Department() {
     getServices(num);
   };
 
+  const selectBrowser = (id) => {
+    switch (id) {
+      case 0:
+        setSemantic(false);
+        break;
+      case 1:
+        setSemantic(true);
+        break;
+    }
+  };
+
+  const semanticSearch = () => {
+    try {
+      setLoading(true);
+      fetch(`http://localhost:3000/api/partner/search?terms=${search}`, {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${getToken()}`,
+        },
+      })
+        .then((data) => data.json())
+        .then((response) => {
+          if (response.success) {
+            setServiceResults(response.services);
+          } else {
+            alert(response.message);
+          }
+          setLoading(false);
+        });
+    } catch (error) {
+      console.error("Error searching services:", error);
+    }
+  };
+
   useEffect(() => {
     getServices(currentPage);
   }, []);
 
   return (
     <>
+      <div className="browse_method">
+        <div className="browse_method_buttons">
+          <button
+            className={semantic ? "" : "active"}
+            onClick={() => selectBrowser(0)}
+          >
+            All Listing
+          </button>
+          <button
+            className={semantic ? "active" : ""}
+            onClick={() => selectBrowser(1)}
+          >
+            Semantic Search
+          </button>
+        </div>
+        {semantic && (
+          <div className="semantic_search">
+            <span className="search_title">Search:</span>
+            <input
+              type="text"
+              placeholder="Search Terms"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <button onClick={() => semanticSearch()}>Search</button>
+          </div>
+        )}
+      </div>
       <div className="department">
         {loading && <Loader />}
         <ServiceLister
