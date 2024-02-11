@@ -1,4 +1,5 @@
 .service {
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -15,10 +16,6 @@
 .service:hover {
     background: #f3f4f6;
     box-shadow: none;
-}
-
-.pointer {
-    cursor: pointer;
 }
 
 .stealth {

@@ -2,8 +2,8 @@ import "./SignUp.css";
 import React from "react";
 import Frame from "../../assets/Frame.png";
 import { useState } from "react";
-import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function SignUp() {
   const [firstName, setFirstName] = useState("");

@@ -39,7 +39,7 @@ function Dashboard() {
         <div className="title">
           {accountType === "company" ? "Services:" : "Dashboard:"}
         </div>
-        {accountType === "company" ? <Department /> : <Company />}
+        {accountType === "company" ? <Company /> : <Company />}
       </div>
     </>
   );

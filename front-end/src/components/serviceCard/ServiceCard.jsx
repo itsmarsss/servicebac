@@ -12,9 +12,7 @@ function ServiceCard({
 }) {
   return (
     <div
-      className={
-        "service" + (noEdit ? " pointer" : "") + (empty ? " stealth" : "")
-      }
+      className={"service" + (empty ? " stealth" : "")}
       onClick={() => {
         onClick(service);
         onClickAction(true);
@@ -31,11 +29,19 @@ function ServiceCard({
             <div className="service_actions">
               <button
                 className="fill_button"
-                onClick={() => showModal(service.serviceId)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  showModal(service.serviceId);
+                }}
               >
                 Edit
               </button>
-              <button onClick={() => deleteService(service.serviceId)}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteService(service.serviceId);
+                }}
+              >
                 Delete
               </button>
             </div>
