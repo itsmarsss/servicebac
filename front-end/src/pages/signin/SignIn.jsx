@@ -26,7 +26,6 @@ function SignIn() {
       })
         .then((data) => data.json())
         .then((response) => {
-          console.log(response);
           if (response.success) {
             if (response.userToken) {
               Cookies.set("token", response.userToken, {

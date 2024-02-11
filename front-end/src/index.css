@@ -44,7 +44,8 @@ button:hover {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+select {
     background-color: #f9fafb;
     border: 1px solid #d1d5db;
     color: #1f2937;
@@ -57,6 +58,7 @@ input[type="password"] {
 
 input[type="text"]:focus,
 input[type="email"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+select:focus {
     outline: 2px solid #2563eb;
 }
