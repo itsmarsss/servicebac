@@ -29,7 +29,7 @@ function Department() {
         .then((response) => {
           if (response.success) {
             setServiceResults(response.services);
-            setCurrentPage(Math.max(1, pageNumber));
+            setCurrentPage(pageNumber);
           } else {
             alert(response.message);
           }
@@ -41,7 +41,7 @@ function Department() {
   };
 
   const setPageNumber = (num) => {
-    getServices(num);
+    getServices(Math.max(1, num));
   };
 
   const selectBrowser = (id) => {
@@ -130,7 +130,8 @@ function Department() {
               type="number"
               placeholder="Page Number"
               value={currentPage}
-              onChange={(e) => setPageNumber(e.target.value)}
+              onChange={() => {}}
+              onBlur={(e) => setPageNumber(e.target.value)}
             />
           </div>
           <button onClick={() => setPageNumber(currentPage + 1)}>Next</button>
