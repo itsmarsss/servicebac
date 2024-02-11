@@ -1,8 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 
 body {
+    font-family: "Inter";
     background: white;
     background-image: radial-gradient(#00000066 1px, transparent 0);
     background-size: 40px 40px;
@@ -33,6 +32,7 @@ button:hover {
     cursor: pointer;
     background: #60a5fa;
     padding: 10px 20px;
+    border: none;
     border-radius: 5px;
     color: #fff;
     transition: 200ms;
@@ -53,9 +53,13 @@ select {
     color: #1f2937;
     border-radius: 5px;
     display: block;
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 10px;
     transition: 200ms;
+}
+
+select {
+    width: 100%;
 }
 
 textarea {

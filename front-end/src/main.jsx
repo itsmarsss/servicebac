@@ -5,7 +5,6 @@ import SignUp from "./pages/signup/SignUp.jsx";
 import Dashboard from "./pages/dashboard/Dashboard.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import Logout from "./pages/logout/Logout.jsx";
-import Submit from "./pages/submit/Submit.jsx";
 import Nav from "./components/nav/Nav.jsx";
 import "./index.css";
 import ReactDOM from "react-dom/client";
@@ -23,7 +22,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/submit" element={<Submit />} />
       </Routes>
     </BrowserRouter>
     <ToastContainer
