@@ -44,7 +44,7 @@ function Company() {
           setLoading(false);
         });
     } catch (error) {
-      console.error("Error getting dashboard:", error);
+      console.error("Fetch error:", error);
     }
   };
 

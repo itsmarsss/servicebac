@@ -34,7 +34,7 @@ function Submit() {
         alert("Error creating service. Please try again.");
       }
     } catch (error) {
-      console.error("Error creating service:", error);
+      console.error("Fetch error:", error);
       alert("An unexpected error occurred. Please try again later.");
     }
   };

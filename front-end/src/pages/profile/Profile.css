@@ -1,0 +1,14 @@
+.profile {
+    padding: 50px;
+}
+
+.profile_form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile_title {
+    font-weight: bold;
+    font-size: 25px;
+}

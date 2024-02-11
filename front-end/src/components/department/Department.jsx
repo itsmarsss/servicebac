@@ -48,7 +48,7 @@ function Department() {
           setLoading(false);
         });
     } catch (error) {
-      console.error("Error getting service list:", error);
+      console.error("Fetch error:", error);
     }
   };
 
@@ -87,7 +87,7 @@ function Department() {
           setLoading(false);
         });
     } catch (error) {
-      console.error("Error searching services:", error);
+      console.error("Fetch error:", error);
     }
   };
 

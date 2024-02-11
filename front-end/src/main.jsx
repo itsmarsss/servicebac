@@ -3,6 +3,7 @@ import Home from "./pages/home/Home.jsx";
 import SignIn from "./pages/signin/SignIn.jsx";
 import SignUp from "./pages/signup/SignUp.jsx";
 import Dashboard from "./pages/dashboard/Dashboard.jsx";
+import Profile from "./pages/profile/Profile.jsx";
 import Logout from "./pages/logout/Logout.jsx";
 import Submit from "./pages/submit/Submit.jsx";
 import Nav from "./components/nav/Nav.jsx";
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/submit" element={<Submit />} />
       </Routes>

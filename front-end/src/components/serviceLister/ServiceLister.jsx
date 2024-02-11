@@ -73,7 +73,7 @@ function ServiceLister({
           setEditing(true);
         });
     } catch (error) {
-      console.error("Error getting service:", error);
+      console.error("Fetch error:", error);
     }
   };
 
@@ -119,7 +119,7 @@ function ServiceLister({
           doneAction();
         });
     } catch (error) {
-      console.error("Error updating service:", error);
+      console.error("Fetch error:", error);
     }
   };
 
@@ -156,7 +156,7 @@ function ServiceLister({
           doneAction();
         });
     } catch (error) {
-      console.error("Error creating service:", error);
+      console.error("Fetch error:", error);
     }
   };
 
@@ -184,7 +184,7 @@ function ServiceLister({
           doneAction();
         });
     } catch (error) {
-      console.error("Error getting dashboard:", error);
+      console.error("Fetch error:", error);
     }
   };
 
