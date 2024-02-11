@@ -17,6 +17,10 @@
     box-shadow: none;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .service_details {
     height: 100%;
     display: flex;
@@ -37,4 +41,12 @@
 .service_id {
     font-size: 10px;
     color: #374151;
+}
+
+.service_data {
+    backdrop-filter: brightness(0.95);
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 15px;
+    overflow: hidden;
 }

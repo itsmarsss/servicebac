@@ -1,5 +1,6 @@
 import React from "react";
 import Company from "../../components/company/Company.jsx";
+import Department from "../../components/department/Department.jsx";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
@@ -31,7 +32,7 @@ function Dashboard() {
     }
   }, []);
 
-  return <>{accountType === "company" ? <Company /> : <h1>RIP</h1>}</>;
+  return <>{accountType === "company" ? <Company /> : <Company />}</>;
 }
 
 export default Dashboard;
