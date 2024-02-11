@@ -1,5 +1,7 @@
 import "./Company.css";
 import React from "react";
+import Loader from "../../components/loader/Loader.jsx";
+import ServiceCard from "../../components/serviceCard/ServiceCard.jsx";
 import EditModal from "../../components/editModal/EditModal.jsx";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
@@ -33,7 +35,7 @@ function Company() {
           if (response.success) {
             setOwnedServices(response.services);
           } else {
-            navigator("/login");
+            alert(response.message);
           }
           setLoading(false);
         });
@@ -118,6 +120,7 @@ function Company() {
             alert(response.message);
           }
           setLoading(false);
+          getOwnedServices();
         });
     } catch (error) {
       console.error("Error updating service:", error);
@@ -152,6 +155,7 @@ function Company() {
             alert(response.message);
           }
           setLoading(false);
+          getOwnedServices();
         });
     } catch (error) {
       console.error("Error creating service:", error);
@@ -166,26 +170,13 @@ function Company() {
     <>
       <div className="company">
         <div className="title">Dashboard:</div>
-        {loading && (
-          <div className="loader">
-            <div className="loader_text">Loading...</div>
-          </div>
-        )}
+        {loading && <Loader />}
         <div className="owned_services">
           {ownedServices.length > 0 && (
             <>
               {ownedServices.map((service) => (
                 <div key={service.serviceId}>
-                  <div href="#" className="service">
-                    <div className="service_details">
-                      <div className="service_name">{service.serviceName}</div>
-                      <div className="service_category">{service.category}</div>
-                      <div className="service_id">ID: {service.serviceId}</div>
-                    </div>
-                    <button onClick={() => showModal(service.serviceId)}>
-                      Edit
-                    </button>
-                  </div>
+                  <ServiceCard service={service} showModal={showModal} />
                 </div>
               ))}
               <button className="add_service" onClick={() => addService()}>
