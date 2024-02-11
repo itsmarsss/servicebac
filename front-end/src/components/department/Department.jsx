@@ -119,6 +119,7 @@ function Department() {
               type="text"
               placeholder="Search Terms"
               value={search}
+              maxLength={200}
               onChange={(e) => setSearch(e.target.value)}
             />
             <button onClick={() => semanticSearch()}>Search</button>

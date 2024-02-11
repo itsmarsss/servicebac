@@ -20,12 +20,24 @@ function SignUp() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (!isEmail(email)) {
-      toast.showErrorAlert("Incorrect email pattern");
-      return;
-    }
-
     try {
+      if (!firstName) {
+        toast.showErrorAlert("First Name cannot be blank");
+        return;
+      }
+      if (!lastName) {
+        toast.showErrorAlert("Last Name cannot be blank");
+        return;
+      }
+      if (!isEmail(email)) {
+        toast.showErrorAlert("Incorrect email pattern");
+        return;
+      }
+      if (!password) {
+        toast.showErrorAlert("Password cannot be blank");
+        return;
+      }
+
       await fetch("http://localhost:3000/api/user/signup", {
         method: "POST",
         headers: {
@@ -77,24 +89,28 @@ function SignUp() {
               type="text"
               placeholder="First Name"
               value={firstName}
+              maxLength={25}
               onChange={(e) => setFirstName(e.target.value)}
             />
             <input
               type="text"
               placeholder="Last Name"
               value={lastName}
+              maxLength={25}
               onChange={(e) => setLastName(e.target.value)}
             />
             <input
               type="email"
               placeholder="Email"
               value={email}
+              maxLength={50}
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
               placeholder="Password"
               value={password}
+              maxLength={25}
               onChange={(e) => setPassword(e.target.value)}
             />
             <select onClick={(e) => setAccountType(e.target.value)}>

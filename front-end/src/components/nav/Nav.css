@@ -35,7 +35,7 @@ nav {
 
 .page:hover {
     color: #fff;
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 }
 
 .page:hover:before {

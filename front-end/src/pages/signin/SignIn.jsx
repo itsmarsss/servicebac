@@ -17,12 +17,16 @@ function SignIn() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (!isEmail(email)) {
-      toast.showErrorAlert("Incorrect email pattern");
-      return;
-    }
-
     try {
+      if (!isEmail(email)) {
+        toast.showErrorAlert("Incorrect email pattern");
+        return;
+      }
+      if (!password) {
+        toast.showErrorAlert("Password cannot be blank");
+        return;
+      }
+
       await fetch("http://localhost:3000/api/user/signin", {
         method: "POST",
         headers: {
@@ -80,12 +84,14 @@ function SignIn() {
               type="text"
               placeholder="Email"
               value={email}
+              maxLength={50}
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
               placeholder="Password"
               value={password}
+              maxLength={25}
               onChange={(e) => setPassword(e.target.value)}
             />
             <input

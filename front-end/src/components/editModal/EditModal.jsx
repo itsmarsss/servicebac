@@ -30,8 +30,8 @@ function EditModal({
             type="text"
             placeholder="Service Name"
             value={serviceName}
-            onChange={(e) => setServiceName(e.target.value)}
             maxLength={100}
+            onChange={(e) => setServiceName(e.target.value)}
           />
         </div>
         <div className="edit_property">
@@ -42,8 +42,8 @@ function EditModal({
             type="text"
             placeholder="Category"
             value={category}
-            onChange={(e) => setCategory(e.target.value)}
             maxLength={50}
+            onChange={(e) => setCategory(e.target.value)}
           />
         </div>
         <div className="edit_property edit_data_cont">
