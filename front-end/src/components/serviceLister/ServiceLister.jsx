@@ -5,7 +5,14 @@ import EditModal from "../editModal/EditModal.jsx";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
-function ServiceLister({ doneAction, setLoading, serviceList, noEdit }) {
+function ServiceLister({
+  doneAction,
+  onClick,
+  onClickAction,
+  setLoading,
+  serviceList,
+  noEdit,
+}) {
   const [width, setWidth] = useState(window.innerWidth);
 
   const [editing, setEditing] = useState(false);
@@ -200,6 +207,8 @@ function ServiceLister({ doneAction, setLoading, serviceList, noEdit }) {
             {serviceList.map((service) => (
               <ServiceCard
                 key={service.serviceId}
+                onClick={onClick}
+                onClickAction={onClickAction}
                 service={service}
                 noEdit={noEdit}
                 showModal={showModal}

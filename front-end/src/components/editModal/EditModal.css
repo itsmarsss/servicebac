@@ -61,6 +61,12 @@
 }
 
 @media screen and (max-width: 600px) {
+    .edit {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
     .edit_actions {
         justify-content: center;
         align-items: center;

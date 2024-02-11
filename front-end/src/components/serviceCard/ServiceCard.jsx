@@ -1,12 +1,24 @@
 import "./ServiceCard.css";
 import React from "react";
 
-function ServiceCard({ empty, service, noEdit, showModal, deleteService }) {
+function ServiceCard({
+  onClick,
+  onClickAction,
+  empty,
+  service,
+  noEdit,
+  showModal,
+  deleteService,
+}) {
   return (
     <div
       className={
         "service" + (noEdit ? " pointer" : "") + (empty ? " stealth" : "")
       }
+      onClick={() => {
+        onClick(service);
+        onClickAction(true);
+      }}
     >
       {!empty && (
         <>
