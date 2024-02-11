@@ -1,37 +1,39 @@
 import "./Home.css";
-import Test from "../../assets/Test.jpg";
+import SideMedia from "../../assets/SideMedia.jpg";
+import KhanAcademy from "../../assets/KhanAcademy.png";
+import Kahoot from "../../assets/Kahoot.png";
+import Google from "../../assets/Google.png";
 
 function Home() {
   return (
     <>
-      <div className="flex justify-between items-center font-medium">
-        <div className="px-[20rem] py-[10rem]">
-          <div className="font-bold text-4xl">
-            A Digital Data Collection Service
-          </div>
-          <div className="py-10">
+      <div className="top">
+        <div className="main">
+          <div className="main_title">A Digital Data Collection Service</div>
+          <div className="main_subtitle">
             Providing Schools with Seamless Data Storage and Search <br /> We
             build ready made databases and applications
           </div>
-          <a
-            href="/signin"
-            className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-          >
+          <a href="/signin" className="button">
             Access your Dashboard
           </a>
         </div>
 
-        <img className="h-[30rem] w-[50rem] rounded-bl-[12rem]" src={Test} />
+        <img className="side_media" src={SideMedia} />
       </div>
-      <div className="flex justify-center mt-12 font-medium">
-        <div className="mr-12">
-          <h1 className="font-bold text-6xl">Our Client</h1>
-          <div className="mt-6">
-            <div>Several Selected Clients, who already</div>
+      <div className="bottom">
+        <div className="secondary">
+          <h1 className="secondary_title">Our Clients</h1>
+          <div className="secondary_subtitle">
+            <div>Several selected clients, who already</div>
             <div>believe in our service.</div>
           </div>
         </div>
-        <div className="flex space-x-20"></div>
+        <div className="partners">
+          <img className="partner_media" src={KhanAcademy} />
+          <img className="partner_media" src={Kahoot} />
+          <img className="partner_media" src={Google} />
+        </div>
       </div>
     </>
   );

@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    background: white;
+    background-image: radial-gradient(#00000066 1px, transparent 0);
+    background-size: 40px 40px;
+    background-position: -20px -20px;
+}
+
+.button {
+    background: #fff;
+    color: #4299e1;
+    padding: 10px 20px;
+    border: 1px solid #4299e1;
+    border-radius: 5px;
+    width: fit-content;
+    box-shadow: #959da533 0px 10px 25px;
+    transition: 200ms;
+}
+
+.button:hover {
+    background: #4299e1;
+    color: #fff;
+    border-color: transparent;
+    text-shadow: 1px 0px 0px #fff;
+    box-shadow: none;
+}

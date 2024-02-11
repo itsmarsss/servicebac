@@ -1,8 +1,11 @@
 nav {
     display: flex;
     justify-content: space-between;
-    padding: 15px;
+    align-items: center;
+    padding: 20px;
     font-weight: bold;
+    background: #fff;
+    box-shadow: #959da533 0px 10px 25px;
 }
 
 .pages {
@@ -37,4 +40,12 @@ nav {
 
 .page:hover:before {
     transform: scaleX(1);
+}
+
+@media screen and (max-width: 500px) {
+    .pages {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+    }
 }

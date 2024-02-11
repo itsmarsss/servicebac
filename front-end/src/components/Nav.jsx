@@ -7,7 +7,7 @@ function Nav() {
     { title: "Home", link: "/", id: 1 },
     { title: "Submit", link: "/submit", id: 2 },
     { title: "Login", link: "/signin", id: 3 },
-    { title: "Register", id: 4 },
+    { title: "Register", link: "/signup", id: 4 },
   ]);
   return (
     <>
