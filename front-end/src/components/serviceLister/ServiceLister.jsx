@@ -136,6 +136,32 @@ function ServiceLister({ doneAction, setLoading, serviceList }) {
     }
   };
 
+  const deleteService = (serviceId) => {
+    try {
+      setLoading(true);
+      fetch("http://localhost:3000/api/partner/delete-service", {
+        method: "DELETE",
+        headers: {
+          authorization: `Bearer ${getToken()}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          serviceId: serviceId,
+        }),
+      })
+        .then((data) => data.json())
+        .then((response) => {
+          if (!response.success) {
+            alert(response.message);
+          }
+          setLoading(false);
+          doneAction();
+        });
+    } catch (error) {
+      console.error("Error getting dashboard:", error);
+    }
+  };
+
   return (
     <>
       <div className="owned_services">
@@ -146,6 +172,7 @@ function ServiceLister({ doneAction, setLoading, serviceList }) {
                 key={service.serviceId}
                 service={service}
                 showModal={showModal}
+                deleteService={deleteService}
               />
             ))}
             <button className="add_service" onClick={() => addService()}>

@@ -50,3 +50,8 @@
     font-size: 15px;
     overflow: hidden;
 }
+
+.service_actions {
+    display: flex;
+    gap: 10px;
+}
