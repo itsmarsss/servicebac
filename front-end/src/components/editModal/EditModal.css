@@ -58,3 +58,23 @@
     display: flex;
     gap: 20px;
 }
+
+@media screen and (max-width: 600px) {
+    .edit_actions {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .edit {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        overflow-y: auto;
+    }
+
+    .edit_data_cont {
+        height: 200px;
+    }
+}
