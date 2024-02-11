@@ -10,13 +10,25 @@ function ServiceCard({
   showModal,
   deleteService,
 }) {
+  const handleCardClick = () => {
+    onClick(service);
+    onClickAction(true);
+  };
+
+  const handleShowModal = (e) => {
+    e.stopPropagation();
+    showModal(service.serviceId);
+  };
+
+  const handleDeleteService = (e) => {
+    e.stopPropagation();
+    deleteService(service.serviceId);
+  };
+
   return (
     <div
       className={"service" + (empty ? " stealth" : "")}
-      onClick={() => {
-        onClick(service);
-        onClickAction(true);
-      }}
+      onClick={() => handleCardClick()}
     >
       {!empty && (
         <>
@@ -29,21 +41,11 @@ function ServiceCard({
             <div className="service_actions">
               <button
                 className="fill_button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  showModal(service.serviceId);
-                }}
+                onClick={(e) => handleShowModal(e)}
               >
                 Edit
               </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  deleteService(service.serviceId);
-                }}
-              >
-                Delete
-              </button>
+              <button onClick={(e) => handleDeleteService(e)}>Delete</button>
             </div>
           )}
           {noEdit && (
