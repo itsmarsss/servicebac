@@ -1,0 +1,21 @@
+.dashboard {
+    margin-bottom: 50px;
+}
+
+.company,
+.department {
+    padding: 50px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 50px;
+    padding: 50px;
+}
+
+@media screen and (max-width: 600px) {
+    .title {
+        margin-left: 50px;
+        font-size: 30px;
+    }
+}

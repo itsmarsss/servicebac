@@ -1,3 +1,4 @@
+import "./Dashboard.css";
 import React from "react";
 import Company from "../../components/company/Company.jsx";
 import Department from "../../components/department/Department.jsx";
@@ -32,7 +33,16 @@ function Dashboard() {
     }
   }, []);
 
-  return <>{accountType === "company" ? <Company /> : <Company />}</>;
+  return (
+    <>
+      <div className="dashboard">
+        <div className="title">
+          {accountType === "company" ? "Services:" : "Dashboard:"}
+        </div>
+        {accountType === "company" ? <Department /> : <Company />}
+      </div>
+    </>
+  );
 }
 
 export default Dashboard;
