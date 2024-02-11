@@ -2,6 +2,7 @@ import "./Department.css";
 import React from "react";
 import Loader from "../../components/loader/Loader.jsx";
 import ServiceLister from "../../components/serviceLister/ServiceLister.jsx";
+import ServiceViewer from "../../components/serviceViewer/ServiceViewer.jsx";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
@@ -11,6 +12,9 @@ function Department() {
   const [semantic, setSemantic] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [serviceResults, setServiceResults] = useState([]);
+
+  const [service, setService] = useState();
+  const [serviceView, setServiceView] = useState(false);
 
   const getToken = () => {
     return Cookies.get("token") || "";
@@ -117,6 +121,8 @@ function Department() {
         <ServiceLister
           doneAction={getServices}
           setLoading={setLoading}
+          onClick={setService}
+          onClickAction={setServiceView}
           serviceList={serviceResults}
           noEdit={true}
         />
@@ -136,6 +142,9 @@ function Department() {
           </div>
           <button onClick={() => setPageNumber(currentPage + 1)}>Next</button>
         </div>
+      )}
+      {serviceView && (
+        <ServiceViewer setServiceView={setServiceView} service={service} />
       )}
     </>
   );
