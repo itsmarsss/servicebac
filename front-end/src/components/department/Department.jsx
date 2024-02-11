@@ -121,19 +121,21 @@ function Department() {
           noEdit={true}
         />
       </div>
-      <div className="page_seekers">
-        <button onClick={() => setPageNumber(currentPage - 1)}>Prev</button>
-        <div className="page_input">
-          <span className="page_text">Page:</span>
-          <input
-            type="number"
-            placeholder="Page Number"
-            value={currentPage}
-            onChange={(e) => setPageNumber(e.target.value)}
-          />
+      {!semantic && (
+        <div className="page_seekers">
+          <button onClick={() => setPageNumber(currentPage - 1)}>Prev</button>
+          <div className="page_input">
+            <span className="page_text">Page:</span>
+            <input
+              type="number"
+              placeholder="Page Number"
+              value={currentPage}
+              onChange={(e) => setPageNumber(e.target.value)}
+            />
+          </div>
+          <button onClick={() => setPageNumber(currentPage + 1)}>Next</button>
         </div>
-        <button onClick={() => setPageNumber(currentPage + 1)}>Next</button>
-      </div>
+      )}
     </>
   );
 }
