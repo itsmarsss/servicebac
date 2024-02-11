@@ -15,10 +15,10 @@ function Department() {
     return Cookies.get("token") || "";
   };
 
-  const getServices = () => {
+  const getServices = (pageNumber) => {
     try {
       setLoading(true);
-      fetch(`http://localhost:3000/api/partner/service-list/${currentPage}`, {
+      fetch(`http://localhost:3000/api/partner/service-list/${pageNumber}`, {
         method: "GET",
         headers: {
           authorization: `Bearer ${getToken()}`,
@@ -28,6 +28,7 @@ function Department() {
         .then((response) => {
           if (response.success) {
             setServiceResults(response.services);
+            setCurrentPage(Math.max(1, pageNumber));
           } else {
             alert(response.message);
           }
@@ -39,12 +40,12 @@ function Department() {
   };
 
   const setPageNumber = (num) => {
-    setCurrentPage(Math.max(1, num));
+    getServices(num);
   };
 
   useEffect(() => {
     getServices(currentPage);
-  }, [currentPage]);
+  }, []);
 
   return (
     <>
