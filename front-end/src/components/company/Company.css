@@ -2,6 +2,12 @@
     margin: 50px;
 }
 
+.company_form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .company_form>div label {
     font-size: 12px;
 }
@@ -32,4 +38,16 @@
 
 .markdown_display>p {
     margin: 0;
+}
+
+@media screen and (max-width: 800px) {
+    .company_form_section {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .company_form_section>* {
+        width: 100%;
+    }
 }

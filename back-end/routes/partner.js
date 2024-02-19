@@ -51,13 +51,29 @@ router.get("/service", async (req, res) => {
     const db = mongoClient.db(partnerDatabase);
     const collection = db.collection(partnerCollection);
 
-    const token = req.headers["authorization"].split(" ")[1];
+    const userToken = req.headers["authorization"].split(" ")[1];
 
-    const service = await collection.find({
-      ownerToken: token
-    });
+    var service = await collection.find({
+      ownerToken: userToken
+    }).toArray();
 
-    const { ownerToken, embeddings, ...sanitizedService } = service;
+    if (service.length === 0) {
+      const service_data = {
+        ownerToken: userToken,
+        serviceName: "Company Name",
+        city: "City",
+        country: "Country",
+        status: "private",
+      };
+
+      await collection.insertOne(service_data);
+    }
+
+    service = await collection.find({
+      ownerToken: userToken
+    }).toArray();
+
+    const { ownerToken, embeddings, ...sanitizedService } = service[0];
 
     res.json({
       success: true,
@@ -78,9 +94,15 @@ Service, creates service, requires:
 router.post("/create-service", async (req, res) => {
   const serviceName = req.body.serviceName;
   const category = req.body.category;
-  const data = req.body.data;
+  const city = req.body.city;
+  const country = req.body.country;
+  const description = req.body.description;
+  const markdown = req.body.markdown;
+  const status = req.body.status;
 
-  if (!(serviceName && category)) {
+  console.log(req.body)
+
+  if (!(serviceName && city && country && status)) {
     res.json({
       success: false,
       message: "Insufficient data",
@@ -93,42 +115,41 @@ router.post("/create-service", async (req, res) => {
     const collection = db.collection(partnerCollection);
 
     const userToken = req.headers["authorization"].split(" ")[1];
-    const service_data = {
-      ownerToken: userToken,
-      serviceName: serviceName,
-      category: category,
-      data: data,
-    };
 
-    const service_tokid = await executePython("./workers/createService.py", []);
-    const result = await collection.insertOne({
-      ...service_tokid,
-      ...service_data,
-    });
+    const result = await collection.updateOne(
+      { ownerToken: userToken },
+      {
+        $set: {
+          serviceName: serviceName,
+          category: category,
+          city: city,
+          country: country,
+          description: description,
+          markdown: markdown,
+          status: status,
+        }
+      }
+    );
 
-    const dataValues = Object.values(data).join(" ");
-
+    const dataValues = Object.values(req.body).join(" ");
     const embed = await cohereClient.embed({
       texts: [serviceName, category, dataValues],
       model: cohereModel,
       inputType: "classification",
     });
-
     const serviceEmbeddings = embed.embeddings[0];
 
     await collection.updateOne(
-      { _id: result.insertedId },
+      { ownerToken: userToken },
       { $set: { embeddings: serviceEmbeddings } }
     );
 
     res.json({
       success: true,
-      ...service_tokid,
-      ...service_data,
       ...result,
     });
   } catch (error) {
-    console.error("Error inserting service:", error);
+    console.error("Error creating/updating service:", error);
     res.status(500).send("Internal Server Error");
   }
 });
@@ -140,12 +161,17 @@ Update service will allow the change of:
 - data...
 */
 router.put("/update-service", async (req, res) => {
-  const serviceId = req.body.serviceId;
   const serviceName = req.body.serviceName;
+  const marquee = req.body.marquee;
+  const icon = req.body.icon;
   const category = req.body.category;
-  const data = req.body.data;
+  const city = req.body.city;
+  const country = req.body.country;
+  const description = req.body.description;
+  const markdown = req.body.markdown;
+  const status = req.body.status;
 
-  if (!(serviceId && serviceName && category)) {
+  if (!(serviceName && city && country && status)) {
     res.json({
       success: false,
       message: "Insufficient data",
@@ -161,7 +187,6 @@ router.put("/update-service", async (req, res) => {
 
     const existingService = await collection.findOne({
       ownerToken: userToken,
-      serviceId: serviceId,
     });
 
     if (!existingService) {
@@ -172,22 +197,25 @@ router.put("/update-service", async (req, res) => {
     }
 
     const service_data = {
-      serviceId: serviceId,
-      ownerToken: userToken,
       serviceName: serviceName,
+      marquee: marquee,
+      icon: icon,
       category: category,
-      data: data,
+      city: city,
+      country: country,
+      description: description,
+      markdown: markdown,
+      status: status,
     };
 
     const result = await collection.updateOne(
       {
-        serviceId: serviceId,
         ownerToken: userToken,
       },
       { $set: service_data }
     );
 
-    const dataValues = Object.values(data).join(" ");
+    const dataValues = Object.values(req.body).join(" ");
 
     const embed = await cohereClient.embed({
       texts: [serviceName, category, dataValues],
@@ -198,7 +226,7 @@ router.put("/update-service", async (req, res) => {
     const serviceEmbeddings = embed.embeddings[0];
 
     await collection.updateOne(
-      { serviceId: serviceId },
+      { ownerToken: userToken },
       { $set: { embeddings: serviceEmbeddings } }
     );
 

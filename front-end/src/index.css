@@ -25,6 +25,15 @@ a {
     color: var(--brand-accent);
 }
 
+hr {
+    display: block;
+    width: 100%;
+    height: 1px;
+    border: none;
+    border-bottom: 1px solid var(--text-light);
+    margin: 15px 0;
+}
+
 button,
 .fill_button {
     cursor: pointer;
@@ -73,7 +82,6 @@ input[type="text"],
 input[type="email"],
 input[type="number"],
 input[type="password"],
-div[contenteditable="true"],
 textarea,
 .markdown_display,
 select {
@@ -90,29 +98,9 @@ input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="number"]:focus,
 input[type="password"]:focus,
-div[contenteditable="true"]:focus,
 textarea:focus,
 select:focus {
     outline: 2px solid var(--brand);
-}
-
-div[contenteditable="true"] {
-    cursor: text;
-    padding: 0;
-}
-
-div[contenteditable="true"]:focus {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    word-wrap: break-word;
-    word-break: break-all;
-    height: unset;
-}
-
-[contenteditable=true]:empty:not(:focus):before {
-    content: attr(placeholder);
-    color: var(--text-light);
 }
 
 textarea {

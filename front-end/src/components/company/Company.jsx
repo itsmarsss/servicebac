@@ -30,7 +30,7 @@ function Company({ companyName, city, country }) {
   const getService = () => {
     try {
       setLoading(true);
-      fetch("/api/partner/service", {
+      fetch("http://localhost:3000/api/partner/service", {
         method: "GET",
         headers: {
           authorization: `Bearer ${getToken()}`,
@@ -39,7 +39,14 @@ function Company({ companyName, city, country }) {
         .then((data) => data.json())
         .then((response) => {
           if (response.success) {
+            console.log(response);
             setService(response.service);
+            setMarquee(response.service.marquee);
+            setIcon(response.service.icon);
+            setCategory(response.service.category);
+            setDescription(response.service.description);
+            setMarkdown(response.service.markdown);
+            setStatus(response.service.status);
             toast.showSuccessAlert("Fetched service");
           } else {
             toast.showErrorAlert(response.message);
@@ -51,7 +58,42 @@ function Company({ companyName, city, country }) {
     }
   };
 
-  const handleSaveChanges = () => {};
+  const handleSaveChanges = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+      await fetch("http://localhost:3000/api/partner/update-service", {
+        method: "PUT",
+        headers: {
+          authorization: `Bearer ${getToken()}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          marquee: marquee,
+          icon: icon,
+          serviceName: companyName,
+          category: category,
+          city: city,
+          country: country,
+          description: description,
+          markdown: markdown,
+          status: status,
+        }),
+      })
+        .then((data) => data.json())
+        .then((response) => {
+          if (response.success) {
+            toast.showSuccessAlert("Updated service");
+          } else {
+            toast.showErrorAlert(response.message);
+          }
+          setLoading(false);
+        });
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  };
 
   useEffect(() => {
     getService();
@@ -70,23 +112,19 @@ function Company({ companyName, city, country }) {
               </div>
               <div className="service_details">
                 <div className="service_name">{companyName}</div>
-                <div
-                  className="service_about"
-                  contentEditable="true"
+                <input
+                  type="text"
                   placeholder="Category"
-                  onBlur={(e) => setCategory(e.target.textContent)}
-                >
-                  {service.category}
-                </div>
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                />
                 <div className="service_location">{`${city}, ${country}`}</div>
-                <div
-                  className="service_description"
+                <input
+                  type="text"
                   placeholder="Description"
-                  contentEditable="true"
-                  onBlur={(e) => setDescription(e.target.textContent)}
-                >
-                  {service.description}
-                </div>
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
               </div>
             </div>
             <form className="company_form">
@@ -96,9 +134,9 @@ function Company({ companyName, city, country }) {
                   <input
                     type="text"
                     placeholder="Marquee URL"
-                    value={service.marquee}
+                    value={marquee}
                     maxLength={200}
-                    onChange={(e) => setMarquee(e.target.value)}
+                    onInput={(e) => setMarquee(e.target.value)}
                   />
                 </div>
                 <div>
@@ -106,18 +144,19 @@ function Company({ companyName, city, country }) {
                   <input
                     type="text"
                     placeholder="Icon URL"
-                    value={service.icon}
+                    value={icon}
                     maxLength={200}
                     onChange={(e) => setIcon(e.target.value)}
                   />
                 </div>
               </div>
+              <hr />
               <div className="company_form_section">
                 <div>
                   <label htmlFor="markdown">Markdown</label>
                   <textarea
                     placeholder="Markdown"
-                    value={service.markdown}
+                    value={markdown}
                     maxLength={100_000}
                     onChange={(e) => setMarkdown(e.target.value)}
                   />
@@ -130,18 +169,24 @@ function Company({ companyName, city, country }) {
                   />
                 </div>
               </div>
-
+              <hr />
               <div>
                 <label htmlFor="status">Status</label>
                 <select
+                  onChange={(e) => setStatus(e.target.value)}
                   onClick={(e) => setStatus(e.target.value)}
-                  value={service.status}
+                  value={status}
                 >
                   <option value="public">Public</option>
                   <option value="private">Private</option>
                 </select>
               </div>
-              <button className="fill_button" onClick={handleSaveChanges}>
+
+              <hr />
+              <button
+                className="fill_button"
+                onClick={(e) => handleSaveChanges(e)}
+              >
                 Save Changes
               </button>
             </form>
