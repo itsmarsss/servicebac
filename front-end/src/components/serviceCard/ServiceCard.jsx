@@ -1,18 +1,12 @@
 import "./ServiceCard.css";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function ServiceCard({
-  onClick,
-  onClickAction,
-  empty,
-  service,
-  noEdit,
-  showModal,
-  deleteService,
-}) {
+function ServiceCard({ empty, service, showModal, deleteService }) {
+  const navigate = useNavigate();
+
   const handleCardClick = () => {
-    onClick(service);
-    onClickAction(true);
+    navigate("/");
   };
 
   const handleShowModal = (e) => {
@@ -30,24 +24,30 @@ function ServiceCard({
       className={"service" + (empty ? " stealth" : "")}
       onClick={() => handleCardClick()}
     >
-      {!empty && (
+      {!empty && service && (
         <>
           <div className="service_graphics">
-            <img className="service_marquee" src="asd"></img>
-            <img className="service_logo" src="asd"></img>
+            <img
+              className="service_marquee"
+              src={service.marquee ? service.marquee : ""}
+            ></img>
+            <img
+              className="service_logo"
+              src={service.icon ? service.icon : ""}
+            ></img>
           </div>
           <div className="service_details">
             <div className="service_name">
-              {service && service.serviceName ? service.serviceName : "..."}
+              {service.serviceName ? service.serviceName : "..."}
             </div>
             <div className="service_about">
-              {service && service.category ? service.category : "..."}
+              {service.category ? service.category : "..."}
             </div>
             <div className="service_location">{`${
-              service && service.city ? service.city : "..."
-            }, ${service && service.country ? service.country : "..."}`}</div>
+              service.city ? service.city : "..."
+            }, ${service.country ? service.country : "..."}`}</div>
             <div className="service_description">
-              {service && service.description ? service.description : "..."}
+              {service.description ? service.description : "..."}
             </div>
           </div>
         </>

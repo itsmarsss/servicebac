@@ -30,7 +30,7 @@ function Company({ companyName, city, country }) {
   const getService = () => {
     try {
       setLoading(true);
-      fetch("http://localhost:3000/api/partner/service", {
+      fetch("/api/partner/service", {
         method: "GET",
         headers: {
           authorization: `Bearer ${getToken()}`,
@@ -63,7 +63,7 @@ function Company({ companyName, city, country }) {
 
     try {
       setLoading(true);
-      await fetch("http://localhost:3000/api/partner/update-service", {
+      await fetch("/api/partner/update-service", {
         method: "PUT",
         headers: {
           authorization: `Bearer ${getToken()}`,

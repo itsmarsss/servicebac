@@ -7,14 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import * as toast from "../../components/toastAlert/toastAlert";
 
-function ServiceLister({
-  doneAction,
-  onClick,
-  onClickAction,
-  setLoading,
-  serviceList,
-  noEdit,
-}) {
+function ServiceLister({ doneAction, setLoading, serviceList, noEdit }) {
   const [width, setWidth] = useState(window.innerWidth);
 
   const [editing, setEditing] = useState(false);
@@ -223,8 +216,6 @@ function ServiceLister({
             {serviceList.map((service) => (
               <ServiceCard
                 key={service.serviceId}
-                onClick={onClick}
-                onClickAction={onClickAction}
                 service={service}
                 noEdit={noEdit}
                 showModal={showModal}
