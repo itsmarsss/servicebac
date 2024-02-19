@@ -3,6 +3,7 @@ All partner related API requests reside on this file.
 */
 
 const express = require("express");
+const { executePython } = require("../pythonExecutor");
 const { mongoClient } = require("../api/mongodb");
 const { cohereClient } = require("../api/cohereai");
 
@@ -65,7 +66,11 @@ router.get("/service", async (req, res) => {
         status: "private",
       };
 
-      await collection.insertOne(service_data);
+      const service_tokid = await executePython("./workers/createService.py", []);
+      await collection.insertOne({
+        ...service_tokid,
+        ...service_data
+      });
     }
 
     service = await collection.find({
