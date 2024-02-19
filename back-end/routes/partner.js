@@ -383,7 +383,9 @@ router.get("/search", async (req, res) => {
     const db = mongoClient.db(partnerDatabase);
     const collection = db.collection(partnerCollection);
 
-    const searchResult = await collection.find().toArray();
+    const searchResult = await collection.find({
+      status: "public",
+    }).toArray();
     const resultsSimilarity = searchResult.map(doc => {
       const documentEmbeddings = doc.embeddings;
       const similarity = calculateCosineSimilarity(queryEmbeddings, documentEmbeddings);
