@@ -55,18 +55,30 @@ function Register() {
         return;
       }
 
+      const userData =
+        accountType === "company"
+          ? {
+              accountType: accountType,
+              companyName: companyName,
+              city: city,
+              country: country,
+              email: email,
+              password: password,
+            }
+          : {
+              accountType: accountType,
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              password: password,
+            };
+
       await fetch("/api/user/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          password: password,
-          accountType: accountType,
-        }),
+        body: JSON.stringify(userData),
       })
         .then((data) => data.json())
         .then((response) => {

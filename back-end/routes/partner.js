@@ -46,25 +46,22 @@ router.post("/create-partners-collection", async (req, res) => {
 });
 
 // Query services owned by token
-router.get("/owned-services", async (req, res) => {
+router.get("/service", async (req, res) => {
   try {
     const db = mongoClient.db(partnerDatabase);
     const collection = db.collection(partnerCollection);
 
     const token = req.headers["authorization"].split(" ")[1];
 
-    const services = await collection.find({
+    const service = await collection.find({
       ownerToken: token
-    }).toArray();
-
-    const sanitizedServices = services.map(service => {
-      const { ownerToken, embeddings, ...sanitizedService } = service;
-      return sanitizedService;
     });
+
+    const { ownerToken, embeddings, ...sanitizedService } = service;
 
     res.json({
       success: true,
-      services: sanitizedServices
+      service: sanitizedService
     });
   } catch (error) {
     console.error("Error querying services by ownerToken:", error);

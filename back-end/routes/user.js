@@ -103,6 +103,7 @@ router.post("/signup", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
+  console.log(req.body)
   if (!(accountType && email && password)) {
     res.json({
       success: false,

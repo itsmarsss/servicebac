@@ -110,6 +110,11 @@ div[contenteditable="true"]:focus {
     height: unset;
 }
 
+[contenteditable=true]:empty:not(:focus):before {
+    content: attr(placeholder);
+    color: var(--text-light);
+}
+
 textarea {
     transition: height 0;
     height: 300px;

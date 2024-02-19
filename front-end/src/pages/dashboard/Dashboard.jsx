@@ -9,7 +9,10 @@ import Cookies from "js-cookie";
 import * as toast from "../../components/toastAlert/toastAlert";
 
 function Dashboard() {
-  const [accountType, setAccountType] = useState("company");
+  const [accountType, setAccountType] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
   const navigate = useNavigate();
 
   const getToken = () => {
@@ -32,6 +35,11 @@ function Dashboard() {
         .then((response) => {
           if (response.success) {
             setAccountType(response.accountType);
+            if (response.accountType === "company") {
+              setCompanyName(response.companyName);
+              setCity(response.city);
+              setCountry(response.country);
+            }
             toast.showSuccessAlert("Fetched dashboard");
           } else {
             toast.showErrorAlert(response.message);
@@ -49,7 +57,11 @@ function Dashboard() {
         <div className="title">
           {accountType === "company" ? "Dashboard:" : "Services:"}
         </div>
-        {accountType === "company" ? <Company /> : <Department />}
+        {accountType === "company" ? (
+          <Company companyName={companyName} city={city} country={country} />
+        ) : (
+          <Department />
+        )}
       </div>
     </>
   );
