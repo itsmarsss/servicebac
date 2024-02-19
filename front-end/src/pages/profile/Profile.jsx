@@ -1,5 +1,6 @@
 import "./Profile.css";
 import React from "react";
+import Loader from "../../components/loader/Loader.jsx";
 import Nav from "../../components/nav/Nav.jsx";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +8,7 @@ import Cookies from "js-cookie";
 import * as toast from "../../components/toastAlert/toastAlert";
 
 function Profile() {
+  const [loading, setLoading] = useState(false);
   const [companyName, setCompanyName] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
@@ -105,6 +107,7 @@ function Profile() {
 
   useEffect(() => {
     try {
+      setLoading(true);
       fetch("/api/user/dashboard", {
         method: "GET",
         headers: {
@@ -128,6 +131,7 @@ function Profile() {
           } else {
             toast.showErrorAlert(response.message);
           }
+          setLoading(false);
         });
     } catch (error) {
       console.error("Fetch error:", error);
@@ -138,6 +142,7 @@ function Profile() {
     <>
       <Nav />
       <div className="profile_container">
+        {loading && <Loader />}
         <form className="profile_form">
           <label className="profile_title">Update profile</label>
           <div>
