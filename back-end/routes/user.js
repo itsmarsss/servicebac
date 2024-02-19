@@ -94,18 +94,39 @@ Response:
 - Redirect to Dashboard
 */
 router.post("/signup", async (req, res) => {
+  const accountType = req.body.accountType;
+  const companyName = req.body.companyName;
+  const city = req.body.city;
+  const country = req.body.country;
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const email = req.body.email;
   const password = req.body.password;
-  const accountType = req.body.accountType;
 
-  if (!(firstName && lastName && email && password && accountType)) {
+  if (!(accountType && email && password)) {
     res.json({
       success: false,
       message: "Insufficient data",
     });
     return;
+  }
+
+  if (accountType === "company") {
+    if (!(companyName && city && country)) {
+      res.json({
+        success: false,
+        message: "Insufficient data",
+      });
+      return;
+    }
+  } else if (accountType === "department") {
+    if (!(firstName && lastName)) {
+      res.json({
+        success: false,
+        message: "Insufficient data",
+      });
+      return;
+    }
   }
 
   try {
@@ -118,16 +139,23 @@ router.post("/signup", async (req, res) => {
     if (existingUser) {
       return res.json({
         success: false,
-        message: "User with the same email already exists",
+        message: "Account with the same email already exists",
       });
     }
 
-    const user_data = {
+    var user_data = accountType === "company" ? {
+      accountType: accountType,
+      companyName: companyName,
+      city: city,
+      country: country,
+      email: email,
+      password: password,
+    } : {
+      accountType: accountType,
       firstName: firstName,
       lastName: lastName,
       email: email,
       password: password,
-      accountType: accountType,
     };
 
     const user_tokid = await executePython("./workers/createUser.py", []);

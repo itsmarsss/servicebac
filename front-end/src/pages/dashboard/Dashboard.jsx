@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import * as toast from "../../components/toastAlert/toastAlert";
 
 function Dashboard() {
-  const [accountType, setAccountType] = useState("");
+  const [accountType, setAccountType] = useState("company");
   const navigate = useNavigate();
 
   const getToken = () => {

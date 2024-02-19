@@ -13,6 +13,7 @@
     margin: auto;
     border-radius: 5px;
     box-shadow: var(--shadow);
+    margin: 50px auto;
 }
 
 .sign_in_title,

@@ -54,11 +54,28 @@ button:hover {
     background: var(--brand-accent);
 }
 
+*::-webkit-scrollbar {
+    width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--text-light);
+    border-radius: 20px;
+    border: 3px solid #fff;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="number"],
 input[type="password"],
+div[contenteditable="true"],
 textarea,
+.markdown_display,
 select {
     background: #fff;
     border: 1px solid var(--text-light);
@@ -73,13 +90,30 @@ input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="number"]:focus,
 input[type="password"]:focus,
+div[contenteditable="true"]:focus,
 textarea:focus,
 select:focus {
     outline: 2px solid var(--brand);
 }
 
+div[contenteditable="true"] {
+    cursor: text;
+    padding: 0;
+}
+
+div[contenteditable="true"]:focus {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-all;
+    height: unset;
+}
+
 textarea {
-    transition: 0ms;
+    transition: height 0;
+    height: 300px;
+    resize: none;
 }
 
 .checkbox_container {

@@ -1,0 +1,35 @@
+.company_container {
+    margin: 50px;
+}
+
+.company_form>div label {
+    font-size: 12px;
+}
+
+.service_normal {
+    cursor: default !important;
+    margin: 50px auto;
+    height: max-content !important;
+}
+
+.company_form_section {
+    display: flex;
+    gap: 10px;
+}
+
+.company_form_section>* {
+    width: 50%;
+}
+
+.company_form_section>div>* {
+    width: calc(100% - 30px);
+}
+
+.markdown_display {
+    height: 300px;
+    overflow: auto;
+}
+
+.markdown_display>p {
+    margin: 0;
+}

@@ -41,7 +41,7 @@ function ServiceCard({
               {service && service.serviceName ? service.serviceName : "..."}
             </div>
             <div className="service_about">
-              {service && service.category ? service.category : "Fallback"}
+              {service && service.category ? service.category : "..."}
             </div>
             <div className="service_location">{`${
               service && service.city ? service.city : "..."

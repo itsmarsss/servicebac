@@ -97,7 +97,7 @@ function Register() {
         <form className="sign_up_form">
           <label className="sign_up_title">Create an account</label>
           <div>
-            <label for="accountType">Account type</label>
+            <label htmlFor="accountType">Account type</label>
             <select onClick={(e) => setAccountType(e.target.value)}>
               {accountType === "select_one" ? (
                 <option value="select_one">Select one</option>
@@ -113,7 +113,7 @@ function Register() {
           ) : accountType === "company" ? (
             <>
               <div>
-                <label for="companyName">Company name</label>
+                <label htmlFor="companyName">Company name</label>
                 <input
                   type="text"
                   placeholder="Company Name"
@@ -123,7 +123,7 @@ function Register() {
                 />
               </div>
               <div>
-                <label for="country">Country</label>
+                <label htmlFor="country">Country</label>
                 <input
                   type="text"
                   placeholder="Country"
@@ -133,7 +133,7 @@ function Register() {
                 />
               </div>
               <div>
-                <label for="city">City</label>
+                <label htmlFor="city">City</label>
                 <input
                   type="text"
                   placeholder="City"
@@ -146,7 +146,7 @@ function Register() {
           ) : (
             <>
               <div>
-                <label for="firstName">First name</label>
+                <label htmlFor="firstName">First name</label>
                 <input
                   type="text"
                   placeholder="First Name"
@@ -156,7 +156,7 @@ function Register() {
                 />
               </div>
               <div>
-                <label for="lastName">Last name</label>
+                <label htmlFor="lastName">Last name</label>
                 <input
                   type="text"
                   placeholder="Last Name"
@@ -172,7 +172,7 @@ function Register() {
           ) : (
             <>
               <div>
-                <label for="email">Email</label>
+                <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   placeholder="Email"
@@ -182,7 +182,7 @@ function Register() {
                 />
               </div>
               <div>
-                <label for="password">Password</label>
+                <label htmlFor="password">Password</label>
                 <input
                   type="password"
                   placeholder="Password"
@@ -192,12 +192,9 @@ function Register() {
                 />
               </div>
 
-              <input
-                className="fill_button"
-                type="button"
-                value="Register"
-                onClick={handleLogin}
-              />
+              <button className="fill_button" onClick={handleLogin}>
+                Register
+              </button>
             </>
           )}
         </form>

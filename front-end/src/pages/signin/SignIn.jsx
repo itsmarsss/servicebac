@@ -75,7 +75,6 @@ function SignIn() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-
           <div>
             <label htmlFor="password">Password</label>
             <input
@@ -97,12 +96,9 @@ function SignIn() {
               <span class="checkmark"></span>
             </label>
           </div>
-          <input
-            className="fill_button"
-            type="button"
-            value="Login"
-            onClick={handleLogin}
-          />
+          <button className="fill_button" onClick={handleLogin}>
+            Login
+          </button>
         </form>
         <div className="bottom_text">
           Don't have an account? <a href="/register">Sign up</a>
