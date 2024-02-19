@@ -84,6 +84,7 @@ function Profile() {
               password: password,
             };
 
+      setLoading(true);
       await fetch("/api/user/update-profile", {
         method: "PUT",
         headers: {
@@ -99,6 +100,7 @@ function Profile() {
           } else {
             toast.showErrorAlert(response.message);
           }
+          setLoading(false);
         });
     } catch (error) {
       console.error("Fetch error:", error);
