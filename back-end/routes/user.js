@@ -140,7 +140,7 @@ router.post("/signup", async (req, res) => {
     const collection = db.collection(userCollection);
 
     const existingUser = await collection.findOne({
-      email: email,
+      email: email.toLowerCase(),
     });
     if (existingUser) {
       return res.json({
@@ -154,13 +154,13 @@ router.post("/signup", async (req, res) => {
       companyName: companyName,
       city: city,
       country: country,
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     } : {
       accountType: accountType,
       firstName: firstName,
       lastName: lastName,
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     };
 
@@ -204,8 +204,8 @@ router.post("/signin", async (req, res) => {
     const collection = db.collection(userCollection);
 
     const user = await collection.findOne({
-      email: req.body.email,
-      password: req.body.password,
+      email: email.toLowerCase(),
+      password: password,
     });
     if (!user) {
       return res.json({
@@ -279,7 +279,7 @@ router.put("/update-profile", async (req, res) => {
     const collection = db.collection(userCollection);
 
     const existingUser = await collection.findOne({
-      email: email,
+      email: email.toLowerCase(),
     });
 
     const userToken = req.headers["authorization"].split(" ")[1];
@@ -295,13 +295,13 @@ router.put("/update-profile", async (req, res) => {
       companyName: companyName,
       city: city,
       country: country,
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     } : {
       accountType: accountType,
       firstName: firstName,
       lastName: lastName,
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     };
 
@@ -355,7 +355,7 @@ router.get("/email/:email", async (req, res) => {
     const db = mongoClient.db(userDatabase);
     const collection = db.collection(userCollection);
 
-    const user = await collection.findOne({ email: req.params.email });
+    const user = await collection.findOne({ email: req.params.email.toLowerCase() });
 
     if (!user) {
       return res.json({
