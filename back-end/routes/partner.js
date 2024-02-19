@@ -3,7 +3,6 @@ All partner related API requests reside on this file.
 */
 
 const express = require("express");
-const { executePython } = require("../pythonExecutor");
 const { mongoClient } = require("../api/mongodb");
 const { cohereClient } = require("../api/cohereai");
 
@@ -81,75 +80,6 @@ router.get("/service", async (req, res) => {
     });
   } catch (error) {
     console.error("Error querying services by ownerToken:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-/*
-Service, creates service, requires:
-- name
-- category
-- data...
-*/
-router.post("/create-service", async (req, res) => {
-  const serviceName = req.body.serviceName;
-  const category = req.body.category;
-  const city = req.body.city;
-  const country = req.body.country;
-  const description = req.body.description;
-  const markdown = req.body.markdown;
-  const status = req.body.status;
-
-  console.log(req.body)
-
-  if (!(serviceName && city && country && status)) {
-    res.json({
-      success: false,
-      message: "Insufficient data",
-    });
-    return;
-  }
-
-  try {
-    const db = mongoClient.db(partnerDatabase);
-    const collection = db.collection(partnerCollection);
-
-    const userToken = req.headers["authorization"].split(" ")[1];
-
-    const result = await collection.updateOne(
-      { ownerToken: userToken },
-      {
-        $set: {
-          serviceName: serviceName,
-          category: category,
-          city: city,
-          country: country,
-          description: description,
-          markdown: markdown,
-          status: status,
-        }
-      }
-    );
-
-    const dataValues = Object.values(req.body).join(" ");
-    const embed = await cohereClient.embed({
-      texts: [serviceName, category, dataValues],
-      model: cohereModel,
-      inputType: "classification",
-    });
-    const serviceEmbeddings = embed.embeddings[0];
-
-    await collection.updateOne(
-      { ownerToken: userToken },
-      { $set: { embeddings: serviceEmbeddings } }
-    );
-
-    res.json({
-      success: true,
-      ...result,
-    });
-  } catch (error) {
-    console.error("Error creating/updating service:", error);
     res.status(500).send("Internal Server Error");
   }
 });
@@ -245,46 +175,6 @@ router.put("/update-service", async (req, res) => {
 });
 
 /*
-Delete service will delete service
-*/
-router.delete("/delete-service", async (req, res) => {
-  const serviceId = req.body.serviceId;
-
-  if (!serviceId) {
-    res.json({
-      success: false,
-      message: "Insufficient data",
-    });
-    return;
-  }
-
-  try {
-    const db = mongoClient.db(partnerDatabase);
-    const collection = db.collection(partnerCollection);
-
-    const userToken = req.headers["authorization"].split(" ")[1];
-    const result = await collection.deleteOne({
-      serviceId: serviceId,
-      ownerToken: userToken,
-    });
-
-    if (result.deletedCount === 0) {
-      return res.json({
-        success: false,
-        message: "Service not found",
-      });
-    }
-
-    res.json({
-      success: true,
-    });
-  } catch (error) {
-    console.error("Error deleting service:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-/*
 Service list provides a list of:
 - email
 - name
@@ -302,7 +192,9 @@ router.get("/service-list/:pageNumber", async (req, res) => {
     const collection = db.collection(partnerCollection);
 
     const entries = await collection
-      .find()
+      .find({
+        status: "public",
+      })
       .skip(skipCount)
       .limit(count)
       .toArray();
