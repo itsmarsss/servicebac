@@ -3,6 +3,8 @@
 :root {
     --brand: #60a5fa;
     --brand-accent: #3b82f6;
+    --text: #3c4257 !important;
+    --text-light: #d0d5da !important;
 }
 
 body {
@@ -12,7 +14,7 @@ body {
     background-size: 40px 40px;
     background-position: -10px -10px;
 
-    color: #3c4257;
+    color: var(--text);
 }
 
 a {
@@ -56,7 +58,7 @@ input[type="password"],
 textarea,
 select {
     background: #fff;
-    border: 1px solid #d1d5db;
+    border: 1px solid var(--text-light);
     border-radius: 5px;
     display: block;
     padding: 10px 15px;

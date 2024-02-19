@@ -6,11 +6,14 @@ import Cookies from "js-cookie";
 import * as toast from "../../components/toastAlert/toastAlert.js";
 
 function Register() {
+  const [companyName, setCompanyName] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [accountType, setAccountType] = useState("company");
+  const [accountType, setAccountType] = useState("select_one");
   const navigate = useNavigate();
 
   const isEmail = (email) =>
@@ -20,13 +23,28 @@ function Register() {
     e.preventDefault();
 
     try {
-      if (!firstName) {
-        toast.showErrorAlert("First Name cannot be blank");
-        return;
-      }
-      if (!lastName) {
-        toast.showErrorAlert("Last Name cannot be blank");
-        return;
+      if (accountType === "company") {
+        if (!companyName) {
+          toast.showErrorAlert("Company name cannot be blank");
+          return;
+        }
+        if (!country) {
+          toast.showErrorAlert("Country cannot be blank");
+          return;
+        }
+        if (!city) {
+          toast.showErrorAlert("City cannot be blank");
+          return;
+        }
+      } else {
+        if (!firstName) {
+          toast.showErrorAlert("First name cannot be blank");
+          return;
+        }
+        if (!lastName) {
+          toast.showErrorAlert("Last name cannot be blank");
+          return;
+        }
       }
       if (!isEmail(email)) {
         toast.showErrorAlert("Incorrect email pattern");
@@ -79,59 +97,109 @@ function Register() {
         <form className="sign_up_form">
           <label className="sign_up_title">Create an account</label>
           <div>
-            <label for="firstName">First Name</label>
-            <input
-              type="text"
-              placeholder="First Name"
-              value={firstName}
-              maxLength={25}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </div>
-          <div>
-            <label for="lastName">Last Name</label>
-            <input
-              type="text"
-              placeholder="Last Name"
-              value={lastName}
-              maxLength={25}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </div>
-          <div>
-            <label for="email">Email</label>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              maxLength={50}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <label for="password">Password</label>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              maxLength={25}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div>
-            <label for="accountType">Account Type</label>
+            <label for="accountType">Account type</label>
             <select onClick={(e) => setAccountType(e.target.value)}>
+              {accountType === "select_one" ? (
+                <option value="select_one">Select one</option>
+              ) : (
+                ""
+              )}
               <option value="company">Company</option>
               <option value="department">Department</option>
             </select>
           </div>
+          {accountType === "select_one" ? (
+            ""
+          ) : accountType === "company" ? (
+            <>
+              <div>
+                <label for="companyName">Company name</label>
+                <input
+                  type="text"
+                  placeholder="Company Name"
+                  value={companyName}
+                  maxLength={50}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                />
+              </div>
+              <div>
+                <label for="country">Country</label>
+                <input
+                  type="text"
+                  placeholder="Country"
+                  value={country}
+                  maxLength={25}
+                  onChange={(e) => setCountry(e.target.value)}
+                />
+              </div>
+              <div>
+                <label for="city">City</label>
+                <input
+                  type="text"
+                  placeholder="City"
+                  value={city}
+                  maxLength={25}
+                  onChange={(e) => setCity(e.target.value)}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                <label for="firstName">First name</label>
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  value={firstName}
+                  maxLength={25}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </div>
+              <div>
+                <label for="lastName">Last name</label>
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  value={lastName}
+                  maxLength={25}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </div>
+            </>
+          )}
+          {accountType === "select_one" ? (
+            ""
+          ) : (
+            <>
+              <div>
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  maxLength={50}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div>
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  maxLength={25}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
 
-          <input
-            className="fill_button"
-            type="button"
-            value="Register"
-            onClick={handleLogin}
-          />
+              <input
+                className="fill_button"
+                type="button"
+                value="Register"
+                onClick={handleLogin}
+              />
+            </>
+          )}
         </form>
         <div className="bottom_text">
           Already have an account? <a href="/signin">Sign in</a>
