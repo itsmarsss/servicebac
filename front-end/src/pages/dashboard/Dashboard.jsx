@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import * as toast from "../../components/toastAlert/toastAlert";
 
 function Dashboard() {
-  const [accountType, setAccountType] = useState("");
+  const [accountType, setAccountType] = useState("select_one");
   const [companyName, setCompanyName] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
@@ -54,13 +54,23 @@ function Dashboard() {
     <>
       <Nav />
       <div className="dashboard">
-        <div className="title">
-          {accountType === "company" ? "Dashboard:" : "Services:"}
-        </div>
-        {accountType === "company" ? (
-          <Company companyName={companyName} city={city} country={country} />
+        {accountType === "select_one" ? (
+          ""
         ) : (
-          <Department />
+          <>
+            <div className="title">
+              {accountType === "company" ? "Dashboard:" : "Services:"}
+            </div>
+            {accountType === "company" ? (
+              <Company
+                companyName={companyName}
+                city={city}
+                country={country}
+              />
+            ) : (
+              <Department />
+            )}
+          </>
         )}
       </div>
     </>

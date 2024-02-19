@@ -4,6 +4,7 @@ nav {
     align-items: center;
     padding: 20px;
     font-weight: bold;
+    font-size: 15px;
     background: #fff;
     box-shadow: var(--shadow);
 }
@@ -47,6 +48,16 @@ nav {
 .signin {
     border: 1px solid #000;
     border-radius: 15px;
+    padding: 3px 10px;
+}
+
+.signin:hover {
+    background: #000;
+    color: #fff;
+}
+
+.signin:hover:before {
+    transform: scale(0);
 }
 
 @media screen and (max-width: 500px) {
