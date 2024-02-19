@@ -7,7 +7,7 @@ function Nav() {
   const [pages, setPages] = useState([
     { title: "Home", link: "/", id: 1 },
     { title: "Login", link: "/signin", id: 2 },
-    { title: "Register", link: "/signup", id: 3 },
+    { title: "Register", link: "/register", id: 3 },
   ]);
 
   const getToken = () => {

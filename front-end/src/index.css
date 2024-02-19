@@ -1,45 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 
+:root {
+    --brand: #60a5fa;
+    --brand-accent: #3b82f6;
+}
+
 body {
     font-family: "Inter";
-    background: white;
+    background: #fafbfc;
     background-image: radial-gradient(#00000066 1px, transparent 0);
     background-size: 40px 40px;
     background-position: -10px -10px;
+
+    color: #3c4257;
 }
 
-button {
+a {
+    text-decoration: none;
+    color: var(--brand-accent);
+}
+
+button,
+.fill_button {
     cursor: pointer;
     background: #fff;
-    color: #4299e1;
-    padding: 10px 20px;
-    border: 1px solid #4299e1;
+    color: var(--brand);
+    padding: 10px 15px;
+    border: 1px solid var(--brand);
     border-radius: 5px;
-    width: fit-content;
-    box-shadow: #959da533 0px 10px 25px;
+    font-weight: bold;
+    font-size: 12px;
     transition: 200ms;
-}
-
-button:hover {
-    background: #4299e1;
-    color: #fff;
-    border-color: transparent;
-    text-shadow: 1px 0px 0px #fff;
-    box-shadow: none;
 }
 
 .fill_button {
-    cursor: pointer;
-    background: #60a5fa;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+    background: var(--brand);
     color: #fff;
-    transition: 200ms;
+    border: none;
+}
+
+button:hover {
+    background: var(--brand-accent);
+    color: #fff;
+    border-color: transparent;
 }
 
 .fill_button:hover {
-    background: #3b82f6;
+    background: var(--brand-accent);
 }
 
 input[type="text"],
@@ -48,14 +55,22 @@ input[type="number"],
 input[type="password"],
 textarea,
 select {
-    background-color: #f9fafb;
+    background: #fff;
     border: 1px solid #d1d5db;
-    color: #1f2937;
     border-radius: 5px;
     display: block;
-    width: calc(100% - 20px);
-    padding: 10px;
+    padding: 10px 15px;
+    font-size: 12px;
     transition: 200ms;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid var(--brand);
 }
 
 select {
@@ -66,11 +81,59 @@ textarea {
     transition: 0ms;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="number"]:focus,
-input[type="password"]:focus,
-textarea:focus,
-select:focus {
-    outline: 2px solid #2563eb;
+.checkbox_container {
+    display: block;
+    position: relative;
+    padding-left: 20px;
+    cursor: pointer;
+    font-size: 10px;
+    line-height: 13.6px;
+    user-select: none;
+}
+
+.checkbox_container input {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+.checkbox_container .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 12px;
+    width: 12px;
+    background: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    transition: 200ms;
+}
+
+.checkbox_container:hover .checkmark {
+    box-shadow: #959da533 0px 5px 10px;
+}
+
+.checkbox_container input:checked~.checkmark {
+    background: #3b82f6;
+}
+
+.checkbox_container .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox_container input:checked~.checkmark:after {
+    display: block;
+}
+
+.checkbox_container .checkmark:after {
+    left: 4.5px;
+    top: 2px;
+    width: 2px;
+    height: 5px;
+    border: solid white;
+    border-width: 0 1.8px 1.8px 0;
+    transform: rotate(45deg);
 }

@@ -1,5 +1,6 @@
 import "./Logout.css";
 import React from "react";
+import Nav from "../../components/nav/Nav.jsx";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
@@ -13,6 +14,7 @@ function Logout() {
 
   return (
     <>
+      <Nav />
       <div className="loggedOut_text">
         {loggedOut ? "Logged out..." : "Logging out..."}
       </div>

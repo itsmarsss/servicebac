@@ -1,12 +1,13 @@
-import "./SignUp.css";
+import "./Register.css";
 import React from "react";
+import Nav from "../../components/nav/Nav.jsx";
 import Frame from "../../assets/Frame.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import * as toast from "../../components/toastAlert/toastAlert";
+import * as toast from "../../components/toastAlert/toastAlert.js";
 
-function SignUp() {
+function Register() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -73,6 +74,7 @@ function SignUp() {
 
   return (
     <>
+      <Nav />
       <div className="sign_up_container">
         <div className="left">
           <h1 className="left_title">Already have an account?</h1>
@@ -131,4 +133,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default Register;

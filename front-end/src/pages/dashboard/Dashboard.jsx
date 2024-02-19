@@ -1,11 +1,12 @@
 import "./Dashboard.css";
 import React from "react";
+import Nav from "../../components/nav/Nav.jsx";
 import Company from "../../components/company/Company.jsx";
+import Department from "../../components/department/Department.jsx";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import * as toast from "../../components/toastAlert/toastAlert";
-import Department from "../../components/department/Department.jsx";
 
 function Dashboard() {
   const [accountType, setAccountType] = useState("");
@@ -43,6 +44,7 @@ function Dashboard() {
 
   return (
     <>
+      <Nav />
       <div className="dashboard">
         <div className="title">
           {accountType === "company" ? "Dashboard:" : "Services:"}

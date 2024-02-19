@@ -1,5 +1,6 @@
 import "./SignIn.css";
 import React from "react";
+import Nav from "../../components/nav/Nav.jsx";
 import Frame from "../../assets/Frame.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +10,7 @@ import * as toast from "../../components/toastAlert/toastAlert";
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [week, setWeek] = useState(true);
   const navigate = useNavigate();
 
   const isEmail = (email) =>
@@ -42,7 +44,7 @@ function SignIn() {
           if (response.success) {
             if (response.userToken) {
               Cookies.set("token", response.userToken, {
-                expires: 7,
+                expires: week ? 7 : 1,
                 secure: true,
               });
               toast.showSuccessAlert("Logged in");
@@ -59,27 +61,14 @@ function SignIn() {
 
   return (
     <>
+      <a className="top_text" href="/">
+        ManageBACK
+      </a>
       <div className="sign_in_container">
-        <div className="left">
-          <h1 className="left_title">
-            Welcome to <br />
-            ManageBACK
-          </h1>
-          <div className="left_subtitle">
-            Here, we believe that build a strong professional networks begins
-            with your participation. <br />
-            We are delighted to offer a modern and user-friendly service to
-            ensure you have the best experience
-          </div>
-          <a href="/signup">
-            <button>Join Now!</button>
-          </a>
-          <img className="media" src={Frame} />
-        </div>
-
-        <div className="right">
-          <form className="sign_in_form">
-            <label className="sign_in_title">Sign In</label>
+        <form className="sign_in_form">
+          <label className="sign_in_title">Sign in to proceed</label>
+          <div>
+            <label for="email">Email</label>
             <input
               type="text"
               placeholder="Email"
@@ -87,6 +76,10 @@ function SignIn() {
               maxLength={50}
               onChange={(e) => setEmail(e.target.value)}
             />
+          </div>
+
+          <div>
+            <label for="password">Password</label>
             <input
               type="password"
               placeholder="Password"
@@ -94,13 +87,27 @@ function SignIn() {
               maxLength={25}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <input
-              className="fill_button"
-              type="button"
-              value="Login"
-              onClick={handleLogin}
-            />
-          </form>
+          </div>
+          <div>
+            <label class="checkbox_container">
+              Stay signed in for a week
+              <input
+                type="checkbox"
+                checked={week}
+                onChange={(e) => setWeek(e.target.checked)}
+              ></input>
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <input
+            className="fill_button"
+            type="button"
+            value="Login"
+            onClick={handleLogin}
+          />
+        </form>
+        <div className="bottom_text">
+          Don't have an account? <a href="/register">Sign up</a>
         </div>
       </div>
     </>

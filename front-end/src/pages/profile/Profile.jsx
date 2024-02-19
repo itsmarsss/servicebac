@@ -1,5 +1,6 @@
 import "./Profile.css";
 import React from "react";
+import Nav from "../../components/nav/Nav.jsx";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import * as toast from "../../components/toastAlert/toastAlert";
@@ -96,64 +97,67 @@ function Profile() {
   }, []);
 
   return (
-    <div className="profile">
-      <form className="profile_form">
-        <label className="profile_title">Update Profile</label>
-        <div>
-          <label>First Name:</label>
+    <>
+      <Nav />
+      <div className="profile">
+        <form className="profile_form">
+          <label className="profile_title">Update Profile</label>
+          <div>
+            <label>First Name:</label>
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              maxLength={25}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Last Name:</label>
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              maxLength={25}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Email:</label>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              maxLength={50}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Password:</label>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              maxLength={25}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Account Type:</label>
+            <select onClick={(e) => setAccountType(e.target.value)}>
+              <option value="company">Company</option>
+              <option value="department">Department</option>
+            </select>
+          </div>
           <input
-            type="text"
-            placeholder="First Name"
-            value={firstName}
-            maxLength={25}
-            onChange={(e) => setFirstName(e.target.value)}
+            className="fill_button"
+            type="button"
+            value="Update"
+            onClick={handleUpdate}
           />
-        </div>
-        <div>
-          <label>Last Name:</label>
-          <input
-            type="text"
-            placeholder="Last Name"
-            value={lastName}
-            maxLength={25}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            maxLength={50}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            maxLength={25}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Account Type:</label>
-          <select onClick={(e) => setAccountType(e.target.value)}>
-            <option value="company">Company</option>
-            <option value="department">Department</option>
-          </select>
-        </div>
-        <input
-          className="fill_button"
-          type="button"
-          value="Update"
-          onClick={handleUpdate}
-        />
-      </form>
-    </div>
+        </form>
+      </div>
+    </>
   );
 }
 

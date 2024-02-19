@@ -3,10 +3,12 @@ import SideMedia from "../../assets/SideMedia.jpg";
 import KhanAcademy from "../../assets/KhanAcademy.png";
 import Kahoot from "../../assets/Kahoot.png";
 import Google from "../../assets/Google.png";
+import Nav from "../../components/nav/Nav.jsx";
 
 function Home() {
   return (
     <>
+      <Nav />
       <div className="top">
         <div className="main">
           <div className="main_title">A Digital Data Collection Service</div>
