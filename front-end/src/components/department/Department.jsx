@@ -84,7 +84,6 @@ function Department() {
     <>
       <div className="browse_method">
         <div className="semantic_search">
-          <span className="search_title">Search:</span>
           <input
             className="semantic_input"
             type="text"

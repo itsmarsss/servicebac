@@ -218,7 +218,7 @@ router.put("/update-service", async (req, res) => {
     const dataValues = Object.values(req.body).join(" ");
 
     const embed = await cohereClient.embed({
-      texts: [serviceName, category, dataValues],
+      texts: [dataValues],
       model: cohereModel,
       inputType: "classification",
     });
