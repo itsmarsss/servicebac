@@ -191,6 +191,7 @@ function ServiceLister({ doneAction, setLoading, serviceList, noEdit }) {
         break;
       }
     }
+    empties += 5; // lazy coding
     let allEmpties = [];
     for (let i = 0; i < empties; i++) {
       allEmpties.push(i);

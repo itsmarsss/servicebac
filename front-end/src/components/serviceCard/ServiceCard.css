@@ -19,6 +19,7 @@
 
 .stealth {
     visibility: hidden;
+    height: 0;
 }
 
 .service_marquee {
