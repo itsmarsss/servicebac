@@ -73,10 +73,6 @@ select:focus {
     outline: 2px solid var(--brand);
 }
 
-select {
-    width: 100%;
-}
-
 textarea {
     transition: 0ms;
 }

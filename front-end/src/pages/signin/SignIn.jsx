@@ -1,7 +1,5 @@
 import "./SignIn.css";
 import React from "react";
-import Nav from "../../components/nav/Nav.jsx";
-import Frame from "../../assets/Frame.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";

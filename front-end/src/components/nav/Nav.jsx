@@ -6,8 +6,7 @@ import Cookies from "js-cookie";
 function Nav() {
   const [pages, setPages] = useState([
     { title: "Home", link: "/", id: 1 },
-    { title: "Login", link: "/signin", id: 2 },
-    { title: "Register", link: "/register", id: 3 },
+    { title: "Sign in", link: "/signin", id: 2 },
   ]);
 
   const getToken = () => {
@@ -32,7 +31,11 @@ function Nav() {
         <div className="logo">ManageBACK</div>
         <div className="pages">
           {pages.map((page) => (
-            <a className="page" href={page.link} key={page.id}>
+            <a
+              className={"page" + (page.link === "/signin" ? " signin" : "")}
+              href={page.link}
+              key={page.id}
+            >
               {page.title}
             </a>
           ))}

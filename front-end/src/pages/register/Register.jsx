@@ -1,7 +1,5 @@
 import "./Register.css";
 import React from "react";
-import Nav from "../../components/nav/Nav.jsx";
-import Frame from "../../assets/Frame.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -74,19 +72,14 @@ function Register() {
 
   return (
     <>
-      <Nav />
+      <a className="top_text" href="/">
+        ManageBACK
+      </a>
       <div className="sign_up_container">
-        <div className="left">
-          <h1 className="left_title">Already have an account?</h1>
-          <a href="/signin">
-            <button>Go To Login</button>
-          </a>
-          <img className="media" src={Frame} />
-        </div>
-
-        <div className="right">
-          <form className="sign_up_form">
-            <label className="sign_up_title">Sign Up</label>
+        <form className="sign_up_form">
+          <label className="sign_up_title">Create an account</label>
+          <div>
+            <label for="firstName">First Name</label>
             <input
               type="text"
               placeholder="First Name"
@@ -94,6 +87,9 @@ function Register() {
               maxLength={25}
               onChange={(e) => setFirstName(e.target.value)}
             />
+          </div>
+          <div>
+            <label for="lastName">Last Name</label>
             <input
               type="text"
               placeholder="Last Name"
@@ -101,6 +97,9 @@ function Register() {
               maxLength={25}
               onChange={(e) => setLastName(e.target.value)}
             />
+          </div>
+          <div>
+            <label for="email">Email</label>
             <input
               type="email"
               placeholder="Email"
@@ -108,6 +107,9 @@ function Register() {
               maxLength={50}
               onChange={(e) => setEmail(e.target.value)}
             />
+          </div>
+          <div>
+            <label for="password">Password</label>
             <input
               type="password"
               placeholder="Password"
@@ -115,18 +117,24 @@ function Register() {
               maxLength={25}
               onChange={(e) => setPassword(e.target.value)}
             />
+          </div>
+          <div>
+            <label for="accountType">Account Type</label>
             <select onClick={(e) => setAccountType(e.target.value)}>
               <option value="company">Company</option>
               <option value="department">Department</option>
             </select>
+          </div>
 
-            <input
-              className="fill_button"
-              type="button"
-              value="Register"
-              onClick={handleLogin}
-            />
-          </form>
+          <input
+            className="fill_button"
+            type="button"
+            value="Register"
+            onClick={handleLogin}
+          />
+        </form>
+        <div className="bottom_text">
+          Already have an account? <a href="/signin">Sign in</a>
         </div>
       </div>
     </>

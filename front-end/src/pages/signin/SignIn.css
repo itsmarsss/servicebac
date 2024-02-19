@@ -1,14 +1,14 @@
 .top_text {
     display: block;
-    width: 300px;
+    width: 400px;
     padding-left: 20px;
-    margin: 30px auto;
+    margin: 50px auto;
     color: #000;
 }
 
 .sign_in_container {
     background: #fff;
-    width: 200px;
+    width: 300px;
     padding: 50px;
     margin: auto;
     border-radius: 5px;
@@ -47,4 +47,14 @@
 
 .bottom_text {
     font-size: 10px;
+}
+
+@media screen and (max-width: 500px) {
+    .top_text {
+        width: 300px;
+    }
+
+    .sign_in_container {
+        width: calc(100% - 100px);
+    }
 }

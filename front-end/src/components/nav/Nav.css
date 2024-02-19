@@ -44,6 +44,11 @@ nav {
     transform: scaleX(1);
 }
 
+.signin {
+    border: 1px solid #000;
+    border-radius: 15px;
+}
+
 @media screen and (max-width: 500px) {
     .pages {
         display: grid;
