@@ -210,7 +210,6 @@ function ServiceLister({ doneAction, setLoading, serviceList, noEdit }) {
   return (
     <>
       <div className="services">
-        <ServiceCard />
         {serviceList.length > 0 && (
           <>
             {serviceList.map((service) => (

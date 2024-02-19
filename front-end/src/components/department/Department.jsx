@@ -10,7 +10,6 @@ import * as toast from "../../components/toastAlert/toastAlert";
 function Department() {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [semantic, setSemantic] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [serviceResults, setServiceResults] = useState([]);
 
@@ -53,17 +52,6 @@ function Department() {
     getServices(Math.max(1, num));
   };
 
-  const selectBrowser = (id) => {
-    switch (id) {
-      case 0:
-        setSemantic(false);
-        break;
-      case 1:
-        setSemantic(true);
-        break;
-    }
-  };
-
   const semanticSearch = () => {
     try {
       setLoading(true);
@@ -95,33 +83,18 @@ function Department() {
   return (
     <>
       <div className="browse_method">
-        <div className="browse_method_buttons">
-          <button
-            className={semantic ? "" : "active"}
-            onClick={() => selectBrowser(0)}
-          >
-            All Listing
-          </button>
-          <button
-            className={semantic ? "active" : ""}
-            onClick={() => selectBrowser(1)}
-          >
-            Semantic Search
-          </button>
+        <div className="semantic_search">
+          <span className="search_title">Search:</span>
+          <input
+            className="semantic_input"
+            type="text"
+            placeholder="Search Terms"
+            value={search}
+            maxLength={200}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button onClick={() => semanticSearch()}>Search</button>
         </div>
-        {semantic && (
-          <div className="semantic_search">
-            <span className="search_title">Search:</span>
-            <input
-              type="text"
-              placeholder="Search Terms"
-              value={search}
-              maxLength={200}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <button onClick={() => semanticSearch()}>Search</button>
-          </div>
-        )}
       </div>
       <div className="department">
         {loading && <Loader />}
@@ -132,22 +105,21 @@ function Department() {
           noEdit={true}
         />
       </div>
-      {!semantic && (
-        <div className="page_seekers">
-          <button onClick={() => setPageNumber(currentPage - 1)}>Prev</button>
-          <div className="page_input">
-            <span className="page_text">Page:</span>
-            <input
-              type="number"
-              placeholder="Page Number"
-              value={currentPage}
-              onChange={() => {}}
-              onBlur={(e) => setPageNumber(e.target.value)}
-            />
-          </div>
-          <button onClick={() => setPageNumber(currentPage + 1)}>Next</button>
+
+      <div className="page_seekers">
+        <button onClick={() => setPageNumber(currentPage - 1)}>Prev</button>
+        <div className="page_input">
+          <span className="page_text">Page:</span>
+          <input
+            type="number"
+            placeholder="Page Number"
+            value={currentPage}
+            onChange={() => {}}
+            onBlur={(e) => setPageNumber(e.target.value)}
+          />
         </div>
-      )}
+        <button onClick={() => setPageNumber(currentPage + 1)}>Next</button>
+      </div>
     </>
   );
 }

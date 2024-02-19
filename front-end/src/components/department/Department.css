@@ -1,17 +1,6 @@
 .browse_method {
+    margin-top: 50px;
     padding: 0 50px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.browse_method_buttons {
-    display: flex;
-    gap: 15px;
-}
-
-.browse_method_buttons .active {
-    background: #60a5fa;
-    color: #fff;
 }
 
 .search_title {
@@ -23,6 +12,10 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+}
+
+.semantic_input {
+    width: 100%;
 }
 
 .page_seekers {
