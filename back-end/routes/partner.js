@@ -215,10 +215,13 @@ router.put("/update-service", async (req, res) => {
       { $set: service_data }
     );
 
-    const dataValues = Object.values(req.body).join(" ");
+    const keys = ["category", "city", "country", "description"];
+    const dataValues = keys.map(key => req.body[key] || "");
+
+    console.log(dataValues)
 
     const embed = await cohereClient.embed({
-      texts: [dataValues],
+      texts: [category || "", city || "", country || "", description || ""],
       model: cohereModel,
       inputType: "classification",
     });
@@ -390,6 +393,8 @@ router.get("/search", async (req, res) => {
     resultsSimilarity.sort((a, b) => b.similarity - a.similarity);
 
     const sanitizedResults = resultsSimilarity.map(({ ownerToken, embeddings, ...rest }) => rest);
+
+    console.log(sanitizedResults)
 
     res.json({
       success: true,

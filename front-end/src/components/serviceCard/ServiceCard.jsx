@@ -2,21 +2,11 @@ import "./ServiceCard.css";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function ServiceCard({ empty, service, showModal, deleteService }) {
+function ServiceCard({ empty, service }) {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
     navigate("/");
-  };
-
-  const handleShowModal = (e) => {
-    e.stopPropagation();
-    showModal(service.serviceId);
-  };
-
-  const handleDeleteService = (e) => {
-    e.stopPropagation();
-    deleteService(service.serviceId);
   };
 
   return (

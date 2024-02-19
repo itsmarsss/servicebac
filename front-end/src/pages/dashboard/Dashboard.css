@@ -17,15 +17,14 @@
 @media screen and (max-width: 600px) {
     .title {
         margin-left: 50px;
-        font-size: 30px;
+        font-size: 20px;
     }
 }
 
 @media screen and (max-width: 400px) {
     .title {
         margin: 0;
-        padding: 50px;
-        font-size: 30px;
+        padding-bottom: 0;
         text-align: center;
     }
 
