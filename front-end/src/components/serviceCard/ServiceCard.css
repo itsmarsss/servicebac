@@ -1,20 +1,19 @@
 .service {
+    position: relative;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 300px;
     height: 200px;
-    padding: 25px;
     background: #fff;
-    border-radius: 10px;
-    border: 1px solid #e5e7eb;
-    box-shadow: #959da533 0px 10px 25px;
+    border-radius: 5px;
+    border: 1px solid var(--text-light);
+    box-shadow: var(--shadow);
     transition: 200ms;
 }
 
 .service:hover {
-    background: #f3f4f6;
     box-shadow: none;
 }
 
@@ -22,41 +21,59 @@
     visibility: hidden;
 }
 
+.service_marquee {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: var(--brand);
+    object-fit: cover;
+    width: 100%;
+    height: 75px;
+}
+
+.service_logo {
+    position: absolute;
+    background: var(--brand-accent);
+    top: 40px;
+    left: 20px;
+    width: 65px;
+    height: 65px;
+    outline: 3px solid #fff;
+    box-shadow: var(--shadow-small);
+}
+
 .service_details {
     height: 100%;
     display: flex;
     flex-direction: column;
     gap: 5px;
+    margin: 5px 20px;
 }
 
 .service_name {
     font-weight: bold;
-    font-size: 20px;
-    line-height: 20px;
-}
-
-.service_category {
-    font-size: 12px;
-}
-
-.service_id {
-    font-size: 10px;
-}
-
-.service_data {
-    backdrop-filter: brightness(0.95);
-    padding: 5px;
-    border-radius: 5px;
     font-size: 15px;
+    margin-left: 80px;
+    margin-bottom: 10px;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.service_similarity {
-    bottom: 6px;
-    font-size: 8px;
+.service_about {
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.service_actions {
-    display: flex;
-    gap: 10px;
+.service_location {
+    font-size: 11px;
+    color: var(--text-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.service_description {
+    font-size: 10px;
+    color: var(--text-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

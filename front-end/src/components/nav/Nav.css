@@ -5,7 +5,7 @@ nav {
     padding: 20px;
     font-weight: bold;
     background: #fff;
-    box-shadow: #959da533 0px 10px 25px;
+    box-shadow: var(--shadow);
 }
 
 .pages {

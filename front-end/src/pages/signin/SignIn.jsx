@@ -66,7 +66,7 @@ function SignIn() {
         <form className="sign_in_form">
           <label className="sign_in_title">Sign in to proceed</label>
           <div>
-            <label for="email">Email</label>
+            <label htmlFor="email">Email</label>
             <input
               type="text"
               placeholder="Email"
@@ -77,7 +77,7 @@ function SignIn() {
           </div>
 
           <div>
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               placeholder="Password"

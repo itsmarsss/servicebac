@@ -32,32 +32,24 @@ function ServiceCard({
     >
       {!empty && (
         <>
-          <div className="service_details">
-            <div className="service_name">{service.serviceName}</div>
-            <div className="service_category">{service.category}</div>
-            <div className="service_id">ID: {service.serviceId}</div>
+          <div className="service_graphics">
+            <img className="service_marquee" src="asd"></img>
+            <img className="service_logo" src="asd"></img>
           </div>
-          {!noEdit && (
-            <div className="service_actions">
-              <button
-                className="fill_button"
-                onClick={(e) => handleShowModal(e)}
-              >
-                Edit
-              </button>
-              <button onClick={(e) => handleDeleteService(e)}>Delete</button>
+          <div className="service_details">
+            <div className="service_name">
+              {service && service.serviceName ? service.serviceName : "..."}
             </div>
-          )}
-          {noEdit && (
-            <>
-              <code className="service_data">
-                {JSON.stringify(service.data)}
-              </code>
-              <span className="service_similarity">
-                {service.similarity && "Similarity: " + service.similarity}
-              </span>
-            </>
-          )}
+            <div className="service_about">
+              {service && service.category ? service.category : "Fallback"}
+            </div>
+            <div className="service_location">{`${
+              service && service.city ? service.city : "..."
+            }, ${service && service.country ? service.country : "..."}`}</div>
+            <div className="service_description">
+              {service && service.description ? service.description : "..."}
+            </div>
+          </div>
         </>
       )}
     </div>
