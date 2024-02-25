@@ -232,14 +232,17 @@ router.get("/id/:id", async (req, res) => {
     const db = mongoClient.db(partnerDatabase);
     const collection = db.collection(partnerCollection);
 
+    console.log(parseInt(req.params.id));
+
     const service = await collection.findOne({
       serviceId: parseInt(req.params.id),
+      status: "public",
     });
 
     if (!service) {
       return res.json({
         success: false,
-        message: "Services not found",
+        message: "Service not found",
       });
     }
 

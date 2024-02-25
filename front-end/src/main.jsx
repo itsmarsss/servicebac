@@ -23,12 +23,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/service" element={<Service />} />
+        <Route path="/service/*" element={<Service />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
     <ToastContainer
-      position="top-right"
+      position="bottom-right"
       autoClose={1500}
       hideProgressBar={false}
       newestOnTop={false}
