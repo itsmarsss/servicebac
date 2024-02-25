@@ -6,6 +6,7 @@ import Dashboard from "./pages/dashboard/Dashboard.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import Logout from "./pages/logout/Logout.jsx";
 import Service from "./pages/service/Service.jsx";
+import PageNotFound from "./pages/pageNotFound/PageNotFound.jsx";
 import "./index.css";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -16,12 +17,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/service" element={<Service />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
     <ToastContainer
