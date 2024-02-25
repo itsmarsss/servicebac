@@ -110,7 +110,10 @@ function Register() {
           <label className="sign_up_title">Create an account</label>
           <div>
             <label htmlFor="accountType">Account type</label>
-            <select onClick={(e) => setAccountType(e.target.value)}>
+            <select
+              onChange={(e) => setAccountType(e.target.value)}
+              onClick={(e) => setAccountType(e.target.value)}
+            >
               {accountType === "select_one" ? (
                 <option value="select_one">Select one</option>
               ) : (

@@ -3,7 +3,7 @@ const { spawn } = require("child_process");
 const executePython = async (script, args) => {
   const mappedArgs = args.map((arg) => arg.toString());
 
-  const py = spawn("python", [script, ...mappedArgs]);
+  const py = spawn("python3", [script, ...mappedArgs]);
 
   const result = await new Promise((resolve, reject) => {
     let output;
