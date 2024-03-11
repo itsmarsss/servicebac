@@ -1497,7 +1497,7 @@ nav {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    margin: 80px 20px 0
+    margin: 85px 20px 0
 }
 
 .service_profile_name {
@@ -1530,7 +1530,8 @@ nav {
     text-overflow: ellipsis;
     white-space: normal;
     word-wrap: break-word;
-    word-break: break-all
+    word-break: break-all;
+    height: 25px
 }
 
 @media screen and (max-width: 800px) {
@@ -1553,6 +1554,10 @@ nav {
         width: 100px;
         height: 100px
     }
+
+    .service_profile_details {
+        margin-top: 55px
+    }
 }
 
 @media screen and (max-width: 400px) {
@@ -1574,7 +1579,7 @@ nav {
     }
 
     .service_profile_details {
-        margin-top: 65px;
+        margin-top: 40px;
         margin-left: 10px
     }
 }
