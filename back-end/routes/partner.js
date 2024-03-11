@@ -151,12 +151,9 @@ router.put("/update-service", async (req, res) => {
     );
 
     const keys = ["category", "city", "country", "description"];
-    const dataValues = keys.map(key => req.body[key] || "");
-
-    console.log(dataValues)
 
     const embed = await cohereClient.embed({
-      texts: [category || "", city || "", country || "", description || ""],
+      texts: [serviceName || "", category || "", city || "", country || "", description || ""],
       model: cohereModel,
       inputType: "classification",
     });
@@ -232,8 +229,6 @@ router.get("/id/:id", async (req, res) => {
     const db = mongoClient.db(partnerDatabase);
     const collection = db.collection(partnerCollection);
 
-    console.log(parseInt(req.params.id));
-
     const service = await collection.findOne({
       serviceId: parseInt(req.params.id),
       status: "public",
@@ -294,9 +289,11 @@ router.get("/search", async (req, res) => {
 
     resultsSimilarity.sort((a, b) => b.similarity - a.similarity);
 
-    const sanitizedResults = resultsSimilarity.map(({ ownerToken, embeddings, ...rest }) => rest);
+    const pageNumber = isNaN(req.query.page) ? 1 : req.query.page;
+    const startIndex = (pageNumber - 1) * 10;
+    const sanitizedResults = resultsSimilarity.slice(startIndex, startIndex + 10).map(({ ownerToken, embeddings, ...rest }) => rest);
 
-    console.log(sanitizedResults)
+    console.log(startIndex)
 
     res.json({
       success: true,

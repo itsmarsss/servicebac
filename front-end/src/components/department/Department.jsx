@@ -12,6 +12,7 @@ function Department() {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [serviceResults, setServiceResults] = useState([]);
+  const [resultsFor, setResultsFor] = useState("");
 
   const navigate = useNavigate();
 
@@ -49,13 +50,21 @@ function Department() {
   };
 
   const setPageNumber = (num) => {
-    getServices(Math.max(1, num));
+    if (search !== "") {
+      semanticSearch(Math.max(1, num));
+    } else {
+      getServices(Math.max(1, num));
+    }
   };
 
-  const semanticSearch = () => {
+  const semanticSearch = (pageNumber) => {
+    if (search === "") {
+      return;
+    }
+
     try {
       setLoading(true);
-      fetch(`/api/partner/search?terms=${search}`, {
+      fetch(`/api/partner/search?terms=${search}&page=${pageNumber}`, {
         method: "GET",
         headers: {
           authorization: `Bearer ${getToken()}`,
@@ -64,7 +73,9 @@ function Department() {
         .then((data) => data.json())
         .then((response) => {
           if (response.success) {
+            setResultsFor(search);
             setServiceResults(response.services);
+            setCurrentPage(pageNumber);
             toast.showSuccessAlert("Fetched services");
           } else {
             toast.showErrorAlert(response.message);
@@ -91,11 +102,26 @@ function Department() {
             value={search}
             maxLength={200}
             onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                semanticSearch(1);
+              }
+            }}
           />
-          <button onClick={() => semanticSearch()}>Search</button>
+          <button onClick={() => semanticSearch(1)}>Search</button>
         </div>
       </div>
       <div className="department">
+        <div className="results_for">
+          {resultsFor !== "" ? (
+            <span>
+              Results for <b>"{resultsFor}"</b>
+            </span>
+          ) : (
+            <br />
+          )}
+        </div>
+
         {loading && <Loader />}
         <ServiceLister
           doneAction={getServices}

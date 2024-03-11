@@ -34,7 +34,6 @@ function Service() {
       const parts = pathname.split("/");
       const id = parts[parts.length - 1];
 
-      console.log(id);
       setLoading(true);
       fetch(`/api/partner/id/${id}`, {
         method: "GET",
@@ -45,7 +44,6 @@ function Service() {
         .then((data) => data.json())
         .then((response) => {
           if (response.success) {
-            console.log(response);
             setService(response.service);
             setMarquee(response.service.marquee);
             setIcon(response.service.icon);

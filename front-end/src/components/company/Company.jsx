@@ -39,7 +39,6 @@ function Company({ companyName, city, country }) {
         .then((data) => data.json())
         .then((response) => {
           if (response.success) {
-            console.log(response);
             setService(response.service);
             setMarquee(response.service.marquee);
             setIcon(response.service.icon);
