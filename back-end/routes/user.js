@@ -20,8 +20,8 @@ const router = express.Router();
 
 router.use(authorization);
 
-const userDatabase = process.env.USER_DATABASE;
-const userCollection = process.env.USER_COLLECTION;
+const userDatabase = "userDatabase";
+const userCollection = "user";
 
 // Create users collection
 router.post("/create-users-collection", async (req, res) => {

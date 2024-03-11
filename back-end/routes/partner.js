@@ -13,12 +13,12 @@ const router = express.Router();
 
 router.use(authorization);
 
-const userDatabase = process.env.USER_DATABASE;
-const userCollection = process.env.USER_COLLECTION;
-const partnerDatabase = process.env.PARTNER_DATABASE;
-const partnerCollection = process.env.PARTNER_COLLECTION;
+const userDatabase = "userDatabase";
+const userCollection = "user";
+const partnerDatabase = "partnerDatabase";
+const partnerCollection = "partner";
 
-const cohereModel = process.env.COHERE_MODEL;
+const cohereModel = "embed-english-v3.0";
 
 // Create partners collection
 router.post("/create-partners-collection", async (req, res) => {
