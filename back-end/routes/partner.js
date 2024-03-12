@@ -150,8 +150,6 @@ router.put("/update-service", async (req, res) => {
       { $set: service_data }
     );
 
-    const keys = ["category", "city", "country", "description"];
-
     const embed = await cohereClient.embed({
       texts: [serviceName || "", category || "", city || "", country || "", description || ""],
       model: cohereModel,

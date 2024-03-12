@@ -38,11 +38,9 @@
     <div>
       <h3>Partner</h3>
       <ul>
-        <li><a href="#partner_create-partners-collection">/api/partner/create-users-collection</a></li>
-        <li><a href="#partner_owned-services">/api/partner/owned-services</a></li>
-        <li><a href="#partner_create-service">/api/partner/create-service</a></li>
+        <li><a href="#partner_create-partners-collection">/api/partner/create-partners-collection</a></li>
+        <li><a href="#partner_service">/api/partner/service</a></li>
         <li><a href="#partner_update-service">/api/partner/update-service</a></li>
-        <li><a href="#partner_delete-service">/api/partner/delete-service</a></li>
         <li><a href="#partner_service-list_pageNumber">/api/partner/service-list/{pageNumber}</a></li>
         <li><a href="#partner_id_id">/api/partner/id/{id}</a></li>
         <li><a href="#partner_search">/api/partner/search</a></li>
@@ -201,12 +199,22 @@
         <pre><code>None</code></pre>
 
         <strong>Body:</strong>
+        <br />
+        <code>Account Type: company</code>
+        <pre><code>{
+    companyName: "Google",
+    city: "Mountain View, California",
+    country: "USA",
+    password: "google123",
+    accountType: "company"
+}</code></pre>
+        <code>Account Type: department</code>
         <pre><code>{
     firstName: "John",
     lastName: "Doe",
     email: "john.doe@gmail.com",
     password: "johndoe123",
-    accountType: "company"
+    accountType: "department"
 }</code></pre>
 
         <strong>Query:</strong>
@@ -216,15 +224,27 @@
         <pre><code class="text">None</code></pre>
 
         <h3>Response</h3>
+        <code>Account Type: company</code>
         <pre><code>{
     success: true,
     userToken: "token",
-    userId: 01123456789,
+    userId: 0123456789,
+    companyName: "Google",
+    city: "Mountain View, California",
+    country: "USA",
+    password: "google123",
+    accountType: "company"
+}</code></pre>
+        <code>Account Type: department</code>
+        <pre><code>{
+    success: true,
+    userToken: "token",
+    userId: 0123456789,
     firstName: "John",
     lastName: "Doe",
     email: "john.doe@gmail.com",
     password: "johndoe123",
-    accountType: "company"
+    accountType: "department"
 }</code></pre>
       </request>
 
@@ -307,12 +327,22 @@
 </code></pre>
 
         <strong>Body:</strong>
+        <br />
+        <code>Account Type: company</code>
+        <pre><code>{
+    companyName: "Google",
+    city: "Mountain View, California",
+    country: "USA",
+    password: "google123",
+    accountType: "company"
+}</code></pre>
+        <code>Account Type: department</code>
         <pre><code>{
     firstName: "John",
     lastName: "Doe",
     email: "john.doe@gmail.com",
     password: "johndoe123",
-    accountType: "company"
+    accountType: "department"
 }</code></pre>
 
         <strong>Query:</strong>
@@ -322,6 +352,18 @@
         <pre><code class="text">None</code></pre>
 
         <h3>Response</h3>
+        <code>Account Type: company</code>
+        <pre><code>{
+    success: true,
+    userToken: "token",
+    userId: 0123456789,
+    companyName: "Google",
+    city: "Mountain View, California",
+    country: "USA",
+    password: "google123",
+    accountType: "company"
+}</code></pre>
+        <code>Account Type: department</code>
         <pre><code>{
     success: true,
     userToken: "token",
@@ -330,7 +372,7 @@
     lastName: "Doe",
     email: "john.doe@gmail.com",
     password: "johndoe123",
-    accountType: "company"
+    accountType: "department"
 }</code></pre>
       </request>
 
@@ -413,14 +455,25 @@
 
         <strong>Parameter:</strong>
         <pre><code class="text">/api/user/email/john.doe@gmail.com</code></pre>
+
         <h3>Response</h3>
+        <code>Account Type: company</code>
         <pre><code>{
     success: true,
-    email: "john.doe@gmail.com",
+    userId: 0123456789,
+    companyName: "Google",
+    city: "Mountain View, California",
+    country: "USA",
+    accountType: "company"
+}</code></pre>
+        <code>Account Type: department</code>
+        <pre><code>{
+    success: true,
     userId: 0123456789,
     firstName: "John",
     lastName: "Doe",
-    accountType: "company"
+    email: "john.doe@gmail.com",
+    accountType: "department"
 }</code></pre>
       </request>
 
@@ -462,13 +515,23 @@
         <pre><code class="text">/api/user/id/0123456789</code></pre>
 
         <h3>Response</h3>
+        <code>Account Type: company</code>
         <pre><code>{
     success: true,
-    email: "john.doe@gmail.com",
-    userId: 01234567879,
+    userId: 0123456789,
+    companyName: "Google",
+    city: "Mountain View, California",
+    country: "USA",
+    accountType: "company"
+}</code></pre>
+        <code>Account Type: department</code>
+        <pre><code>{
+    success: true,
+    userId: 0123456789,
     firstName: "John",
     lastName: "Doe",
-    accountType: "company"
+    email: "john.doe@gmail.com",
+    accountType: "department"
 }</code></pre>
       </request>
 
@@ -525,10 +588,10 @@
       </infos>
     </section>
 
-    <section id="partner_owned-services" class="endpoint">
+    <section id="partner_service" class="endpoint">
       <method class="get">
         <span class="method_name">GET</span>
-        <span class="method_url">/api/partner/owned-services</span>
+        <span class="method_url">/api/partner/service</span>
         <span class="material-symbols-outlined revealer">
           chevron_right
         </span>
@@ -558,72 +621,18 @@
         <h3>Response</h3>
         <pre><code>{
     success: true,
-    services: [
-    {
+    service: {
         serviceId: 0123456789,
-        serviceName: "Coding Camp",
-        category: "CODING",
-        data: ...
-    },
-    {
-        serviceId: 1123456789,
-        serviceName: "Art Camp",
-        category: "ART",
-        data: ...
+        serviceName: "Google",
+        city: "Mountain View, California",
+        country: "USA",
+        category: "Search Engine",
+        description: "...",
+        marquee: "[imageurl]",
+        icon: "[imageurl]",
+        markdown: "...",
+        status: "public"
     }
-  ]
-}</code></pre>
-      </request>
-
-      <infos>
-        <div class="note"><b>Note:</b> This is a note.</div>
-        <div class="warning"><b>Warning:</b> This is a warning.</div>
-        <div class="error"><b>Error:</b> This is an error.</div>
-      </infos>
-    </section>
-
-    <section id="partner_create-service" class="endpoint">
-      <method class="post">
-        <span class="method_name">POST</span>
-        <span class="method_url">/api/partner/create-service</span>
-        <span class="material-symbols-outlined revealer">
-          chevron_right
-        </span>
-        <span class="method_desc">Insert service into
-          <pre><code class="text">partnerDatabase</code></pre>
-        </span>
-      </method>
-
-      <request>
-        <h3>Request</h3>
-
-        <strong>Headers:</strong>
-        <pre><code>{
-    Authorization: "Bearer {token}"
-}
-</code></pre>
-
-        <strong>Body:</strong>
-        <pre><code>{
-    serviceName: "Coding Camp",
-    category: "CODING",
-    data: ...
-}</code></pre>
-
-        <strong>Query:</strong>
-        <pre><code class="text">None</code></pre>
-
-        <strong>Parameter:</strong>
-        <pre><code class="text">None</code></pre>
-
-        <h3>Response</h3>
-        <pre><code>{
-    success: true,
-    serviceId: 0123456789,
-    ownerToken: "token",
-    serviceName: "Codng Camp",
-    category: "CODING",
-    data: ...
 }</code></pre>
       </request>
 
@@ -659,10 +668,15 @@
 
         <strong>Body:</strong>
         <pre><code>{
-    serviceId: 0123456789,
-    serviceName: "Coding Camp",
-    category: "CODING",
-    data: ...
+    serviceName: "Google",
+    city: "Mountain View, California",
+    country: "USA",
+    category: "Search Engine",
+    description: "...",
+    marquee: "[imageurl]",
+    icon: "[imageurl]",
+    markdown: "...",
+    status: "public"
 }</code></pre>
 
         <strong>Query:</strong>
@@ -674,56 +688,15 @@
         <h3>Response</h3>
         <pre><code>{
     success: true,
-    serviceId: 0123456789,
-    ownerToken: "token",
-    serviceName: "Coding Camp",
-    category: "CODING",
-    data: ...
-}</code></pre>
-      </request>
-
-      <infos>
-        <div class="note"><b>Note:</b> This is a note.</div>
-        <div class="warning"><b>Warning:</b> This is a warning.</div>
-        <div class="error"><b>Error:</b> This is an error.</div>
-      </infos>
-    </section>
-
-    <section id="partner_delete-service" class="endpoint">
-      <method class="delete">
-        <span class="method_name">DELETE</span>
-        <span class="method_url">/api/partner/delete-service</span>
-        <span class="material-symbols-outlined revealer">
-          chevron_right
-        </span>
-        <span class="method_desc">Drop service from
-          <pre><code class="text">partnerDatabase</code></pre>
-        </span>
-      </method>
-
-      <request>
-        <h3>Request</h3>
-
-        <strong>Headers:</strong>
-        <pre><code>{
-    Authorization: "Bearer {token}"
-}
-</code></pre>
-
-        <strong>Body:</strong>
-        <pre><code>{
-    serviceId: 0123456789
-}</code></pre>
-
-        <strong>Query:</strong>
-        <pre><code class="text">None</code></pre>
-
-        <strong>Parameter:</strong>
-        <pre><code class="text">None</code></pre>
-
-        <h3>Response</h3>
-        <pre><code>{
-    success: true
+    serviceName: "Google",
+    city: "Mountain View, California",
+    country: "USA",
+    category: "Search Engine",
+    description: "...",
+    marquee: "[imageurl]",
+    icon: "[imageurl]",
+    markdown: "...",
+    status: "public"
 }</code></pre>
       </request>
 
@@ -768,19 +741,32 @@
         <pre><code>{
     success: true,
     services: [
-    {
-        serviceId: 0123456789,
-        serviceName: "Coding Camp",
-        category: "CODING",
-        data: ...
-    },
-    {
-        serviceId: 1123456789,
-        serviceName: "Art Camp",
-        category: "ART",
-        data: ...
-    }
-  ]
+        {
+            serviceId: 0123456789,
+            serviceName: "Google",
+            city: "Mountain View, California",
+            country: "USA",
+            category: "Search Engine",
+            description: "...",
+            marquee: "[imageurl]",
+            icon: "[imageurl]",
+            markdown: "...",
+            status: "public"
+        },
+        {
+            serviceId: 1123456789,
+            serviceName: "Bing",
+            city: "Bellevue, Washington",
+            country: "USA",
+            category: "Search Engine",
+            description: "...",
+            marquee: "[imageurl]",
+            icon: "[imageurl]",
+            markdown: "...",
+            status: "public"
+        },
+        ...
+    ]
 }</code></pre>
       </request>
 
@@ -825,9 +811,15 @@
         <pre><code>{
     success: true,
     serviceId: 0123456789,
-    serviceName: "Coding Camp",
-    category: "CODING",
-    data: ...
+    serviceName: "Google",
+    city: "Mountain View, California",
+    country: "USA",
+    category: "Search Engine",
+    description: "...",
+    marquee: "[imageurl]",
+    icon: "[imageurl]",
+    markdown: "...",
+    status: "public"
 }</code></pre>
       </request>
 
@@ -863,7 +855,11 @@
         <pre><code>None</code></pre>
 
         <strong>Query:</strong>
-        <pre><code class="text">/api/partner/search?terms=Best+coding+service</code></pre>
+        <br />
+        <code>Default</code>
+        <pre><code class="text">/api/partner/search?terms=Search+engine</code></pre>
+        <code>Specific page number</code>
+        <pre><code class="text">/api/partner/search?terms=Search+engine&page=1</code></pre>
 
         <strong>Parameter:</strong>
         <pre><code class="text">None</code></pre>
@@ -871,23 +867,34 @@
         <h3>Response</h3>
         <pre><code>{
     success: true,
-    terms: "Best coding service",
+    terms: "Search engine",
     services: [
-    {
-        serviceId: 0123456789,
-        serviceName: "Coding Camp",
-        category: "CODING",
-        data: ...,
-        similarity: 0.54321
-    },
-    {
-        serviceId: 1123456789,
-        serviceName: "Art Camp",
-        category: "ART",
-        data: ...,
-        similarity: 0.32198
-    }
-  ]
+        {
+            serviceId: 0123456789,
+            serviceName: "Google",
+            city: "Mountain View, California",
+            country: "USA",
+            category: "Search Engine",
+            description: "...",
+            marquee: "[imageurl]",
+            icon: "[imageurl]",
+            markdown: "...",
+            status: "public"
+        },
+        {
+            serviceId: 1123456789,
+            serviceName: "Bing",
+            city: "Bellevue, Washington",
+            country: "USA",
+            category: "Search Engine",
+            description: "...",
+            marquee: "[imageurl]",
+            icon: "[imageurl]",
+            markdown: "...",
+            status: "public"
+        },
+        ...
+    ]
 }</code></pre>
       </request>
 
