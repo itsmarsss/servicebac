@@ -2,37 +2,47 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
-const app = express();
+const { isPythonAvailable } = require("./pythonExecutor");
+const startServer = async () => {
+    if (!await isPythonAvailable()) {
+        console.log("Server needs `python3` (or `python`) to be able to run.");
+        return;
+    }
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(logger);
-app.use(cors());
+    const app = express();
 
-app.use(express.static(path.join(__dirname, "build")));
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json());
+    app.use(logger);
+    app.use(cors());
 
-app.set("view engine", "ejs");
+    app.use(express.static(path.join(__dirname, "build")));
 
-app.get("/", (req, res) => {
-    console.log("Root");
-    res.render("index", { name: "User!" });
-});
+    app.set("view engine", "ejs");
 
-const userRouter = require("./routes/user");
-const partnerRouter = require("./routes/partner");
+    app.get("/", (req, res) => {
+        console.log("Root");
+        res.render("index", { name: "User!" });
+    });
 
-function logger(req, res, next) {
-    console.log(req.originalUrl);
-    console.log(req.socket.remoteAddress);
+    const userRouter = require("./routes/user");
+    const partnerRouter = require("./routes/partner");
 
-    next();
+    function logger(req, res, next) {
+        console.log(req.originalUrl);
+        console.log(req.socket.remoteAddress);
+
+        next();
+    }
+
+    app.use("/api/user", userRouter);
+    app.use("/api/partner", partnerRouter);
+
+    app.get('/*', function (req, res) {
+        res.sendFile(path.join(__dirname, "build", "index.html"));
+    });
+
+    app.listen(3000);
 }
 
-app.use("/api/user", userRouter);
-app.use("/api/partner", partnerRouter);
-
-app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, "build", "index.html"));
-});
-
-app.listen(3000);
+startServer();

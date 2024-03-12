@@ -1,9 +1,11 @@
 const { spawn } = require("child_process");
 
+let pythonCmd = "python";
+
 const executePython = async (script, args) => {
   const mappedArgs = args.map((arg) => arg.toString());
 
-  const py = spawn("python3", [script, ...mappedArgs]);
+  const py = spawn(pythonCmd, [script, ...mappedArgs]);
 
   const result = await new Promise((resolve, reject) => {
     let output;
@@ -29,4 +31,36 @@ const executePython = async (script, args) => {
   return result;
 };
 
-module.exports = { executePython };
+const isCommandAvailable = (command, args) => {
+  return new Promise((resolve) => {
+    const child = spawn(command, args);
+
+    child.on('error', (error) => {
+      resolve(false);
+    });
+
+    child.on('exit', (code) => {
+      resolve(true);
+    });
+  });
+};
+
+const isPythonAvailable = async () => {
+  const python3 = await isCommandAvailable("python3", ["--version"]);
+  console.log(`Python3 available: ${python3}`);
+
+  const python = await isCommandAvailable("python", ["--version"]);
+  console.log(`Python available: ${python}`);
+
+  if (python3) {
+    pythonCmd = "python3";
+    return true;
+  } else if (python) {
+    pythonCmd = "python";
+    return true;
+  } else {
+    return false;
+  }
+}
+
+module.exports = { executePython, isPythonAvailable };
