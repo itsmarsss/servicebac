@@ -15,7 +15,7 @@ app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
     console.log("Root");
-    res.render("index", { name: "Marsss!" });
+    res.render("index", { name: "User!" });
 });
 
 const userRouter = require("./routes/user");
@@ -34,6 +34,5 @@ app.use("/api/partner", partnerRouter);
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, "build", "index.html"));
 });
-
 
 app.listen(3000);

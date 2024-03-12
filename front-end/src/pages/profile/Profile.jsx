@@ -9,6 +9,7 @@ import * as toast from "../../components/toastAlert/toastAlert";
 
 function Profile() {
   const [loading, setLoading] = useState(false);
+  const [deleteAcc, setDeleteAcc] = useState(false);
   const [companyName, setCompanyName] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
@@ -97,6 +98,37 @@ function Profile() {
         .then((response) => {
           if (response.success) {
             toast.showSuccessAlert("Profile updated");
+          } else {
+            toast.showErrorAlert(response.message);
+          }
+          setLoading(false);
+        });
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    if (!deleteAcc) {
+      setDeleteAcc(true);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      await fetch("/api/user/delete-profile", {
+        method: "DELETE",
+        headers: {
+          authorization: `Bearer ${getToken()}`,
+        },
+      })
+        .then((data) => data.json())
+        .then((response) => {
+          if (response.success) {
+            toast.showSuccessAlert("Profile deleted");
+            navigate("/deletion");
           } else {
             toast.showErrorAlert(response.message);
           }
@@ -249,6 +281,10 @@ function Profile() {
 
               <button className="fill_button" onClick={handleUpdate}>
                 Update
+              </button>
+
+              <button className="fill_button delete_btn" onClick={handleDelete}>
+                {deleteAcc ? "Confirm deletion" : "Delete"}
               </button>
             </>
           )}

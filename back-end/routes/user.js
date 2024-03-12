@@ -22,6 +22,8 @@ router.use(authorization);
 
 const userDatabase = "userDatabase";
 const userCollection = "user";
+const partnerDatabase = "partnerDatabase";
+const partnerCollection = "partner";
 
 // Create users collection
 router.post("/create-users-collection", async (req, res) => {
@@ -339,6 +341,10 @@ router.delete("/delete-profile", async (req, res) => {
         message: "User not found",
       });
     }
+
+    const db2 = mongoClient.db(partnerDatabase);
+    const collection2 = db2.collection(partnerCollection);
+    await collection2.deleteOne({ ownerToken: userToken });
 
     res.json({
       success: true,

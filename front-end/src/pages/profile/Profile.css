@@ -37,6 +37,10 @@
     font-weight: 500;
 }
 
+.delete_btn {
+    background: var(--brand-no) !important;
+}
+
 .bottom_text {
     font-size: 10px;
 }
