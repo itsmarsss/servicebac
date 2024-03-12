@@ -279,13 +279,18 @@ function Profile() {
                 />
               </div>
 
-              <button className="fill_button" onClick={handleUpdate}>
-                Update
-              </button>
+              <div>
+                <button className="fill_button" onClick={handleUpdate}>
+                  Update
+                </button>
 
-              <button className="fill_button delete_btn" onClick={handleDelete}>
-                {deleteAcc ? "Confirm deletion" : "Delete"}
-              </button>
+                <button
+                  className="fill_button delete_btn"
+                  onClick={handleDelete}
+                >
+                  {deleteAcc ? "Confirm deletion" : "Delete"}
+                </button>
+              </div>
             </>
           )}
         </form>
