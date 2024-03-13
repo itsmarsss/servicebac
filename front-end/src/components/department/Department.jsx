@@ -133,9 +133,10 @@ function Department() {
 
       <div className="page_seekers">
         <button onClick={() => setPageNumber(currentPage - 1)}>Prev</button>
-        <div className="page_input">
+        <div className="page_input_cont">
           <span className="page_text">Page:</span>
           <input
+            className="page_input"
             type="number"
             placeholder="Page Number"
             value={currentPage}

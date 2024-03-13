@@ -291,8 +291,6 @@ router.get("/search", async (req, res) => {
     const startIndex = (pageNumber - 1) * 10;
     const sanitizedResults = resultsSimilarity.slice(startIndex, startIndex + 10).map(({ ownerToken, embeddings, ...rest }) => rest);
 
-    console.log(startIndex)
-
     res.json({
       success: true,
       terms: terms,

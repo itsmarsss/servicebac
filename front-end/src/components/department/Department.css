@@ -29,12 +29,15 @@
     gap: 10px;
 }
 
-.page_input {
-    width: 100px;
+.page_input_cont {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
+}
+
+.page_input {
+    width: 50px;
 }
 
 @media screen and (max-width: 850px) {
