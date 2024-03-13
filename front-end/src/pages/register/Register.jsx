@@ -103,7 +103,7 @@ function Register() {
   return (
     <>
       <a className="top_text" href="/">
-        ConnectED
+        ServiceBac
       </a>
       <div className="sign_up_container">
         <form className="sign_up_form">

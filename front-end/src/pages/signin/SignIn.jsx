@@ -60,7 +60,7 @@ function SignIn() {
   return (
     <>
       <a className="top_text" href="/">
-        ConnectED
+        ServiceBac
       </a>
       <div className="sign_in_container">
         <form className="sign_in_form">

@@ -18,8 +18,8 @@ function Deletion() {
       <div className="deleted_text">
         {deleted ? "Deleted account..." : "Deleting account..."}
       </div>
-      <div className="deleted_signin_cont">
-        <a className="deleted_signin" href="/register">
+      <div className="deleted_signup_cont">
+        <a className="deleted_signup" href="/register">
           <button>Go To Sign Up</button>
         </a>
       </div>
