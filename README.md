@@ -19,21 +19,25 @@ ServiceBac is a versatile website template and framework designed to facilitate 
 
 ## Getting Started
 
-To set up ServiceBac:
+Clone the repository:
 
-1. Clone the repository:
+```bash
+git clone https://github.com/itsmarsss/servicebac.git
+```
 
-   ```bash
-   git clone https://github.com/itsmarsss/servicebac.git
-   ```
+To start website
 
-2. Start the backend:
+1. Setup the backend:
 
    ```bash
    cd servicebac/back-end
    npm install
    npm run devStart
    ```
+
+2. Make sure `.env` file contains MongoDB URI and CohereAI API key.
+
+   > Check `.env.example` to see formatting
 
 3. Access the website at [http://localhost:3000](http://localhost:3000).
    > The back-end already contains a front-end prebuild version
