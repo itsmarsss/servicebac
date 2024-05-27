@@ -28,7 +28,7 @@ function Nav() {
   return (
     <>
       <nav className="nav">
-        <div className="logo">ConnectED</div>
+        <div className="logo">ServiceBac</div>
         <div className="pages">
           {pages.map((page) => (
             <a
